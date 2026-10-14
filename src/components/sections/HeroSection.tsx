@@ -14,11 +14,42 @@ export function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative pt-6 sm:pt-10 pb-12 lg:pt-12 lg:pb-16 bg-[#FFF9FB] overflow-hidden"
+      className="relative bg-[#FFF9F6] overflow-hidden min-h-[580px] lg:min-h-[620px] xl:min-h-[660px] flex items-center"
     >
-      <Container>
+      {/* ========================================================================= */}
+      {/* IMAGEM DESKTOP INTEGRADA COM FADE SUAVE NO LADO ESQUERDO (>= lg)          */}
+      {/* Sem container de card, sem borda dura, sem sombra: fusão com o fundo      */}
+      {/* ========================================================================= */}
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] xl:w-[56%] 2xl:w-[53%] z-0 pointer-events-none select-none">
+        <div className="relative w-full h-full">
+          {/* Imagem real hero-desktop com enquadramento preservando os presentes */}
+          <Image
+            src="/images/hero-desktop.png"
+            alt="Presentes e personalizados da Mimos e Caprichos em Valinhos"
+            fill
+            priority
+            className="object-cover object-right"
+            sizes="(min-width: 1024px) 56vw, 800px"
+          />
+
+          {/* Overlay de Fade no lado esquerdo conforme especificação do mockup */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to left, transparent 0%, rgba(255,249,246,0.15) 20%, rgba(255,249,246,0.55) 40%, rgba(255,249,246,0.9) 70%, #FFF9F6 100%)",
+            }}
+          />
+
+          {/* Suaves fusões de transição no topo e na base para total integração */}
+          <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#FFF9F6] to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#FFF9F6] to-transparent pointer-events-none" />
+        </div>
+      </div>
+
+      <Container className="relative z-10 py-10 sm:py-12 lg:py-16 xl:py-20 w-full">
         {/* ========================================================= */}
-        {/* COMPOSIÇÃO MOBILE (Conforme referência "mobile.png")       */}
+        {/* COMPOSIÇÃO MOBILE (< lg) (Conforme referência "mobile.png") */}
         {/* ========================================================= */}
         <div className="lg:hidden flex flex-col items-start text-left space-y-4">
           {/* Eyebrow */}
@@ -37,7 +68,7 @@ export function HeroSection() {
             Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
           </p>
 
-          {/* Botões Mobile (WhatsApp primeiro, depois Conheça nossos presentes) */}
+          {/* Botões Mobile */}
           <div className="flex flex-col gap-3 w-full pt-1">
             <a
               href={whatsappUrl}
@@ -52,15 +83,15 @@ export function HeroSection() {
 
             <a
               href="#presentes"
-              className="flex items-center justify-center py-3.5 px-6 rounded-full bg-white border border-brand-pink/30 text-brand-dark text-sm font-semibold hover:border-brand-pink transition-all"
+              className="flex items-center justify-center py-3.5 px-6 rounded-full bg-white border border-[#F3D7E3] hover:border-brand-pink text-brand-dark text-sm font-semibold transition-all"
             >
               Conheça nossos presentes
             </a>
           </div>
 
-          {/* Imagem Mobile (hero-mobile.png com cantos arredondados) */}
-          <div className="w-full pt-3">
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-card border-2 border-white bg-white">
+          {/* Imagem Mobile (hero-mobile.png adaptada à largura) */}
+          <div className="w-full pt-2">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#F5E2EC] bg-white shadow-2xs">
               <Image
                 src="/images/hero-mobile.png"
                 alt="Presentes afetivos Mimos e Caprichos"
@@ -72,8 +103,8 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* 3 Diferenciais Mobile (Linha com ícones) */}
-          <div className="grid grid-cols-3 gap-2 w-full pt-4 text-center">
+          {/* 3 Diferenciais Mobile em linha com ícones */}
+          <div className="grid grid-cols-3 gap-2 w-full pt-3 text-center">
             <div className="flex flex-col items-center">
               <div className="w-9 h-9 rounded-xl bg-[#FDEAF1] flex items-center justify-center text-brand-pink mb-1.5">
                 <Gift className="w-4 h-4" />
@@ -106,9 +137,9 @@ export function HeroSection() {
         {/* ========================================================= */}
         {/* COMPOSIÇÃO DESKTOP (Conforme "Homepage Pastel Mimos e Caprichos") */}
         {/* ========================================================= */}
-        <div className="hidden lg:grid grid-cols-12 gap-10 xl:gap-14 items-center">
-          {/* Coluna Texto (6 colunas) */}
-          <div className="col-span-6 flex flex-col items-start text-left space-y-6">
+        <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center">
+          {/* Coluna Texto (7 colunas no lg, 6 no xl para respiração perfeita) */}
+          <div className="col-span-7 xl:col-span-6 flex flex-col items-start text-left space-y-6">
             <span className="text-xs font-semibold uppercase tracking-wider text-brand-dark/70">
               PRESENTES QUE TRANSFORMAM MOMENTOS
             </span>
@@ -118,12 +149,12 @@ export function HeroSection() {
               <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
             </h1>
 
-            <p className="text-lg text-brand-muted leading-relaxed font-sans max-w-lg">
+            <p className="text-base xl:text-lg text-brand-muted leading-relaxed font-sans max-w-lg">
               Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
             </p>
 
             {/* Botões Desktop: Conheça nossos presentes (rosa) + Fale pelo WhatsApp (branco) */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-4 pt-1">
               <a
                 href="#presentes"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
@@ -143,11 +174,11 @@ export function HeroSection() {
               </a>
             </div>
 
-            {/* 3 Diferenciais Desktop com ícones elegantes em linha */}
+            {/* 3 Diferenciais Desktop com divisores elegantes em linha */}
             <div className="pt-8 mt-2 flex items-center gap-6 border-t border-[#F5E2EC] w-full">
               <div className="flex items-center gap-3">
                 <Gift className="w-5 h-5 text-brand-pink shrink-0" />
-                <span className="text-xs font-medium text-brand-dark/85 max-w-[120px] leading-tight">
+                <span className="text-xs font-medium text-brand-dark/85 max-w-[125px] leading-tight">
                   Presentes para todas as ocasiões
                 </span>
               </div>
@@ -156,7 +187,7 @@ export function HeroSection() {
 
               <div className="flex items-center gap-3">
                 <Heart className="w-5 h-5 text-brand-pink shrink-0" />
-                <span className="text-xs font-medium text-brand-dark/85 max-w-[120px] leading-tight">
+                <span className="text-xs font-medium text-brand-dark/85 max-w-[125px] leading-tight">
                   Personalizados do seu jeito
                 </span>
               </div>
@@ -165,26 +196,15 @@ export function HeroSection() {
 
               <div className="flex items-center gap-3">
                 <Truck className="w-5 h-5 text-brand-pink shrink-0" />
-                <span className="text-xs font-medium text-brand-dark/85 max-w-[140px] leading-tight">
+                <span className="text-xs font-medium text-brand-dark/85 max-w-[145px] leading-tight">
                   Retirada na loja e entregas em Valinhos e região
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Coluna Imagem Desktop (6 colunas) */}
-          <div className="col-span-6 relative">
-            <div className="relative aspect-[4/3] rounded-3xl xl:rounded-4xl overflow-hidden shadow-card border-4 border-white bg-white">
-              <Image
-                src="/images/hero-desktop.png"
-                alt="Presentes e personalizados da Mimos e Caprichos em Valinhos"
-                fill
-                priority
-                className="object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                sizes="(min-width: 1024px) 50vw, 600px"
-              />
-            </div>
-          </div>
+          {/* Espaço da direita no grid reservado para a composição da foto com fade */}
+          <div className="col-span-5 xl:col-span-6" />
         </div>
       </Container>
     </section>
