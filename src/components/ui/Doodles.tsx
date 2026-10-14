@@ -4,6 +4,8 @@ export function DoodleHeart({ className = "w-6 h-6 text-brand-pink" }: { classNa
   return (
     <svg
       className={className}
+      width="24"
+      height="24"
       viewBox="0 0 40 40"
       fill="none"
       stroke="currentColor"
@@ -20,6 +22,8 @@ export function DoodleDoubleHeart({ className = "w-8 h-8 text-brand-pink" }: { c
   return (
     <svg
       className={className}
+      width="32"
+      height="22"
       viewBox="0 0 60 40"
       fill="none"
       stroke="currentColor"
@@ -37,6 +41,8 @@ export function DoodleTripleHearts({ className = "w-11 h-8 text-brand-pink" }: {
   return (
     <svg
       className={className}
+      width="44"
+      height="32"
       viewBox="0 0 64 40"
       fill="none"
       stroke="currentColor"
@@ -67,6 +73,8 @@ export function LargeDoodleHeart({ className = "w-16 h-16 text-brand-pink" }: { 
   return (
     <svg
       className={className}
+      width="64"
+      height="64"
       viewBox="0 0 64 64"
       fill="none"
       stroke="currentColor"

@@ -23,7 +23,10 @@ export function AboutSection() {
           {/* COLUNA ESQUERDA: Fotografia Grande do Interior da Loja     */}
           {/* ========================================================= */}
           <div className="lg:col-span-6 w-full">
-            <div className="relative aspect-[4/3] sm:aspect-[16/11] w-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-sm border border-[#F2E5EC]/60 bg-[#FAF2F5]">
+            <div
+              className="relative aspect-[4/3] sm:aspect-[16/11] w-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-sm border border-[#F2E5EC]/60 bg-[#FAF2F5]"
+              style={{ position: "relative" }}
+            >
               <Image
                 src="/images/sobre-loja.png"
                 alt="Interior e fachada da loja Mimos e Caprichos em Valinhos"
