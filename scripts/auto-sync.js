@@ -21,8 +21,12 @@ function sync() {
     console.log(`📡 Repositório remoto: ${remoteUrl}`);
     console.log(`🌿 Branch ativa: ${currentBranch}\n`);
 
-    if (remoteUrl !== "https://github.com/dovik1989/mimosecaprichos.git") {
-      throw new Error(`Remote divergente detectado: ${remoteUrl}. Esperado: https://github.com/dovik1989/mimosecaprichos.git`);
+    const allowedRemotes = [
+      "https://github.com/dovik1989/mimosecaprichos2.git",
+      "https://github.com/dovik1989/mimosecaprichos.git",
+    ];
+    if (!allowedRemotes.includes(remoteUrl)) {
+      throw new Error(`Remote divergente detectado: ${remoteUrl}. Esperado: ${allowedRemotes.join(" ou ")}`);
     }
 
     // 2. Identificar arquivos modificados
