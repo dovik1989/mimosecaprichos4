@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { ChevronLeft, ChevronRight, ArrowRight, MessageCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
 
 const inspirationPhotos = [
@@ -67,11 +67,19 @@ const mobileFilterTabs = [
 
 export function InspirationsSection() {
   const [mobileFilter, setMobileFilter] = useState("all");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const whatsappUrl = createWhatsAppUrl(
     siteConfig.phoneRaw,
     "Olá! Vi a galeria de inspirações no site e gostaria de encomendar algo especial."
   );
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -260 : 260;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   const filteredMobilePhotos =
     mobileFilter === "all"
@@ -79,61 +87,67 @@ export function InspirationsSection() {
       : inspirationPhotos.filter((p) => p.category === mobileFilter);
 
   return (
-    <section id="inspiracoes" className="py-16 sm:py-24 bg-white border-t border-[#F8E7EE]">
+    <section id="inspiracoes" className="py-14 sm:py-20 bg-white border-t border-[#F8E7EE]">
       <Container>
         {/* ========================================================= */}
-        {/* CABEÇALHO DA SEÇÃO                                         */}
+        {/* CABEÇALHO DA SEÇÃO (Alinhado com a referência aprovada)   */}
         {/* ========================================================= */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 sm:mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7 sm:mb-9">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               GALERIA
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark tracking-tight mt-1">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-brand-dark tracking-tight mt-1 leading-[1.2]">
               Inspirações que encantam
             </h2>
           </div>
 
-          <div className="flex items-center gap-4">
-            <p className="text-xs sm:text-sm text-brand-muted max-w-xs leading-relaxed hidden sm:block">
+          <div className="flex items-center gap-5 sm:gap-6">
+            <p className="text-xs sm:text-[13px] text-[#554959] max-w-xs lg:max-w-sm leading-relaxed hidden sm:block">
               Confira algumas ideias reais que já fizeram muitos momentos serem ainda mais especiais.
             </p>
 
-            {/* Setas de navegação desktop */}
-            <div className="hidden sm:flex items-center gap-2">
+            {/* Setas de navegação circulares com scroll interativo */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0">
               <button
                 type="button"
-                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                onClick={() => scroll("left")}
+                className="w-9 h-9 rounded-full border border-[#F0D5E1] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors shadow-2xs active:scale-95"
                 aria-label="Anterior"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-4 h-4" width="16" height="16" />
               </button>
               <button
                 type="button"
-                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                onClick={() => scroll("right")}
+                className="w-9 h-9 rounded-full border border-[#F0D5E1] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors shadow-2xs active:scale-95"
                 aria-label="Próximo"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4" width="16" height="16" />
               </button>
             </div>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* LAYOUT DESKTOP: 5 CARDS EM LINHA (Conforme mockup desktop) */}
+        {/* LAYOUT DESKTOP: 5 CARDS EM LINHA (Proporção compacta)     */}
         {/* ========================================================= */}
-        <div className="hidden lg:grid grid-cols-5 gap-4">
-          {inspirationPhotos.slice(0, 5).map((photo) => (
+        <div
+          ref={scrollContainerRef}
+          className="hidden lg:flex gap-3.5 xl:gap-4 overflow-x-auto scroll-smooth no-scrollbar py-1"
+        >
+          {inspirationPhotos.map((photo) => (
             <div
               key={photo.id}
-              className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#FAF2F5] border border-[#F5E2EC] shadow-2xs hover:shadow-card hover:-translate-y-1 transition-all duration-300"
+              className="flex-none w-[calc((100%-4*16px)/5)] aspect-[4/4.3] rounded-[18px] sm:rounded-[20px] overflow-hidden bg-[#FAF2F5] border border-[#F5E2EC] shadow-2xs hover:shadow-card hover:-translate-y-1 transition-all duration-300 relative group"
+              style={{ position: "relative" }}
             >
               <Image
                 src={photo.imageSrc}
                 alt={photo.title}
                 fill
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="20vw"
+                sizes="(max-width: 1280px) 20vw, 240px"
               />
             </div>
           ))}
@@ -163,12 +177,13 @@ export function InspirationsSection() {
             })}
           </div>
 
-          {/* Grid 2 colunas mobile (8 cards) */}
+          {/* Grid 2 colunas mobile */}
           <div className="grid grid-cols-2 gap-3">
             {filteredMobilePhotos.map((photo) => (
               <div
                 key={photo.id}
                 className="relative aspect-square rounded-2xl overflow-hidden bg-[#FAF2F5] border border-[#F5E2EC] shadow-2xs"
+                style={{ position: "relative" }}
               >
                 <Image
                   src={photo.imageSrc}
