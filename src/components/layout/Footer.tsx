@@ -13,7 +13,6 @@ import {
   ShieldCheck,
   FileText,
 } from "lucide-react";
-import { ScriptQuote } from "@/components/ui/Doodles";
 
 function InstagramRoundIcon() {
   return (
@@ -55,11 +54,11 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-16 pb-12 border-t border-[#F8E2EC] relative">
+    <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-14 sm:pt-16 pb-10 sm:pb-12 border-t border-[#F8E2EC] relative">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-[#F5E2EC]">
-          {/* 1. Logo & Descrição Curta (4 colunas no lg) */}
-          <div className="lg:col-span-4 space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-start">
+          {/* 1. Logo & Descrição Curta (3 colunas no lg) */}
+          <div className="lg:col-span-3 space-y-4">
             <div className="relative w-44 h-12 flex items-center">
               <Image
                 src="/images/logo-temporario.png"
@@ -70,17 +69,17 @@ export function Footer() {
               />
             </div>
 
-            <p className="text-xs sm:text-sm leading-relaxed text-brand-muted max-w-xs font-sans">
+            <p className="text-xs leading-relaxed text-brand-muted max-w-xs font-sans">
               Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
             </p>
 
-            {/* Redes Sociais com botões circulares em tom pastel */}
-            <div className="flex items-center gap-2.5 pt-2">
+            {/* Redes Sociais */}
+            <div className="flex items-center gap-2.5 pt-1">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-[#2D2630] flex items-center justify-center hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all shadow-2xs"
                 aria-label="Instagram"
               >
                 <InstagramRoundIcon />
@@ -90,7 +89,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-[#2D2630] flex items-center justify-center hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all shadow-2xs"
                 aria-label="Facebook"
               >
                 <FacebookRoundIcon />
@@ -100,7 +99,7 @@ export function Footer() {
                 href="https://tiktok.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-[#2D2630] flex items-center justify-center hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all shadow-2xs"
                 aria-label="TikTok"
               >
                 <TikTokRoundIcon />
@@ -110,7 +109,7 @@ export function Footer() {
 
           {/* 2. Menu Institucional (2 colunas) */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-sm text-brand-dark mb-3">Menu</h4>
+            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Menu</h4>
             <ul className="space-y-2 text-xs">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -127,7 +126,7 @@ export function Footer() {
 
           {/* 3. Nossos Presentes (2 colunas) */}
           <div className="lg:col-span-2">
-            <h4 className="font-bold text-sm text-brand-dark mb-3">Nossos Presentes</h4>
+            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Nossos Presentes</h4>
             <ul className="space-y-2 text-xs">
               {categoriesList.map((cat, idx) => (
                 <li key={idx}>
@@ -142,13 +141,13 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 4. Contato (2 colunas) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-bold text-sm text-brand-dark mb-3">Contato</h4>
+          {/* 4. Contato (3 colunas) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Contato</h4>
 
             <div className="space-y-2.5 text-xs text-brand-muted">
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-brand-pink shrink-0" />
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-brand-pink shrink-0 stroke-[1.8]" />
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
                   className="hover:text-brand-pink font-medium transition-colors"
@@ -157,32 +156,41 @@ export function Footer() {
                 </a>
               </div>
 
-              <div className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-brand-pink shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-brand-pink shrink-0 mt-0.5 stroke-[1.8]" />
                 <span className="leading-snug">
                   Av. Onze de Agosto, 849 <br />
                   Centro, Valinhos - SP
                 </span>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Clock className="w-3.5 h-3.5 text-brand-pink shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5">
+                <Clock className="w-4 h-4 text-brand-pink shrink-0 mt-0.5 stroke-[1.8]" />
                 <span className="leading-snug">
-                  Seg. a Sexta: 09h às 18h <br />
+                  Seg. a Sex: 09h às 18h <br />
                   Sábado: 09h às 13h
                 </span>
               </div>
             </div>
           </div>
 
-          {/* 5. Frase Script / Lettering (2 colunas) */}
-          <div className="lg:col-span-2 hidden lg:flex items-center justify-center">
-            <ScriptQuote className="scale-90" />
+          {/* 5. Frase Script / Lettering Decorativo (2 colunas) */}
+          <div className="lg:col-span-2 hidden lg:flex items-center justify-center border-l border-[#F0D5E2] pl-6 xl:pl-8">
+            <div className="relative w-auto h-32 xl:h-36 flex items-center justify-center select-none">
+              <Image
+                src="/images/frase-decorativa.png"
+                alt="Mais que presentes, entregamos emoções"
+                width={100}
+                height={140}
+                className="h-full w-auto object-contain"
+                priority
+              />
+            </div>
           </div>
         </div>
 
-        {/* Barra Inferior com Copyright e Links Legais */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
+        {/* Barra Inferior com Copyright e Links Legais (sem linha divisória pesada) */}
+        <div className="pt-10 sm:pt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
           <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
 
           <div className="flex items-center gap-4">
@@ -193,7 +201,7 @@ export function Footer() {
             >
               Política de Privacidade
             </button>
-            <span>|</span>
+            <span className="text-[#E8CBD9]">|</span>
             <button
               type="button"
               onClick={() => setModalContent("terms")}
