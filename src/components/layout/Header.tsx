@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { siteConfig, navItems } from "@/data/site-config";
+import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { Menu, X, MessageCircle, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle, Phone } from "lucide-react";
 import { cn, createWhatsAppUrl } from "@/lib/utils";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,78 +27,114 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-300",
+        "sticky top-0 z-40 w-full bg-white transition-all duration-300",
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-soft py-3 border-b border-brand-pink-light/60"
-          : "bg-brand-offwhite/90 backdrop-blur-sm py-4 border-b border-brand-border/40"
+          ? "shadow-sm border-b border-[#F5E6EC] py-2.5"
+          : "border-b border-[#F7ECF1] py-3.5"
       )}
     >
       <Container className="flex items-center justify-between">
         {/* Logo */}
         <Link
           href="#inicio"
-          className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink rounded-lg"
+          className="flex items-center gap-3 shrink-0 focus:outline-none"
         >
-          <div className="relative w-40 h-11 sm:w-48 sm:h-12 transition-transform duration-300 group-hover:scale-[1.02]">
+          <div className="relative w-44 h-12 sm:w-52 sm:h-14">
             <Image
               src="/images/logo-temporario.png"
-              alt="Mimos e Caprichos - Presentes Personalizados"
+              alt="Mimos e Caprichos"
               fill
               priority
               className="object-contain object-left"
-              sizes="(max-width: 640px) 160px, 192px"
+              sizes="(max-width: 640px) 176px, 208px"
             />
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-7">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-brand-dark/85 hover:text-brand-pink transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-brand-pink after:transition-all after:duration-300"
-            >
-              {item.label}
-            </Link>
-          ))}
+        {/* Desktop Navigation (Centralizada) */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-brand-dark/85">
+          <Link
+            href="#inicio"
+            onClick={() => setActiveSection("inicio")}
+            className={cn(
+              "relative py-1 transition-colors hover:text-brand-pink",
+              activeSection === "inicio" ? "text-brand-pink font-semibold" : "text-brand-dark/80"
+            )}
+          >
+            Início
+            {activeSection === "inicio" && (
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-brand-pink rounded-full" />
+            )}
+          </Link>
+
+          <Link
+            href="#sobre"
+            onClick={() => setActiveSection("sobre")}
+            className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
+          >
+            Nossa história
+          </Link>
+
+          {/* Dropdown / Presentes com chevron */}
+          <Link
+            href="#presentes"
+            onClick={() => setActiveSection("presentes")}
+            className="inline-flex items-center gap-1 py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
+          >
+            <span>Presentes</span>
+            <ChevronDown className="w-3.5 h-3.5 text-brand-dark/60 mt-0.5" />
+          </Link>
+
+          <Link
+            href="#corporativos"
+            onClick={() => setActiveSection("corporativos")}
+            className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
+          >
+            Empresas
+          </Link>
+
+          <Link
+            href="#avaliacoes"
+            onClick={() => setActiveSection("avaliacoes")}
+            className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
+          >
+            Avaliações
+          </Link>
+
+          <Link
+            href="#contato"
+            onClick={() => setActiveSection("contato")}
+            className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
+          >
+            Contato
+          </Link>
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-4">
-          <Button
+        {/* Desktop CTA: Fale conosco */}
+        <div className="hidden lg:flex items-center">
+          <a
             href={whatsappUrl}
-            variant="primary"
-            size="md"
-            leftIcon={<MessageCircle className="w-4 h-4 text-white" />}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-medium shadow-sm transition-all duration-300 hover:scale-[1.02]"
           >
-            Fale conosco
-          </Button>
+            <MessageCircle className="w-4 h-4 fill-white text-transparent" />
+            <span>Fale conosco</span>
+          </a>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <Button
-            href={whatsappUrl}
-            variant="primary"
-            size="sm"
-            className="text-xs px-3 py-1.5"
-            leftIcon={<MessageCircle className="w-3.5 h-3.5" />}
-          >
-            WhatsApp
-          </Button>
-
+        {/* Mobile Hamburger Toggle (Conforme mockup mobile) */}
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2.5 rounded-xl text-brand-dark hover:text-brand-pink hover:bg-brand-pink-light/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink"
+            className="p-2 text-brand-dark hover:text-brand-pink transition-colors focus:outline-none"
             aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
-            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7 text-brand-dark" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-7 h-7 text-brand-dark" />
             )}
           </button>
         </div>
@@ -106,35 +142,67 @@ export function Header() {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[65px] sm:top-[73px] bottom-0 bg-white/95 backdrop-blur-xl border-t border-brand-border/60 z-50 flex flex-col p-6 animate-fadeIn shadow-2xl overflow-y-auto">
-          <nav className="flex flex-col gap-2 py-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium text-brand-dark py-3 px-4 rounded-xl hover:bg-brand-pink-light/70 hover:text-brand-pink transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
+        <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-white z-50 flex flex-col p-6 animate-fadeIn shadow-xl border-t border-[#F5E6EC]">
+          <nav className="flex flex-col gap-3 py-4 text-base font-medium">
+            <Link
+              href="#inicio"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-pink bg-[#FDF0F4]"
+            >
+              Início
+            </Link>
+            <Link
+              href="#sobre"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
+            >
+              Nossa história
+            </Link>
+            <Link
+              href="#presentes"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
+            >
+              Presentes
+            </Link>
+            <Link
+              href="#corporativos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
+            >
+              Empresas
+            </Link>
+            <Link
+              href="#avaliacoes"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
+            >
+              Avaliações
+            </Link>
+            <Link
+              href="#contato"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
+            >
+              Contato
+            </Link>
           </nav>
 
-          <div className="mt-auto pt-6 border-t border-brand-border/60 flex flex-col gap-3">
-            <Button
+          <div className="mt-auto pt-6 border-t border-[#F5E6EC] flex flex-col gap-3">
+            <a
               href={whatsappUrl}
-              variant="primary"
-              size="lg"
-              fullWidth
-              leftIcon={<MessageCircle className="w-5 h-5 text-white" />}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 py-3 rounded-full bg-brand-pink text-white font-medium shadow-sm"
             >
-              Fale pelo WhatsApp
-            </Button>
+              <MessageCircle className="w-5 h-5 fill-white text-transparent" />
+              <span>Fale pelo WhatsApp</span>
+            </a>
 
             <a
               href={`tel:${siteConfig.phoneRaw}`}
-              className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-brand-muted hover:text-brand-pink transition-colors"
+              className="flex items-center justify-center gap-2 py-2 text-sm text-brand-muted hover:text-brand-pink"
             >
               <Phone className="w-4 h-4 text-brand-pink" />
               <span>{siteConfig.phoneDisplay}</span>
@@ -145,4 +213,3 @@ export function Header() {
     </header>
   );
 }
-

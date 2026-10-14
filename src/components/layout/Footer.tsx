@@ -9,25 +9,15 @@ import {
   MapPin,
   Phone,
   Clock,
-  MessageCircle,
-  Heart,
   X,
   ShieldCheck,
   FileText,
 } from "lucide-react";
-import { createWhatsAppUrl } from "@/lib/utils";
+import { ScriptQuote } from "@/components/ui/Doodles";
 
-function InstagramIcon({ className }: { className?: string }) {
+function InstagramRoundIcon() {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -35,104 +25,98 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-function FacebookIcon({ className }: { className?: string }) {
+function FacebookRoundIcon() {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function TikTokRoundIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c0 1.9-.53 3.8-1.57 5.4-1.22 1.86-3.15 3.23-5.32 3.75-2.06.49-4.29.17-6.13-.88-1.99-1.14-3.47-3.08-4.04-5.31-.6-2.31-.19-4.83 1.13-6.81 1.25-1.89 3.28-3.19 5.55-3.61.35-.06.71-.09 1.07-.11v4.06c-.46.04-.92.14-1.35.31-1.07.41-1.95 1.23-2.42 2.28-.47 1.05-.48 2.28-.01 3.33.45 1.02 1.3 1.83 2.34 2.23 1.04.4 2.22.35 3.22-.14 1-.49 1.75-1.4 2.05-2.47.16-.57.24-1.16.24-1.76V.02z" />
     </svg>
   );
 }
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, siteConfig.defaultWhatsAppMessage);
   const [modalContent, setModalContent] = useState<"privacy" | "terms" | null>(null);
 
   const categoriesList = [
-    { label: "Cestas Personalizadas", href: "#presentes" },
-    { label: "Balões e Surpresas", href: "#presentes" },
-    { label: "Presentes Personalizados", href: "#presentes" },
-    { label: "Presentes Corporativos", href: "#corporativos" },
+    { label: "Cestas personalizadas", href: "#presentes" },
+    { label: "Balões & surpresas", href: "#presentes" },
+    { label: "Presentes personalizados", href: "#presentes" },
+    { label: "Presentes corporativos", href: "#corporativos" },
+    { label: "Lembranças e kits", href: "#presentes" },
+    { label: "Todas as ocasiões", href: "#presentes" },
   ];
 
   return (
-    <footer className="bg-[#1F1722] text-white/80 pt-16 pb-12 border-t border-white/10 relative">
+    <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-16 pb-12 border-t border-[#F8E2EC] relative">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10">
-          {/* 1. Logo & Descrição Curta & Redes Sociais */}
-          <div className="lg:col-span-4 space-y-5">
-            {/* Logo */}
-            <div className="relative w-48 h-14 bg-white/95 p-2 rounded-2xl shadow-sm inline-block">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-[#F5E2EC]">
+          {/* 1. Logo & Descrição Curta (4 colunas no lg) */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="relative w-44 h-12">
               <Image
                 src="/images/logo-temporario.png"
-                alt="Mimos e Caprichos - Valinhos"
+                alt="Mimos e Caprichos"
                 fill
-                className="object-contain p-1.5"
-                sizes="192px"
+                className="object-contain object-left"
+                sizes="176px"
               />
             </div>
 
-            {/* Descrição curta solicitada */}
-            <p className="text-sm leading-relaxed text-white/75 font-sans max-w-sm">
+            <p className="text-xs sm:text-sm leading-relaxed text-brand-muted max-w-xs font-sans">
               Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
             </p>
 
-            {/* Redes Sociais */}
-            <div className="pt-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">
-                Conecte-se conosco
-              </p>
-              <div className="flex items-center gap-3">
-                <a
-                  href={siteConfig.socials.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-brand-pink text-white/80 hover:text-white border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-105"
-                  aria-label="Instagram da Mimos e Caprichos"
-                >
-                  <InstagramIcon className="w-5 h-5" />
-                </a>
+            {/* Redes Sociais com botões circulares em tom pastel */}
+            <div className="flex items-center gap-2.5 pt-2">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                aria-label="Instagram"
+              >
+                <InstagramRoundIcon />
+              </a>
 
-                <a
-                  href={siteConfig.socials.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-brand-pink text-white/80 hover:text-white border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-105"
-                  aria-label="Facebook da Mimos e Caprichos"
-                >
-                  <FacebookIcon className="w-5 h-5" />
-                </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                aria-label="Facebook"
+              >
+                <FacebookRoundIcon />
+              </a>
 
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/30 flex items-center justify-center transition-all duration-300 hover:scale-105"
-                  aria-label="WhatsApp da Mimos e Caprichos"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                </a>
-              </div>
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white border border-[#FADCE8] text-brand-pink flex items-center justify-center hover:bg-brand-pink hover:text-white transition-all shadow-2xs"
+                aria-label="TikTok"
+              >
+                <TikTokRoundIcon />
+              </a>
             </div>
           </div>
 
-          {/* 2. Menu Institucional */}
+          {/* 2. Menu Institucional (2 colunas) */}
           <div className="lg:col-span-2">
-            <h4 className="font-serif text-lg text-white mb-4">Institucional</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h4 className="font-bold text-sm text-brand-dark mb-3">Menu</h4>
+            <ul className="space-y-2 text-xs">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-white/70 hover:text-brand-pink transition-colors inline-block"
+                    className="text-brand-muted hover:text-brand-pink transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -141,91 +125,81 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 3. Categorias Principais */}
-          <div className="lg:col-span-3">
-            <h4 className="font-serif text-lg text-white mb-4">Categorias</h4>
-            <ul className="space-y-2.5 text-sm">
+          {/* 3. Nossos Presentes (2 colunas) */}
+          <div className="lg:col-span-2">
+            <h4 className="font-bold text-sm text-brand-dark mb-3">Nossos Presentes</h4>
+            <ul className="space-y-2 text-xs">
               {categoriesList.map((cat, idx) => (
                 <li key={idx}>
                   <Link
                     href={cat.href}
-                    className="text-white/70 hover:text-brand-pink transition-colors inline-block"
+                    className="text-brand-muted hover:text-brand-pink transition-colors"
                   >
                     {cat.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-1">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-brand-pink hover:text-white text-xs font-semibold uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors"
-                >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>Pedir item sob medida</span>
-                </a>
-              </li>
             </ul>
           </div>
 
-          {/* 4. Contato, Endereço e Horários */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-serif text-lg text-white mb-4">Loja & Contato</h4>
+          {/* 4. Contato (2 colunas) */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="font-bold text-sm text-brand-dark mb-3">Contato</h4>
 
-            <div className="space-y-3.5 text-sm text-white/75 font-sans">
-              {/* Endereço */}
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-brand-pink shrink-0 mt-0.5" />
-                <span className="leading-snug">{siteConfig.address}</span>
-              </div>
-
-              {/* Telefone */}
-              <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-brand-pink shrink-0" />
+            <div className="space-y-2.5 text-xs text-brand-muted">
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-brand-pink shrink-0" />
                 <a
                   href={`tel:${siteConfig.phoneRaw}`}
-                  className="hover:text-white font-semibold transition-colors"
+                  className="hover:text-brand-pink font-medium transition-colors"
                 >
-                  {siteConfig.phoneDisplay}
+                  (19) 99200-5279
                 </a>
               </div>
 
-              {/* Horários */}
-              <div className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-brand-pink shrink-0 mt-0.5" />
-                <div className="space-y-0.5 text-xs text-white/70">
-                  <p>{siteConfig.hours.weekdays}</p>
-                  <p>{siteConfig.hours.saturday}</p>
-                </div>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-brand-pink shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  Av. Onze de Agosto, 849 <br />
+                  Centro, Valinhos - SP
+                </span>
+              </div>
+
+              <div className="flex items-start gap-2">
+                <Clock className="w-3.5 h-3.5 text-brand-pink shrink-0 mt-0.5" />
+                <span className="leading-snug">
+                  Seg. a Sexta: 09h às 18h <br />
+                  Sábado: 09h às 13h
+                </span>
               </div>
             </div>
           </div>
+
+          {/* 5. Frase Script / Lettering (2 colunas) */}
+          <div className="lg:col-span-2 hidden lg:flex items-center justify-center">
+            <ScriptQuote className="scale-90" />
+          </div>
         </div>
 
-        {/* Rodapé Inferior: Copyright + Links de Política e Termos */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
-          <p className="flex items-center gap-1.5 text-center sm:text-left">
-            <span>© {currentYear} {siteConfig.name}. Feito com</span>
-            <Heart className="w-3.5 h-3.5 text-brand-pink fill-brand-pink inline" />
-            <span>em Valinhos-SP. Todos os direitos reservados.</span>
-          </p>
+        {/* Barra Inferior com Copyright e Links Legais */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
+          <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <button
               type="button"
               onClick={() => setModalContent("privacy")}
-              className="hover:text-white transition-colors focus:outline-none underline-offset-4 hover:underline"
+              className="hover:text-brand-pink transition-colors"
             >
               Política de Privacidade
             </button>
-            <span className="text-white/20">•</span>
+            <span>|</span>
             <button
               type="button"
               onClick={() => setModalContent("terms")}
-              className="hover:text-white transition-colors focus:outline-none underline-offset-4 hover:underline"
+              className="hover:text-brand-pink transition-colors"
             >
-              Termos de Uso
+              Termos de Uso &gt;
             </button>
           </div>
         </div>
@@ -233,24 +207,24 @@ export function Footer() {
         {/* Modal de Políticas e Termos */}
         {modalContent && (
           <div
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
             onClick={() => setModalContent(null)}
           >
             <div
-              className="relative max-w-xl w-full bg-white text-brand-dark rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20 max-h-[85vh] overflow-y-auto"
+              className="relative max-w-lg w-full bg-white text-brand-dark rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#FADDE8] max-h-[85vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between pb-4 border-b border-brand-border/60">
-                <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-between pb-3 border-b border-[#F7E6ED]">
+                <div className="flex items-center gap-2">
                   {modalContent === "privacy" ? (
                     <>
                       <ShieldCheck className="w-5 h-5 text-brand-pink" />
-                      <h3 className="font-serif text-xl font-normal">Política de Privacidade</h3>
+                      <h3 className="font-serif text-lg font-bold">Política de Privacidade</h3>
                     </>
                   ) : (
                     <>
                       <FileText className="w-5 h-5 text-brand-pink" />
-                      <h3 className="font-serif text-xl font-normal">Termos de Uso</h3>
+                      <h3 className="font-serif text-lg font-bold">Termos de Uso</h3>
                     </>
                   )}
                 </div>
@@ -258,54 +232,41 @@ export function Footer() {
                 <button
                   type="button"
                   onClick={() => setModalContent(null)}
-                  className="p-1 rounded-full text-brand-muted hover:text-brand-dark hover:bg-stone-100 transition-colors"
-                  aria-label="Fechar modal"
+                  className="p-1 rounded-full text-brand-muted hover:text-brand-dark"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="py-4 space-y-3.5 text-sm text-brand-muted leading-relaxed font-sans">
+              <div className="py-4 space-y-3 text-xs sm:text-sm text-brand-muted leading-relaxed">
                 {modalContent === "privacy" ? (
                   <>
                     <p>
-                      A <strong>Mimos e Caprichos</strong> valoriza a sua privacidade. Esta página é de caráter institucional e tem por objetivo apresentar nossos produtos, serviços e informações de contato.
+                      A <strong>Mimos e Caprichos</strong> valoriza a sua privacidade. Esta página é de caráter institucional e tem por objetivo apresentar nossos produtos, serviços e informações de contato em Valinhos-SP.
                     </p>
                     <p>
-                      <strong>Coleta de Dados:</strong> Nosso site institucional não exige cadastro nem armazena senhas ou dados financeiros. O atendimento e encomendas são realizados diretamente através do aplicativo WhatsApp.
-                    </p>
-                    <p>
-                      <strong>Uso de Informações:</strong> As informações eventualmente compartilhadas por você via WhatsApp são utilizadas unicamente para orçamentos, montagem de presentes personalizados e combinação de entregas em Valinhos e região.
-                    </p>
-                    <p>
-                      Para qualquer dúvida sobre privacidade, entre em contato pelo telefone (19) 99200-5279.
+                      O atendimento e encomendas são realizados diretamente através do nosso canal oficial no WhatsApp. As informações compartilhadas são utilizadas unicamente para orçamentos e entregas de presentes.
                     </p>
                   </>
                 ) : (
                   <>
                     <p>
-                      Bem-vindo ao site institucional da <strong>Mimos e Caprichos</strong> (Valinhos-SP).
+                      Bem-vindo ao site institucional da <strong>Mimos e Caprichos</strong>.
                     </p>
                     <p>
-                      <strong>Objetivo do Site:</strong> Este site destina-se à apresentação de nosso portfólio de presentes afetivos, cestas, balões e soluções corporativas. Não realizamos transações financeiras automáticas ou vendas diretas online pelo site.
-                    </p>
-                    <p>
-                      <strong>Preços e Disponibilidade:</strong> Fotos e composições apresentadas são referências visuais de peças já criadas. Preços, flores e itens específicos de época devem ser consultados e confirmados via atendimento no WhatsApp.
-                    </p>
-                    <p>
-                      <strong>Propriedade Intelectual:</strong> Logomarca, fotos e textos são de propriedade da Mimos e Caprichos.
+                      Este site destina-se à apresentação do portfólio de presentes afetivos, cestas e personalizados. Fotos apresentadas são criações reais da loja para inspiração.
                     </p>
                   </>
                 )}
               </div>
 
-              <div className="pt-4 border-t border-brand-border/60 text-right">
+              <div className="pt-3 border-t border-[#F7E6ED] text-right">
                 <button
                   type="button"
                   onClick={() => setModalContent(null)}
                   className="px-5 py-2 rounded-full bg-brand-pink text-white text-xs font-semibold hover:bg-brand-pink-hover transition-colors"
                 >
-                  Entendido
+                  Fechar
                 </button>
               </div>
             </div>

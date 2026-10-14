@@ -2,91 +2,93 @@ import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { MessageCircle, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight, Pencil, Gift, Heart } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
 
 export function CustomBannerSection() {
   const whatsappUrl = createWhatsAppUrl(
     siteConfig.phoneRaw,
-    "Olá! Tenho uma ideia especial e gostaria de personalizar um presente com a Mimos e Caprichos."
+    "Olá! Quero personalizar um presente exclusivo do meu jeito na Mimos e Caprichos."
   );
 
-  const perks = [
-    "Nomes, datas e mensagens sob medida",
-    "Composições únicas com flores, balões e mimos",
-    "Embalagens refinadas com acabamento artesanal",
-  ];
-
   return (
-    <section id="personalize" className="py-16 sm:py-24 bg-brand-offwhite relative overflow-hidden">
-      {/* Luz ambiente de destaque no fundo */}
-      <div className="absolute top-1/2 right-10 -translate-y-1/2 -z-10 w-96 h-96 bg-brand-pink-light/60 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="personalize" className="py-12 sm:py-16 bg-white">
       <Container>
-        <div className="relative rounded-3xl sm:rounded-4xl overflow-hidden bg-[#1E1722] text-white shadow-2xl min-h-[500px] lg:min-h-[540px] flex items-center border border-white/10 group">
-          {/* Imagem de Fundo com Alta Nitidez e Efeito Hover Sutil */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/banner-personalizados.png"
-              alt="Banner de presentes personalizados sob medida - Mimos e Caprichos"
-              fill
-              className="object-cover object-center sm:object-right transition-transform duration-1000 ease-out group-hover:scale-105"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              priority={false}
-            />
+        {/* Card em tom pastel rosa conforme o mockup aprovado */}
+        <div className="relative rounded-3xl sm:rounded-4xl bg-[#FFF2F6] border border-[#FADDE8] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+            {/* Coluna Esquerda: Texto + Botão (4 colunas) */}
+            <div className="lg:col-span-4 flex flex-col items-start space-y-4">
+              <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
+                PERSONALIZADOS
+              </span>
 
-            {/* Gradiente sofisticado: escuro e legível à esquerda, transparente à direita para revelar a imagem */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1E1722] via-[#1E1722]/85 to-black/20 sm:to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1E1722]/90 via-transparent to-transparent sm:hidden" />
-          </div>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark leading-[1.15] tracking-tight">
+                Seu presente, <br />
+                <span className="text-brand-pink font-normal italic">do seu jeito.</span>
+              </h2>
 
-          {/* Conteúdo em Destaque Visual */}
-          <div className="relative z-10 p-7 sm:p-12 lg:p-16 max-w-2xl space-y-6">
-            {/* Tag / Eyebrow */}
-            <Badge
-              variant="pink"
-              size="md"
-              className="bg-brand-pink text-white border-transparent shadow-xs"
-            >
-              <Sparkles className="w-3.5 h-3.5 mr-1" />
-              EXCLUSIVIDADE & AFETO
-            </Badge>
+              <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-sans max-w-sm">
+                Conte pra gente a sua ideia e criamos um presente único, com todo o carinho que cada momento merece.
+              </p>
 
-            {/* Título Principal */}
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white leading-[1.12] tracking-tight">
-              Seu presente, <br />
-              <span className="text-brand-pink italic font-normal">do seu jeito.</span>
-            </h2>
+              <div className="pt-2">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs sm:text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300"
+                >
+                  <span>Personalize com a gente</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
 
-            {/* Texto Descritivo */}
-            <p className="text-base sm:text-lg text-white/90 leading-relaxed font-sans max-w-xl">
-              Conte pra gente a sua ideia e criamos um presente único, com todo o carinho que cada momento merece.
-            </p>
+            {/* Coluna Central: Imagem real banner-personalizados.png (5 colunas) */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/banner-personalizados.png"
+                  alt="Seu presente, do seu jeito - Mimos e Caprichos"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 450px"
+                />
+              </div>
+            </div>
 
-            {/* Lista de Vantagens do Personalizado */}
-            <ul className="space-y-2.5 pt-1 text-sm text-white/80">
-              {perks.map((perk, index) => (
-                <li key={index} className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-brand-pink shrink-0" />
-                  <span>{perk}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Coluna Direita: 3 Passos com ícones em círculos rosa (3 colunas) */}
+            <div className="lg:col-span-3 flex flex-row lg:flex-col justify-around lg:justify-center gap-4 lg:gap-6 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-[#F7D8E4]">
+              {/* Passo 1 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-white border border-[#FADDE8] flex items-center justify-center text-brand-pink mb-2 shadow-2xs">
+                  <Pencil className="w-4 h-4 text-brand-pink" />
+                </div>
+                <span className="text-[11px] sm:text-xs font-semibold text-brand-dark">
+                  Escolha os itens
+                </span>
+              </div>
 
-            {/* Botão de Conversão Forte */}
-            <div className="pt-3">
-              <Button
-                href={whatsappUrl}
-                variant="primary"
-                size="lg"
-                leftIcon={<MessageCircle className="w-5 h-5 text-white" />}
-                rightIcon={<ArrowRight className="w-4 h-4 ml-1 text-white/80 transition-transform group-hover:translate-x-1" />}
-                className="shadow-floating hover:brightness-105 hover:scale-[1.02] transition-all"
-              >
-                Personalize com a gente
-              </Button>
+              {/* Passo 2 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-white border border-[#FADDE8] flex items-center justify-center text-brand-pink mb-2 shadow-2xs">
+                  <Gift className="w-4 h-4 text-brand-pink" />
+                </div>
+                <span className="text-[11px] sm:text-xs font-semibold text-brand-dark">
+                  Personalize como quiser
+                </span>
+              </div>
+
+              {/* Passo 3 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-10 h-10 rounded-full bg-white border border-[#FADDE8] flex items-center justify-center text-brand-pink mb-2 shadow-2xs">
+                  <Heart className="w-4 h-4 text-brand-pink fill-brand-pink" />
+                </div>
+                <span className="text-[11px] sm:text-xs font-semibold text-brand-dark">
+                  Surpreenda alguém especial
+                </span>
+              </div>
             </div>
           </div>
         </div>

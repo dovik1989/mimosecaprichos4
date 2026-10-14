@@ -4,247 +4,196 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { MessageCircle, Sparkles, X, ZoomIn, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight, MessageCircle } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
 
-interface GalleryItem {
-  id: string;
-  title: string;
-  category: "all" | "cestas" | "baloes" | "personalizados" | "corporativos";
-  categoryLabel: string;
-  imageSrc: string;
-  colSpanDesktop: string;
-  aspectDesktop: string;
-}
-
-const galleryItems: GalleryItem[] = [
+const inspirationPhotos = [
   {
-    id: "banner-insp",
-    title: "Composições Elegantes para Aniversários & Celebrações",
-    category: "cestas",
-    categoryLabel: "Cestas & Flores",
+    id: "photo-1",
     imageSrc: "/images/banner-inspiracao.png",
-    colSpanDesktop: "lg:col-span-8",
-    aspectDesktop: "aspect-[16/9] lg:aspect-[21/9]",
-  },
-  {
-    id: "extra-insp",
-    title: "Momentos Afetivos & Detalhes Especiais",
-    category: "personalizados",
-    categoryLabel: "Lembranças Afetivas",
-    imageSrc: "/images/inspiracao-extra.png",
-    colSpanDesktop: "lg:col-span-4",
-    aspectDesktop: "aspect-square lg:aspect-auto",
-  },
-  {
-    id: "cestas-insp",
-    title: "Cesta de Café da Manhã Completa",
-    category: "cestas",
-    categoryLabel: "Cestas Artesanais",
-    imageSrc: "/images/categoria-cestas.png",
-    colSpanDesktop: "lg:col-span-3 sm:col-span-6",
-    aspectDesktop: "aspect-square",
-  },
-  {
-    id: "baloes-insp",
-    title: "Bouquet de Balões & Caixinha Surpresa",
+    title: "Buquê de Balão com Cesta",
     category: "baloes",
-    categoryLabel: "Balões e Surpresas",
+  },
+  {
+    id: "photo-2",
     imageSrc: "/images/categoria-baloes.png",
-    colSpanDesktop: "lg:col-span-3 sm:col-span-6",
-    aspectDesktop: "aspect-square",
+    title: "Balão Feliz Dia das Crianças",
+    category: "baloes",
   },
   {
-    id: "pers-insp",
-    title: "Kits de Porcelana & Mimos Criativos",
+    id: "photo-3",
+    imageSrc: "/images/inspiracao-extra.png",
+    title: "Bandeja Ser Criança é Bom Demais",
     category: "personalizados",
-    categoryLabel: "Personalizados",
-    imageSrc: "/images/categoria-personalizados.png",
-    colSpanDesktop: "lg:col-span-3 sm:col-span-6",
-    aspectDesktop: "aspect-square",
   },
   {
-    id: "corp-insp",
-    title: "Presentes e Brindes Corporativos de Fim de Ano",
-    category: "corporativos",
-    categoryLabel: "Empresas",
+    id: "photo-4",
+    imageSrc: "/images/categoria-cestas.png",
+    title: "Cesta de Ursinho & Chocolates",
+    category: "cestas",
+  },
+  {
+    id: "photo-5",
     imageSrc: "/images/categoria-corporativos.png",
-    colSpanDesktop: "lg:col-span-3 sm:col-span-6",
-    aspectDesktop: "aspect-square",
+    title: "Kit Executivo Personalizado",
+    category: "personalizados",
+  },
+  {
+    id: "photo-6",
+    imageSrc: "/images/categoria-personalizados.png",
+    title: "Caneca Amor Não Envelhece",
+    category: "personalizados",
+  },
+  {
+    id: "photo-7",
+    imageSrc: "/images/hero-desktop.png",
+    title: "Cesta Feliz Dia das Professoras",
+    category: "cestas",
+  },
+  {
+    id: "photo-8",
+    imageSrc: "/images/banner-personalizados.png",
+    title: "Kit Você é Especial",
+    category: "personalizados",
   },
 ];
 
-const filterTabs = [
-  { id: "all", label: "Todas as Ideias" },
+const mobileFilterTabs = [
+  { id: "all", label: "Todos" },
   { id: "cestas", label: "Cestas" },
-  { id: "baloes", label: "Balões & Surpresas" },
+  { id: "baloes", label: "Balões" },
   { id: "personalizados", label: "Personalizados" },
-  { id: "corporativos", label: "Corporativos" },
 ];
 
 export function InspirationsSection() {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [mobileFilter, setMobileFilter] = useState("all");
 
-  const filteredItems =
-    activeFilter === "all"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === activeFilter);
+  const whatsappUrl = createWhatsAppUrl(
+    siteConfig.phoneRaw,
+    "Olá! Vi a galeria de inspirações no site e gostaria de encomendar algo especial."
+  );
+
+  const filteredMobilePhotos =
+    mobileFilter === "all"
+      ? inspirationPhotos
+      : inspirationPhotos.filter((p) => p.category === mobileFilter);
 
   return (
-    <section id="inspiracoes" className="py-20 lg:py-28 bg-[#FFFBF8] border-t border-brand-border/40 relative">
+    <section id="inspiracoes" className="py-16 sm:py-24 bg-white border-t border-[#F8E7EE]">
       <Container>
-        {/* Cabeçalho da Seção */}
-        <SectionHeading
-          eyebrow="PORTFÓLIO DE AFETO"
-          title="Inspirações que encantam"
-          description="Confira algumas ideias reais que já fizeram muitos momentos se tornarem ainda mais especiais."
-          align="center"
-          className="mb-10 sm:mb-12"
-        />
+        {/* ========================================================= */}
+        {/* CABEÇALHO DA SEÇÃO                                         */}
+        {/* ========================================================= */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 sm:mb-12">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
+              GALERIA
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark tracking-tight mt-1">
+              Inspirações que encantam
+            </h2>
+          </div>
 
-        {/* Filtros em Abas Delicadas */}
-        <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-2.5 mb-10 sm:mb-14">
-          {filterTabs.map((tab) => {
-            const isActive = activeFilter === tab.id;
-            return (
+          <div className="flex items-center gap-4">
+            <p className="text-xs sm:text-sm text-brand-muted max-w-xs leading-relaxed hidden sm:block">
+              Confira algumas ideias reais que já fizeram muitos momentos serem ainda mais especiais.
+            </p>
+
+            {/* Setas de navegação desktop */}
+            <div className="hidden sm:flex items-center gap-2">
               <button
-                key={tab.id}
-                onClick={() => setActiveFilter(tab.id)}
-                className={`text-xs sm:text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink ${
-                  isActive
-                    ? "bg-brand-pink text-white shadow-soft"
-                    : "bg-white text-brand-dark/80 hover:text-brand-pink hover:bg-brand-pink-light/50 border border-brand-border/60"
-                }`}
+                type="button"
+                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                aria-label="Anterior"
               >
-                {tab.label}
+                <ChevronLeft className="w-4 h-4" />
               </button>
-            );
-          })}
+              <button
+                type="button"
+                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Galeria em Grid Responsivo e Elegante */}
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6">
-          {filteredItems.map((item) => (
+        {/* ========================================================= */}
+        {/* LAYOUT DESKTOP: 5 CARDS EM LINHA (Conforme mockup desktop) */}
+        {/* ========================================================= */}
+        <div className="hidden lg:grid grid-cols-5 gap-4">
+          {inspirationPhotos.slice(0, 5).map((photo) => (
             <div
-              key={item.id}
-              onClick={() => setSelectedImage(item)}
-              className={`group relative rounded-3xl overflow-hidden border border-brand-border/70 shadow-sm bg-white cursor-pointer hover:shadow-card transition-all duration-500 col-span-1 sm:col-span-6 ${
-                activeFilter === "all" ? item.colSpanDesktop : "lg:col-span-4"
-              }`}
+              key={photo.id}
+              className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#FAF2F5] border border-[#F5E2EC] shadow-2xs hover:shadow-card hover:-translate-y-1 transition-all duration-300"
             >
-              <div
-                className={`relative w-full h-full min-h-[250px] sm:min-h-[280px] ${
-                  activeFilter === "all" ? item.aspectDesktop : "aspect-square"
-                }`}
-              >
-                <Image
-                  src={item.imageSrc}
-                  alt={item.title}
-                  fill
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-
-                {/* Overlay de Hover com Informações e Ícone de Zoom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/85 via-brand-dark/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 text-white">
-                  <div className="flex justify-end">
-                    <span className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                      <ZoomIn className="w-4 h-4" />
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-brand-pink-light bg-brand-pink/60 backdrop-blur-sm px-2.5 py-0.5 rounded-full mb-1.5">
-                      {item.categoryLabel}
-                    </span>
-                    <h4 className="font-serif text-lg sm:text-xl font-normal leading-snug">
-                      {item.title}
-                    </h4>
-                  </div>
-                </div>
-              </div>
+              <Image
+                src={photo.imageSrc}
+                alt={photo.title}
+                fill
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes="20vw"
+              />
             </div>
           ))}
         </div>
 
-        {/* Botão de Encomenda Abaixo da Galeria */}
-        <div className="mt-14 sm:mt-16 text-center">
-          <Button
-            href={createWhatsAppUrl(
-              siteConfig.phoneRaw,
-              "Olá! Vi a galeria de inspirações no site e gostaria de encomendar um presente especial parecido."
-            )}
-            variant="primary"
-            size="lg"
-            leftIcon={<MessageCircle className="w-5 h-5 text-white" />}
-            rightIcon={<ArrowRight className="w-4 h-4 ml-1" />}
-            className="shadow-soft hover:shadow-floating"
-          >
-            Quero um presente inspirado nessas ideias
-          </Button>
-        </div>
+        {/* ========================================================= */}
+        {/* LAYOUT MOBILE (Conforme mockup "mobile.png" tela 4)        */}
+        {/* ========================================================= */}
+        <div className="lg:hidden flex flex-col space-y-6">
+          {/* Abas de filtro mobile */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {mobileFilterTabs.map((tab) => {
+              const isActive = mobileFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setMobileFilter(tab.id)}
+                  className={`text-xs font-semibold px-4 py-1.5 rounded-full whitespace-nowrap transition-all ${
+                    isActive
+                      ? "bg-brand-pink text-white shadow-xs"
+                      : "bg-[#FBF1F5] text-brand-dark/80 hover:bg-[#F8E3EC]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
 
-        {/* Modal / Lightbox de Visualização Rápida */}
-        {selectedImage && (
-          <div
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
-            onClick={() => setSelectedImage(null)}
-          >
-            <div
-              className="relative max-w-2xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Botão Fechar */}
-              <button
-                type="button"
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black transition-colors"
-                aria-label="Fechar visualização"
+          {/* Grid 2 colunas mobile (8 cards) */}
+          <div className="grid grid-cols-2 gap-3">
+            {filteredMobilePhotos.map((photo) => (
+              <div
+                key={photo.id}
+                className="relative aspect-square rounded-2xl overflow-hidden bg-[#FAF2F5] border border-[#F5E2EC] shadow-2xs"
               >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Imagem Ampliada */}
-              <div className="relative aspect-[4/3] w-full bg-stone-100">
                 <Image
-                  src={selectedImage.imageSrc}
-                  alt={selectedImage.title}
+                  src={photo.imageSrc}
+                  alt={photo.title}
                   fill
                   className="object-cover object-center"
-                  sizes="(max-width: 768px) 100vw, 700px"
+                  sizes="50vw"
                 />
               </div>
-
-              {/* Detalhes e CTA de Encomenda no Modal */}
-              <div className="p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white">
-                <div>
-                  <span className="text-xs font-semibold uppercase text-brand-pink tracking-wider">
-                    {selectedImage.categoryLabel}
-                  </span>
-                  <h3 className="font-serif text-xl text-brand-dark mt-0.5">
-                    {selectedImage.title}
-                  </h3>
-                </div>
-
-                <Button
-                  href={createWhatsAppUrl(
-                    siteConfig.phoneRaw,
-                    `Olá! Adorei a inspiração "${selectedImage.title}" que vi no site e gostaria de encomendar algo parecido.`
-                  )}
-                  variant="primary"
-                  size="md"
-                  leftIcon={<MessageCircle className="w-4 h-4 text-white" />}
-                  className="shrink-0 w-full sm:w-auto"
-                >
-                  Pedir no WhatsApp
-                </Button>
-              </div>
-            </div>
+            ))}
           </div>
-        )}
+
+          {/* Botão Ver mais inspirações mobile */}
+          <div className="pt-2">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-brand-pink text-white text-sm font-semibold shadow-soft"
+            >
+              <span>Ver mais inspirações</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
       </Container>
     </section>
   );
