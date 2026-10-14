@@ -1,63 +1,100 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { Star, ChevronLeft, ChevronRight, ArrowRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight, Star } from "lucide-react";
 
 /**
- * PLACEHOLDER ESTRUTURAL IDENTIFICADO:
- * As avaliações abaixo reproduzem o layout aprovado no mockup (Mariana Silva, Carlos Andrade, Juliana Ferraz)
- * e devem ser substituídas pelas avaliações reais do perfil da loja no Google Meu Negócio.
+ * Ícone estilizado de aspas duplas rosas conforme o mockup aprovado
  */
-const reviews = [
+function PinkQuoteIcon({ className = "w-7 h-7 text-brand-pink" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="28"
+      height="24"
+      viewBox="0 0 28 24"
+      fill="currentColor"
+    >
+      <path d="M2.5 12C2.5 7.5 5.5 4 9.5 3c.6 0 1 .4 1 1 0 .5-.4.9-.9 1C6.8 5.6 4.8 8.2 4.6 11.2c.7-.4 1.5-.7 2.4-.7 2.8 0 5 2.2 5 5s-2.2 5-5 5c-2.8 0-4.5-2.2-4.5-8.5zm14 0c0-4.5 3-8 7-9 .6 0 1 .4 1 1 0 .5-.4.9-.9 1-2.8.6-4.8 3.2-5 6.2.7-.4 1.5-.7 2.4-.7 2.8 0 5 2.2 5 5s-2.2 5-5 5c-2.8 0-4.5-2.2-4.5-8.5z" />
+    </svg>
+  );
+}
+
+/**
+ * Textos de demonstração claramente identificados como ilustrativos
+ * conforme instrução do projeto.
+ */
+const demoReviews = [
   {
     id: "review-1",
-    author: "Mariana Silva",
-    time: "Há 2 semanas",
-    text: "Atendimento maravilhoso! Super atenciosas e caprichosas. O presente ficou lindo e fez toda a diferença no meu dia especial!",
-    rating: 5,
+    text: "Atendimento muito atencioso do início ao fim. Cada detalhe faz a diferença.",
   },
   {
     id: "review-2",
-    author: "Carlos Andrade",
-    time: "Há 1 mês",
-    text: "Produtos de excelente qualidade e muito bem montados. Entrega no prazo e atendimento nota 10!",
-    rating: 5,
+    text: "O presente ficou lindo e cheio de carinho. Uma surpresa muito especial!",
   },
   {
     id: "review-3",
-    author: "Juliana Ferraz",
-    time: "Há 1 mês",
-    text: "Sempre peço na Mimos e Caprichos e nunca me decepciono. Tudo feito com muito carinho e bom gosto!",
-    rating: 5,
+    text: "A personalização deixou tudo ainda mais encantador.",
   },
 ];
 
 export function ReviewsSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="avaliacoes" className="py-16 sm:py-24 bg-[#FFF8FA] border-t border-[#F8E7EE]">
-      <Container>
+    <section id="avaliacoes" className="relative py-12 sm:py-16 lg:py-18 bg-[#FDF1F5] overflow-hidden border-t border-[#F8E7EE]">
+      {/* ========================================================= */}
+      {/* ELEMENTOS DECORATIVOS ORGÂNICOS DE FUNDO                   */}
+      {/* ========================================================= */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-0">
+        {/* Onda suave no topo */}
+        <svg
+          className="absolute -top-1 left-0 w-full h-10 opacity-70"
+          viewBox="0 0 1440 40"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <path d="M0 0C360 22 720 30 1440 8V0H0Z" fill="#FFFFFF" />
+        </svg>
+
+        {/* Formas orgânicas suaves com blur */}
+        <div className="absolute -bottom-16 -left-16 w-80 h-80 rounded-full bg-[#FCE6EE] blur-3xl opacity-60" />
+        <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-[#FFF0F6] blur-3xl opacity-60" />
+      </div>
+
+      <Container className="relative z-10">
         {/* ========================================================= */}
-        {/* CABEÇALHO COM GOOGLE RATING BOX                           */}
+        {/* 1. CABEÇALHO HORIZONTAL (TÍTULO + SELO GOOGLE RATING)     */}
         {/* ========================================================= */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
-          {/* Título & Subtítulo */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 sm:mb-10">
+          {/* Esquerda: Título */}
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               AVALIAÇÕES
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark tracking-tight mt-1">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-brand-dark tracking-tight mt-1 leading-[1.15]">
               O carinho de quem já comprou
             </h2>
-            <p className="text-xs sm:text-sm text-brand-muted mt-1 font-sans">
+            <p className="text-xs sm:text-[13px] text-[#554959] mt-1 font-sans">
               Histórias e experiências que fazem a diferença.
             </p>
           </div>
 
-          {/* Box Oficial de Avaliação do Google (Conforme mockup) */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-[#F5E2EC] shadow-xs flex items-center gap-4 shrink-0">
-            {/* Logo Google oficial */}
-            <div className="w-10 h-10 rounded-full bg-stone-50 border border-stone-200 flex items-center justify-center shrink-0">
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
+          {/* Direita: Selo Oficial do Google Rating */}
+          <div className="bg-white rounded-[22px] sm:rounded-full px-5 sm:px-6 py-3 shadow-xs border border-[#F4E1EC] flex items-center gap-3.5 sm:gap-4 shrink-0 self-start lg:self-auto">
+            {/* Logo Google oficial colorido */}
+            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+              <svg className="w-7 h-7" width="28" height="28" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
                   d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
@@ -77,75 +114,91 @@ export function ReviewsSection() {
               </svg>
             </div>
 
+            {/* Nota e estrelas */}
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-serif text-xl sm:text-2xl font-bold text-brand-dark">5,0</span>
-                <div className="flex text-amber-400 text-xs">
-                  {"★★★★★"}
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-xl sm:text-2xl text-brand-dark leading-none">
+                  5,0
+                </span>
+                <div className="flex text-[#FBBC05] text-xs gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#FBBC05] text-[#FBBC05]" />
+                  ))}
                 </div>
               </div>
-              <p className="text-[11px] sm:text-xs text-brand-muted font-medium">
-                874 avaliações no Google
+              <p className="text-[11px] text-[#554959] font-medium mt-0.5 leading-none">
+                874 avaliações
               </p>
             </div>
 
-            <div className="hidden sm:block h-8 w-[1px] bg-[#F5E2EC] mx-1" />
+            {/* Divisória vertical rosa-claro */}
+            <div className="hidden sm:block h-7 w-[1.5px] bg-[#F4D3E1] mx-1" />
 
-            <p className="hidden sm:block text-[11px] text-brand-muted max-w-[140px] leading-tight">
+            {/* Texto de apoio */}
+            <p className="hidden sm:block text-[11px] text-[#554959] max-w-[130px] leading-tight font-sans">
               Clientes reais compartilhando momentos especiais
             </p>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* CARDS DE DEPOIMENTOS                                      */}
+        {/* 2. CARDS DE AVALIAÇÃO + SETAS DE NAVEGAÇÃO LATERAIS       */}
         {/* ========================================================= */}
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reviews.map((rev) => (
+        <div className="relative flex items-center gap-2 sm:gap-3 lg:gap-4">
+          {/* Seta circular esquerda */}
+          <button
+            type="button"
+            onClick={() => scroll("left")}
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all shadow-2xs shrink-0 active:scale-95"
+            aria-label="Avaliação anterior"
+          >
+            <ChevronLeft className="w-4 h-4" width="16" height="16" />
+          </button>
+
+          {/* Container dos 3 cards */}
+          <div
+            ref={scrollContainerRef}
+            className="flex-1 flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth no-scrollbar py-2"
+          >
+            {demoReviews.map((rev) => (
               <div
                 key={rev.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-[#F5E2EC] shadow-xs hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="flex-none w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(235,75,142,0.06)] border border-[#F6DCE6]/70 flex flex-col justify-between min-h-[170px] sm:min-h-[185px] transition-transform duration-300 hover:-translate-y-1"
               >
-                <div>
-                  {/* Topo do card: Aspas rosa + Estrelas */}
-                  <div className="flex items-center justify-between mb-3.5">
-                    <div className="w-8 h-8 rounded-full bg-[#FFF0F5] text-brand-pink flex items-center justify-center">
-                      <Quote className="w-4 h-4 fill-brand-pink text-brand-pink" />
-                    </div>
-                    <div className="flex text-amber-400 text-sm">
-                      {"★★★★★"}
-                    </div>
-                  </div>
-
-                  {/* Texto do comentário */}
-                  <p className="text-xs sm:text-sm text-brand-dark/85 leading-relaxed font-sans">
-                    {rev.text}
-                  </p>
-                </div>
-
-                {/* Autor do comentário */}
-                <div className="mt-6 pt-4 border-t border-[#F8E8EE] flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-[#FCE8F0] text-brand-pink font-bold text-xs flex items-center justify-center">
-                      {rev.author[0]}
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-brand-dark">{rev.author}</h4>
-                      <p className="text-[10px] text-brand-muted">{rev.time}</p>
-                    </div>
+                {/* Linha superior: Aspas rosas à esquerda + 5 estrelas amarelas */}
+                <div className="flex items-center justify-between mb-2">
+                  <PinkQuoteIcon className="w-7 h-7 text-brand-pink" />
+                  <div className="flex text-[#FBBC05] gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#FBBC05] text-[#FBBC05]" />
+                    ))}
                   </div>
                 </div>
+
+                {/* Texto do depoimento */}
+                <p className="text-xs sm:text-[13px] text-[#2D2630] font-sans leading-[1.65] my-auto">
+                  {rev.text}
+                </p>
               </div>
             ))}
           </div>
+
+          {/* Seta circular direita */}
+          <button
+            type="button"
+            onClick={() => scroll("right")}
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all shadow-2xs shrink-0 active:scale-95"
+            aria-label="Próxima avaliação"
+          >
+            <ChevronRight className="w-4 h-4" width="16" height="16" />
+          </button>
         </div>
 
         {/* ========================================================= */}
-        {/* RODAPÉ DA SEÇÃO: DISCLAIMER + BOTÃO GOOGLE                */}
+        {/* 3. RODAPÉ: AVISO ILUSTRATIVO + BOTÃO GOOGLE CENTRALIZADO   */}
         {/* ========================================================= */}
-        <div className="mt-10 sm:mt-12 text-center space-y-3">
-          <p className="text-[11px] text-brand-muted/70">
+        <div className="mt-6 sm:mt-8 text-center space-y-3.5">
+          <p className="text-[10px] sm:text-[11px] text-[#8C7A86] font-sans">
             Comentários ilustrativos — substituir por avaliações reais do Google na versão final.
           </p>
 
