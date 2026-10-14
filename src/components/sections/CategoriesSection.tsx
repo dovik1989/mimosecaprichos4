@@ -1,10 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
-import { DoodleDoubleHeart } from "@/components/ui/Doodles";
+import { DoodleTripleHearts } from "@/components/ui/Doodles";
 
 const categories = [
   {
@@ -12,7 +14,7 @@ const categories = [
     title: "Cestas personalizadas",
     description: "Combinações especiais para emocionar em qualquer ocasião.",
     imageSrc: "/images/categoria-cestas.png",
-    whatsappMessage: "Olá! Gostaria de um orçamento para uma Cesta Personalizada.",
+    whatsappMessage: "Olá! Gostaria de um orçamento para uma Cesta Personalizada da Mimos e Caprichos.",
   },
   {
     id: "baloes",
@@ -26,7 +28,7 @@ const categories = [
     title: "Presentes personalizados",
     description: "Canecas, caixinhas, lembranças e muito mais, do seu jeito.",
     imageSrc: "/images/categoria-personalizados.png",
-    whatsappMessage: "Olá! Gostaria de saber mais sobre opções de presentes personalizados.",
+    whatsappMessage: "Olá! Gostaria de saber mais sobre as opções de presentes e lembranças personalizadas.",
   },
   {
     id: "corporativos",
@@ -38,39 +40,55 @@ const categories = [
 ];
 
 export function CategoriesSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -340 : 340;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="presentes" className="py-16 sm:py-24 bg-white">
+    <section id="presentes" className="py-16 sm:py-20 lg:py-24 bg-white">
       <Container>
-        {/* Cabeçalho da Seção com Título e Setas de Navegação (Desktop) */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-10 sm:mb-12">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
+        {/* ========================================================= */}
+        {/* CABEÇALHO DA SEÇÃO (Conforme referência aprovada)          */}
+        {/* ========================================================= */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12">
+          {/* Lado Esquerdo: Eyebrow + Título + Três Corações Vazados */}
+          <div className="flex flex-col items-start">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               NOSSOS PRESENTES
             </span>
-            <div className="flex items-center gap-2 mt-1">
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark tracking-tight">
+            <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[44px] text-brand-dark tracking-tight leading-[1.12]">
                 Encontre o presente perfeito
               </h2>
-              <DoodleDoubleHeart className="w-7 h-7 sm:w-9 sm:h-9 text-brand-pink shrink-0" />
+              <DoodleTripleHearts className="w-11 h-8 text-brand-pink shrink-0 -translate-y-1" />
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <p className="text-xs sm:text-sm text-brand-muted max-w-xs leading-relaxed hidden sm:block">
+          {/* Lado Direito: Descrição Curta + Dois Botões Circulares de Navegação */}
+          <div className="flex items-center justify-between sm:justify-end gap-5 lg:gap-6">
+            <p className="text-xs sm:text-[13px] text-brand-muted max-w-[270px] leading-relaxed">
               Opções criativas, personalizadas e cheias de carinho para cada momento da sua vida.
             </p>
 
-            <div className="hidden sm:flex items-center gap-2">
+            {/* Botões Circulares com Setas de Navegação */}
+            <div className="flex items-center gap-2.5 shrink-0">
               <button
                 type="button"
-                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                onClick={() => handleScroll("left")}
+                className="w-10 h-10 rounded-full border border-[#E8DCE2] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 type="button"
-                className="w-9 h-9 rounded-full border border-[#F2D7E2] hover:border-brand-pink text-brand-dark hover:text-brand-pink flex items-center justify-center transition-colors"
+                onClick={() => handleScroll("right")}
+                className="w-10 h-10 rounded-full border border-[#E8DCE2] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-all shadow-2xs hover:scale-105 active:scale-95"
                 aria-label="Próximo"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -79,13 +97,13 @@ export function CategoriesSection() {
           </div>
         </div>
 
-        {/* Subtexto Mobile */}
-        <p className="text-xs text-brand-muted mb-6 sm:hidden">
-          Opções criativas, personalizadas e cheias de carinho para cada momento da sua vida.
-        </p>
-
-        {/* Grid de 4 Cards (4 colunas no desktop, empilhados no mobile conforme mockups) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ========================================================= */}
+        {/* CARDS DE CATEGORIAS (4 cards alinhados no desktop)        */}
+        {/* ========================================================= */}
+        <div
+          ref={scrollContainerRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 no-scrollbar"
+        >
           {categories.map((category) => {
             const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, category.whatsappMessage);
 
@@ -96,10 +114,10 @@ export function CategoriesSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 id={category.id === "corporativos" ? "corporativos" : undefined}
-                className="group flex flex-col bg-white rounded-3xl p-3.5 border border-[#F6E6ED] shadow-xs hover:shadow-card hover:-translate-y-1 transition-all duration-300"
+                className="group flex flex-col bg-white rounded-[22px] p-3.5 sm:p-4 border border-[#F2E5EC] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-6px_rgba(235,75,142,0.12)] hover:-translate-y-1 transition-all duration-300"
               >
-                {/* Imagem com cantos arredondados */}
-                <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-[#FAF2F5] mb-4">
+                {/* Imagem em destaque ocupando a maior parte da altura com enquadramento perfeito */}
+                <div className="relative aspect-[4/3.7] w-full rounded-[16px] overflow-hidden bg-[#FAF2F5] mb-3.5">
                   <Image
                     src={category.imageSrc}
                     alt={category.title}
@@ -109,21 +127,21 @@ export function CategoriesSection() {
                   />
                 </div>
 
-                {/* Conteúdo */}
-                <div className="flex-1 flex flex-col justify-between px-1.5 pb-1">
-                  <div>
-                    <h3 className="font-bold text-brand-dark text-base sm:text-lg group-hover:text-brand-pink transition-colors">
-                      {category.title}
-                    </h3>
-                    <p className="text-xs text-brand-muted mt-1 leading-relaxed">
+                {/* Bloco de Informações */}
+                <div className="flex-1 flex flex-col justify-between px-1">
+                  <h3 className="font-bold text-brand-dark text-[16px] sm:text-[17px] group-hover:text-brand-pink transition-colors leading-snug">
+                    {category.title}
+                  </h3>
+
+                  {/* Linha com Descrição à esquerda e Botão Circular Rosa com Seta à direita */}
+                  <div className="flex items-end justify-between gap-3 pt-2 mt-auto">
+                    <p className="text-[12px] sm:text-[12.5px] text-brand-muted leading-relaxed line-clamp-2">
                       {category.description}
                     </p>
-                  </div>
 
-                  {/* Seta circular rosa no canto inferior direito conforme mockup */}
-                  <div className="flex justify-end pt-4 mt-2">
-                    <div className="w-8 h-8 rounded-full border border-[#F6DCE5] text-brand-pink group-hover:bg-brand-pink group-hover:text-white group-hover:border-transparent flex items-center justify-center transition-all duration-300">
-                      <ArrowRight className="w-4 h-4" />
+                    {/* Ícone circular rosa com seta à direita */}
+                    <div className="w-8 h-8 rounded-full border border-[#F3B3C8] bg-white text-brand-pink group-hover:bg-brand-pink group-hover:text-white group-hover:border-transparent flex items-center justify-center shrink-0 transition-all duration-300 shadow-2xs">
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 </div>

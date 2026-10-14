@@ -69,3 +69,4 @@ export function TrustBar() {
     </div>
   );
 }
+
