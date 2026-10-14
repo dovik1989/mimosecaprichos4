@@ -1,188 +1,248 @@
 import React from "react";
-import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { MessageCircle, Gift, Heart, ArrowRight, ArrowDown } from "lucide-react";
-import { createWhatsAppUrl } from "@/lib/utils";
 import { DoodleHeart } from "@/components/ui/Doodles";
 
-export function HowItWorksSection() {
-  const whatsappUrl = createWhatsAppUrl(
-    siteConfig.phoneRaw,
-    "Olá! Gostaria de conversar com a equipe da Mimos e Caprichos e solicitar um presente personalizado."
-  );
-
+function DoodleGiftBox({ className = "w-14 h-16" }: { className?: string }) {
   return (
-    <section className="py-16 sm:py-24 bg-[#FFFBFD] border-t border-[#F8E7EE] overflow-hidden">
-      <Container>
-        {/* Cabeçalho */}
-        <div className="mb-12 sm:mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-brand-pink">
-            COMO FUNCIONA
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-brand-dark tracking-tight mt-1 max-w-xl">
-            É simples surpreender com a Mimos e Caprichos
-          </h2>
+    <svg
+      className={className}
+      width="56"
+      height="68"
+      viewBox="0 0 56 68"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {/* Cyan/Blue box with hand-drawn dash pattern */}
+      <rect
+        x="6"
+        y="24"
+        width="44"
+        height="40"
+        rx="4"
+        stroke="#00AEEF"
+        strokeWidth="2"
+        fill="#FFFFFF"
+      />
+      {/* Decorative hand-drawn doodle text/lines on box */}
+      <path d="M11 34h8M11 42h5M11 50h10M36 36h8M36 46h6" stroke="#00AEEF" strokeWidth="1.5" />
+
+      {/* Vertical pink ribbon */}
+      <rect x="23" y="24" width="10" height="40" fill="#EB4B8E" />
+
+      {/* Pink Bow on top */}
+      <path
+        d="M28 24C21 14 9 12 13 20c3 6 15 4 15 4z"
+        fill="#FFA4C8"
+        stroke="#EB4B8E"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M28 24C35 14 47 12 43 20c-3 6-15 4-15 4z"
+        fill="#FFA4C8"
+        stroke="#EB4B8E"
+        strokeWidth="1.8"
+      />
+      <circle cx="28" cy="24" r="3.5" fill="#EB4B8E" />
+      {/* Hanging ribbon tails */}
+      <path d="M25 26c-3 6-5 12-6 16" stroke="#EB4B8E" strokeWidth="2" />
+      <path d="M31 26c3 6 5 12 6 16" stroke="#EB4B8E" strokeWidth="2" />
+    </svg>
+  );
+}
+
+export function HowItWorksSection() {
+  return (
+    <section className="relative py-10 sm:py-12 lg:py-14 bg-white border-t border-[#F8E7EE] overflow-hidden">
+      {/* ========================================================= */}
+      {/* ELEMENTO DECORATIVO: ONDAS ORGÂNICAS INFERIOR ESQUERDA     */}
+      {/* ========================================================= */}
+      <svg
+        className="absolute bottom-0 left-0 w-72 sm:w-96 h-20 sm:h-24 pointer-events-none opacity-75 -z-0"
+        viewBox="0 0 360 90"
+        fill="none"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 90V45C70 25 140 65 210 50C280 35 320 55 360 40V90H0Z"
+          fill="#FDEEF4"
+        />
+      </svg>
+
+      <Container className="relative z-10">
+        {/* ========================================================= */}
+        {/* LAYOUT DESKTOP: UMA ÚNICA FAIXA HORIZONTAL (35% / 65%)    */}
+        {/* ========================================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* ========================================================= */}
+          {/* COLUNA ESQUERDA (~35%): Eyebrow + Título                   */}
+          {/* ========================================================= */}
+          <div className="lg:col-span-4 flex flex-col items-start justify-center">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-pink mb-1.5">
+              COMO FUNCIONA
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-brand-dark leading-[1.18] tracking-tight">
+              É simples surpreender <br />
+              com a Mimos e Caprichos
+            </h2>
+          </div>
+
+          {/* ========================================================= */}
+          {/* COLUNA DIREITA (~65%): 3 Passos Horizontais + Doodles      */}
+          {/* ========================================================= */}
+          <div className="lg:col-span-8 relative">
+            <div className="flex items-start justify-between w-full lg:pr-14 xl:pr-16">
+              {/* ---------------- PASSO 1 ---------------- */}
+              <div className="flex-1 flex flex-col items-center text-center">
+                {/* Número 1 em pequeno círculo rosa acima do ícone */}
+                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
+                  1
+                </div>
+
+                {/* Ícone de conversa em círculo rosa suave */}
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
+                  <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
+                </div>
+
+                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
+                  Conte sua ideia
+                </h3>
+                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
+                  Fale pra gente a ocasião e o que você imagina.
+                </p>
+              </div>
+
+              {/* Seta horizontal 1 (alinhada à altura dos ícones) */}
+              <div className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
+              </div>
+
+              {/* ---------------- PASSO 2 ---------------- */}
+              <div className="flex-1 flex flex-col items-center text-center">
+                {/* Número 2 em pequeno círculo rosa */}
+                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
+                  2
+                </div>
+
+                {/* Ícone de presente em círculo rosa suave */}
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
+                  <Gift className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
+                </div>
+
+                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
+                  Criamos com carinho
+                </h3>
+                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
+                  Montamos uma opção especial e personalizada.
+                </p>
+              </div>
+
+              {/* Seta horizontal 2 (alinhada à altura dos ícones) */}
+              <div className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
+              </div>
+
+              {/* ---------------- PASSO 3 ---------------- */}
+              <div className="flex-1 flex flex-col items-center text-center">
+                {/* Número 3 em pequeno círculo rosa */}
+                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
+                  3
+                </div>
+
+                {/* Ícone de coração em círculo rosa suave */}
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
+                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
+                </div>
+
+                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
+                  Surpreenda alguém
+                </h3>
+                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
+                  Entregamos um presente que vai emocionar.
+                </p>
+              </div>
+            </div>
+
+            {/* ========================================================= */}
+            {/* ELEMENTOS DECORATIVOS À DIREITA (Coração e Presente)       */}
+            {/* ========================================================= */}
+            {/* Coração em contorno no canto superior direito */}
+            <div className="hidden lg:block absolute -top-1 right-2 xl:right-4 text-brand-pink">
+              <DoodleHeart className="w-6 h-6 text-brand-pink rotate-12" />
+            </div>
+
+            {/* Ilustração decorativa de presente no canto inferior direito */}
+            <div className="hidden lg:block absolute -bottom-3 right-0">
+              <DoodleGiftBox className="w-12 h-16 xl:w-14 xl:h-18" />
+            </div>
+          </div>
         </div>
 
         {/* ========================================================= */}
-        {/* LAYOUT DESKTOP: 3 PASSOS HORIZONTAIS + ILUSTRAÇÃO         */}
+        {/* LAYOUT MOBILE (Organização Vertical Conforme Referência)   */}
         {/* ========================================================= */}
-        <div className="hidden lg:grid grid-cols-12 gap-6 items-center">
-          {/* Passo 1 */}
-          <div className="col-span-3 flex flex-col items-center text-center">
-            <div className="relative mb-4">
-              <div className="w-16 h-16 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <MessageCircle className="w-7 h-7 text-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center shadow-2xs">
-                1
-              </span>
-            </div>
-            <h3 className="font-bold text-brand-dark text-base">Conte sua ideia</h3>
-            <p className="text-xs text-brand-muted mt-1 leading-relaxed max-w-[200px]">
-              Fale pra gente a ocasião e o que você imagina.
-            </p>
-          </div>
-
-          {/* Seta divisória */}
-          <div className="col-span-1 flex justify-center text-brand-pink/40">
-            <ArrowRight className="w-6 h-6" />
-          </div>
-
-          {/* Passo 2 */}
-          <div className="col-span-3 flex flex-col items-center text-center">
-            <div className="relative mb-4">
-              <div className="w-16 h-16 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <Gift className="w-7 h-7 text-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center shadow-2xs">
-                2
-              </span>
-            </div>
-            <h3 className="font-bold text-brand-dark text-base">Criamos com carinho</h3>
-            <p className="text-xs text-brand-muted mt-1 leading-relaxed max-w-[200px]">
-              Montamos uma opção especial e personalizada.
-            </p>
-          </div>
-
-          {/* Seta divisória */}
-          <div className="col-span-1 flex justify-center text-brand-pink/40">
-            <ArrowRight className="w-6 h-6" />
-          </div>
-
-          {/* Passo 3 */}
-          <div className="col-span-3 flex flex-col items-center text-center">
-            <div className="relative mb-4">
-              <div className="w-16 h-16 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <Heart className="w-7 h-7 text-brand-pink fill-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center shadow-2xs">
-                3
-              </span>
-            </div>
-            <h3 className="font-bold text-brand-dark text-base">Surpreenda alguém</h3>
-            <p className="text-xs text-brand-muted mt-1 leading-relaxed max-w-[200px]">
-              Entregamos um presente que vai emocionar.
-            </p>
-          </div>
-
-          {/* Ilustração fofa no canto direito */}
-          <div className="col-span-1 flex justify-center">
-            <DoodleHeart className="w-9 h-9 text-brand-pink" />
-          </div>
-        </div>
-
-        {/* ========================================================= */}
-        {/* LAYOUT MOBILE (Conforme mockup "mobile.png" tela 5)        */}
-        {/* ========================================================= */}
-        <div className="lg:hidden flex flex-col space-y-6">
+        <div className="lg:hidden mt-8 flex flex-col space-y-6">
           {/* Passo 1 */}
           <div className="flex items-start gap-4">
-            <div className="relative shrink-0">
-              <div className="w-14 h-14 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <MessageCircle className="w-6 h-6 text-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border border-brand-pink text-brand-pink text-[11px] font-bold flex items-center justify-center">
+            <div className="relative shrink-0 flex flex-col items-center">
+              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
                 1
               </span>
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                <MessageCircle className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+              </div>
             </div>
-            <div>
+            <div className="pt-2">
               <h3 className="font-bold text-brand-dark text-base">Conte sua ideia</h3>
-              <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
+              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
                 Fale pra gente a ocasião e o que você imagina.
               </p>
             </div>
           </div>
 
-          <div className="pl-6 text-brand-pink/50">
-            <ArrowDown className="w-4 h-4" />
+          <div className="pl-6 text-slate-300">
+            <ArrowDown className="w-4 h-4 text-slate-400" />
           </div>
 
           {/* Passo 2 */}
           <div className="flex items-start gap-4">
-            <div className="relative shrink-0">
-              <div className="w-14 h-14 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <Gift className="w-6 h-6 text-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border border-brand-pink text-brand-pink text-[11px] font-bold flex items-center justify-center">
+            <div className="relative shrink-0 flex flex-col items-center">
+              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
                 2
               </span>
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                <Gift className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+              </div>
             </div>
-            <div>
+            <div className="pt-2">
               <h3 className="font-bold text-brand-dark text-base">Criamos com carinho</h3>
-              <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
+              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
                 Montamos uma opção especial e personalizada.
               </p>
             </div>
           </div>
 
-          <div className="pl-6 text-brand-pink/50">
-            <ArrowDown className="w-4 h-4" />
+          <div className="pl-6 text-slate-300">
+            <ArrowDown className="w-4 h-4 text-slate-400" />
           </div>
 
           {/* Passo 3 */}
           <div className="flex items-start gap-4">
-            <div className="relative shrink-0">
-              <div className="w-14 h-14 rounded-full bg-white border border-[#FADDE8] shadow-xs flex items-center justify-center text-brand-pink">
-                <Heart className="w-6 h-6 text-brand-pink fill-brand-pink" />
-              </div>
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white border border-brand-pink text-brand-pink text-[11px] font-bold flex items-center justify-center">
+            <div className="relative shrink-0 flex flex-col items-center">
+              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
                 3
               </span>
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                <Heart className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+              </div>
             </div>
-            <div>
+            <div className="pt-2">
               <h3 className="font-bold text-brand-dark text-base">Surpreenda alguém</h3>
-              <p className="text-xs text-brand-muted mt-0.5 leading-relaxed">
+              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
                 Entregamos um presente que vai emocionar.
               </p>
             </div>
-          </div>
-
-          {/* Card de Atendimento Rápido no WhatsApp (Mobile) */}
-          <div className="mt-6 p-5 rounded-3xl bg-[#FFF2F6] border border-[#FADDE8] space-y-3 text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-brand-pink text-white flex items-center justify-center shadow-xs">
-                <MessageCircle className="w-6 h-6 fill-white text-transparent" />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-brand-pink">
-                  ATENDIMENTO RÁPIDO PELO WHATSAPP
-                </span>
-                <p className="text-xs text-brand-dark/85 font-medium leading-snug">
-                  Fale agora com a gente e solicite seu presente personalizado.
-                </p>
-              </div>
-            </div>
-
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-full bg-brand-pink text-white text-xs font-semibold shadow-soft hover:bg-brand-pink-hover transition-all"
-            >
-              <span>Falar no WhatsApp</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
           </div>
         </div>
       </Container>
