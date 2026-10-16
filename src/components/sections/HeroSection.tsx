@@ -65,7 +65,7 @@ export function HeroSection() {
 
           {/* Descrição Mobile */}
           <p className="text-sm sm:text-base text-brand-muted leading-relaxed font-sans">
-            Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
+            Presentes e personalizados que encantam, surpreendem e eternizam momentos.
           </p>
 
           {/* Botão Mobile */}
@@ -143,7 +143,7 @@ export function HeroSection() {
             </h1>
 
             <p className="text-base xl:text-lg text-brand-muted leading-relaxed font-sans max-w-lg">
-              Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
+              Presentes e personalizados que encantam, surpreendem e eternizam momentos.
             </p>
 
             {/* Botão Desktop: Fale pelo WhatsApp */}
