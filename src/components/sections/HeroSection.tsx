@@ -2,7 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { MessageCircle, Gift, Heart, Truck, ArrowRight } from "lucide-react";
+import { Gift, Heart, Truck, ArrowRight } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { createWhatsAppUrl } from "@/lib/utils";
 
 export function HeroSection() {
@@ -69,9 +70,9 @@ export function HeroSection() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft transition-all"
+              className="flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft transition-all"
             >
-              <MessageCircle className="w-4 h-4 fill-white text-transparent" />
+              <FaWhatsapp className="w-[19px] h-[19px] text-white shrink-0" />
               <span>Fale pelo WhatsApp</span>
               <ArrowRight className="w-4 h-4 ml-0.5" />
             </a>
@@ -143,9 +144,9 @@ export function HeroSection() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
               >
-                <MessageCircle className="w-4 h-4 fill-white text-transparent" />
+                <FaWhatsapp className="w-[19px] h-[19px] text-white shrink-0" />
                 <span>Fale pelo WhatsApp</span>
                 <ArrowRight className="w-4 h-4 ml-0.5" />
               </a>
