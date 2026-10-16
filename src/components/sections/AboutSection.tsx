@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
-import { LargeDoodleHeart, HandmadeLettering } from "@/components/ui/Doodles";
+import { LargeDoodleHeart } from "@/components/ui/Doodles";
 
 export function AboutSection() {
   const whatsappUrl = createWhatsAppUrl(
@@ -39,49 +39,39 @@ export function AboutSection() {
           </div>
 
           {/* ========================================================= */}
-          {/* COLUNA DIREITA: Conteúdo Institucional + Lettering         */}
+          {/* COLUNA DIREITA: Conteúdo Institucional                     */}
           {/* ========================================================= */}
-          <div className="lg:col-span-6 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-              {/* Bloco de Texto Principal (Aproximadamente 70% da coluna) */}
-              <div className="sm:col-span-8 flex flex-col items-start space-y-5">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
-                  SOBRE NÓS
-                </span>
+          <div className="lg:col-span-6 w-full relative">
+            {/* Coração decorativo rosa no canto superior direito */}
+            <div className="absolute top-0 right-0 sm:right-2 -translate-y-2 pointer-events-none select-none">
+              <LargeDoodleHeart className="w-14 h-14 sm:w-16 sm:h-16 text-brand-pink" />
+            </div>
 
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-brand-dark leading-[1.15] tracking-tight">
-                  Uma história feita <br />
-                  de carinho e detalhes
-                </h2>
+            {/* Bloco de Texto Principal */}
+            <div className="flex flex-col items-start space-y-5 max-w-xl pr-12 sm:pr-16">
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
+                SOBRE NÓS
+              </span>
 
-                <p className="text-xs sm:text-[14px] text-[#554959] leading-[1.65] font-sans">
-                  A Mimos e Caprichos nasceu em Valinhos com o propósito de transformar momentos em lembranças especiais. Aqui você encontra presentes criativos, personalizados e feitos com muito carinho, sempre pensando em tornar cada ocasião mais única e inesquecível.
-                </p>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-brand-dark leading-[1.15] tracking-tight">
+                Uma história feita <br />
+                de carinho e detalhes
+              </h2>
 
-                <div className="pt-2 w-full sm:w-auto">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
-                  >
-                    <span>Conheça nossa história</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
+              <p className="text-xs sm:text-[14px] text-[#554959] leading-[1.65] font-sans">
+                A Mimos e Caprichos nasceu em Valinhos com o propósito de transformar momentos em lembranças especiais. Aqui você encontra presentes criativos, personalizados e feitos com muito carinho, sempre pensando em tornar cada ocasião mais única e inesquecível.
+              </p>
 
-              {/* Elementos Decorativos à Direita: Coração no Topo + Lettering no Rodapé */}
-              <div className="sm:col-span-4 flex sm:flex-col items-center justify-around sm:justify-between self-stretch pt-4 sm:pt-0 sm:pl-2">
-                {/* Coração decorativo rosa no canto superior direito conforme referência */}
-                <div className="sm:self-end">
-                  <LargeDoodleHeart className="w-14 h-14 sm:w-16 sm:h-16 text-brand-pink" />
-                </div>
-
-                {/* Frase decorativa em estilo manuscrito com sparkles */}
-                <div className="sm:self-center mt-2 sm:mt-auto">
-                  <HandmadeLettering className="scale-90 sm:scale-100" />
-                </div>
+              <div className="pt-2 w-full sm:w-auto">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
+                >
+                  <span>Conheça nossa história</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
