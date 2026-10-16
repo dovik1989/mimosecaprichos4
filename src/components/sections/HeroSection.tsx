@@ -55,7 +55,7 @@ export function HeroSection() {
         <div className="lg:hidden flex flex-col items-start text-left space-y-4">
           {/* Título Mobile */}
           <h1 className="font-serif text-4xl sm:text-5xl text-brand-dark leading-[1.12] tracking-tight">
-            Pequenos gestos. <br />
+            <span className="text-[#275780]">Pequenos gestos.</span> <br />
             <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
           </h1>
 
@@ -130,7 +130,7 @@ export function HeroSection() {
           {/* Coluna Texto (7 colunas no lg, 6 no xl para respiração perfeita) */}
           <div className="col-span-7 xl:col-span-6 flex flex-col items-start text-left space-y-6">
             <h1 className="font-serif text-5xl xl:text-6xl text-brand-dark leading-[1.12] tracking-tight">
-              Pequenos gestos. <br />
+              <span className="text-[#275780]">Pequenos gestos.</span> <br />
               <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
             </h1>
 
