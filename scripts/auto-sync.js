@@ -22,6 +22,7 @@ function sync() {
     console.log(`🌿 Branch ativa: ${currentBranch}\n`);
 
     const allowedRemotes = [
+      "https://github.com/dovik1989/mimosecaprichos3.git",
       "https://github.com/dovik1989/mimosecaprichos2.git",
       "https://github.com/dovik1989/mimosecaprichos.git",
     ];
@@ -70,7 +71,7 @@ function sync() {
 
     // 6. Enviar para o GitHub
     console.log(`🚀 Enviando commits para ${remoteUrl} na branch ${currentBranch}...`);
-    const pushOutput = run(`git push origin ${currentBranch}`);
+    const pushOutput = run(`git push -u origin ${currentBranch}`);
     if (pushOutput) {
       console.log(`   ${pushOutput}`);
     }
