@@ -72,7 +72,7 @@ export function HeroSection() {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft transition-all"
             >
-              <FaWhatsapp size={19} aria-hidden="true" className="shrink-0" />
+              <FaWhatsapp className="w-[19px] h-[19px] text-white shrink-0" />
               <span>Fale pelo WhatsApp</span>
               <ArrowRight className="w-4 h-4 ml-0.5" />
             </a>
@@ -146,7 +146,7 @@ export function HeroSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
               >
-                <FaWhatsapp size={19} aria-hidden="true" className="shrink-0" />
+                <FaWhatsapp className="w-[19px] h-[19px] text-white shrink-0" />
                 <span>Fale pelo WhatsApp</span>
                 <ArrowRight className="w-4 h-4 ml-0.5" />
               </a>
