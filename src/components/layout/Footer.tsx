@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   FileText,
 } from "lucide-react";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
 
 function InstagramRoundIcon() {
   return (
@@ -56,9 +57,13 @@ export function Footer() {
   return (
     <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-14 sm:pt-16 pb-10 sm:pb-12 border-t border-[#F8E2EC] relative">
       <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-start">
+        <StaggerContainer
+          staggerInterval={0.08}
+          distance={18}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-start"
+        >
           {/* 1. Logo & Descrição Curta (3 colunas no lg) */}
-          <div className="lg:col-span-3 space-y-3.5">
+          <StaggerItem index={0} className="lg:col-span-3 space-y-3.5">
             <div className="relative h-14 sm:h-16 flex items-center">
               <Image
                 src="/images/logos/logo-oficial-mimos.png"
@@ -105,10 +110,10 @@ export function Footer() {
                 <TikTokRoundIcon />
               </a>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* 2. Menu Institucional (2 colunas) */}
-          <div className="lg:col-span-2">
+          <StaggerItem index={1} className="lg:col-span-2">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Menu</h4>
             <ul className="space-y-2 text-xs">
               {navItems.map((item) => (
@@ -122,10 +127,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </StaggerItem>
 
           {/* 3. Nossos Presentes (2 colunas) */}
-          <div className="lg:col-span-2">
+          <StaggerItem index={2} className="lg:col-span-2">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Nossos Presentes</h4>
             <ul className="space-y-2 text-xs">
               {categoriesList.map((cat, idx) => (
@@ -139,10 +144,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </StaggerItem>
 
           {/* 4. Contato (3 colunas) */}
-          <div className="lg:col-span-3 space-y-3">
+          <StaggerItem index={3} className="lg:col-span-3 space-y-3">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Contato</h4>
 
             <div className="space-y-2.5 text-xs text-brand-muted">
@@ -172,10 +177,10 @@ export function Footer() {
                 </span>
               </div>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* 5. Frase Script / Lettering Decorativo (2 colunas) */}
-          <div className="lg:col-span-2 hidden lg:flex items-center justify-center border-l border-[#F0D5E2] pl-6 xl:pl-8">
+          <StaggerItem index={4} className="lg:col-span-2 hidden lg:flex items-center justify-center border-l border-[#F0D5E2] pl-6 xl:pl-8">
             <div className="relative w-auto h-32 xl:h-36 flex items-center justify-center select-none">
               <Image
                 src="/images/frase-decorativa.png"
@@ -186,31 +191,33 @@ export function Footer() {
                 priority
               />
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
 
         {/* Barra Inferior com Copyright e Links Legais (sem linha divisória pesada) */}
-        <div className="pt-10 sm:pt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
-          <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
+        <Reveal direction="fade" delay={0.15} distance={12}>
+          <div className="pt-10 sm:pt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
+            <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
 
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setModalContent("privacy")}
-              className="hover:text-brand-pink transition-colors"
-            >
-              Política de Privacidade
-            </button>
-            <span className="text-[#E8CBD9]">|</span>
-            <button
-              type="button"
-              onClick={() => setModalContent("terms")}
-              className="hover:text-brand-pink transition-colors"
-            >
-              Termos de Uso &gt;
-            </button>
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setModalContent("privacy")}
+                className="hover:text-brand-pink transition-colors"
+              >
+                Política de Privacidade
+              </button>
+              <span className="text-[#E8CBD9]">|</span>
+              <button
+                type="button"
+                onClick={() => setModalContent("terms")}
+                className="hover:text-brand-pink transition-colors"
+              >
+                Termos de Uso &gt;
+              </button>
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Modal de Políticas e Termos */}
         {modalContent && (

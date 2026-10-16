@@ -8,10 +8,12 @@
   --color-blue-accent: #18A9C9;
   --color-offwhite: #FFF9F6;
   --color-text-main: #2D2630;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   color-scheme: light;
 }
 

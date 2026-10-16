@@ -40,6 +40,9 @@ const config: Config = {
       borderRadius: {
         "4xl": "2rem",
       },
+      transitionTimingFunction: {
+        premium: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0", transform: "translateY(8px)" },

@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import { Container } from "@/components/ui/Container";
 import { MessageCircle, Gift, Heart, ArrowRight, ArrowDown } from "lucide-react";
 import { DoodleHeart } from "@/components/ui/Doodles";
+import { Reveal } from "@/components/animation";
 
 function DoodleGiftBox({ className = "w-14 h-16" }: { className?: string }) {
   return (
@@ -78,7 +81,7 @@ export function HowItWorksSection() {
           {/* ========================================================= */}
           {/* COLUNA ESQUERDA (~35%): Eyebrow + Título                   */}
           {/* ========================================================= */}
-          <div className="lg:col-span-4 flex flex-col items-start justify-center">
+          <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="lg:col-span-4 flex flex-col items-start justify-center">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink mb-1.5">
               COMO FUNCIONA
             </span>
@@ -86,7 +89,7 @@ export function HowItWorksSection() {
               É simples surpreender <br />
               com a Mimos e Caprichos
             </h2>
-          </div>
+          </Reveal>
 
           {/* ========================================================= */}
           {/* COLUNA DIREITA (~65%): 3 Passos Horizontais + Doodles      */}
@@ -94,7 +97,7 @@ export function HowItWorksSection() {
           <div className="lg:col-span-8 relative">
             <div className="flex items-start justify-between w-full lg:pr-14 xl:pr-16">
               {/* ---------------- PASSO 1 ---------------- */}
-              <div className="flex-1 flex flex-col items-center text-center">
+              <Reveal direction="up" distance={22} duration={0.8} delay={0.15} className="flex-1 flex flex-col items-center text-center">
                 {/* Número 1 em pequeno círculo rosa acima do ícone */}
                 <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
                   1
@@ -111,15 +114,15 @@ export function HowItWorksSection() {
                 <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
                   Fale pra gente a ocasião e o que você imagina.
                 </p>
-              </div>
+              </Reveal>
 
               {/* Seta horizontal 1 (alinhada à altura dos ícones) */}
-              <div className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
+              <Reveal direction="fade" duration={0.7} delay={0.25} className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
-              </div>
+              </Reveal>
 
               {/* ---------------- PASSO 2 ---------------- */}
-              <div className="flex-1 flex flex-col items-center text-center">
+              <Reveal direction="up" distance={22} duration={0.8} delay={0.32} className="flex-1 flex flex-col items-center text-center">
                 {/* Número 2 em pequeno círculo rosa */}
                 <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
                   2
@@ -136,15 +139,15 @@ export function HowItWorksSection() {
                 <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
                   Montamos uma opção especial e personalizada.
                 </p>
-              </div>
+              </Reveal>
 
               {/* Seta horizontal 2 (alinhada à altura dos ícones) */}
-              <div className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
+              <Reveal direction="fade" duration={0.7} delay={0.42} className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
-              </div>
+              </Reveal>
 
               {/* ---------------- PASSO 3 ---------------- */}
-              <div className="flex-1 flex flex-col items-center text-center">
+              <Reveal direction="up" distance={22} duration={0.8} delay={0.48} className="flex-1 flex flex-col items-center text-center">
                 {/* Número 3 em pequeno círculo rosa */}
                 <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
                   3
@@ -161,7 +164,7 @@ export function HowItWorksSection() {
                 <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
                   Entregamos um presente que vai emocionar.
                 </p>
-              </div>
+              </Reveal>
             </div>
 
             {/* ========================================================= */}
@@ -169,12 +172,16 @@ export function HowItWorksSection() {
             {/* ========================================================= */}
             {/* Coração em contorno no canto superior direito */}
             <div className="hidden lg:block absolute -top-1 right-2 xl:right-4 text-brand-pink">
-              <DoodleHeart className="w-6 h-6 text-brand-pink rotate-12" />
+              <Reveal direction="fade" duration={0.8} delay={0.5}>
+                <DoodleHeart className="w-6 h-6 text-brand-pink rotate-12" />
+              </Reveal>
             </div>
 
             {/* Ilustração decorativa de presente no canto inferior direito */}
             <div className="hidden lg:block absolute -bottom-3 right-0">
-              <DoodleGiftBox className="w-12 h-16 xl:w-14 xl:h-18" />
+              <Reveal direction="fade" duration={0.8} delay={0.55}>
+                <DoodleGiftBox className="w-12 h-16 xl:w-14 xl:h-18" />
+              </Reveal>
             </div>
           </div>
         </div>
@@ -184,66 +191,72 @@ export function HowItWorksSection() {
         {/* ========================================================= */}
         <div className="lg:hidden mt-8 flex flex-col space-y-6">
           {/* Passo 1 */}
-          <div className="flex items-start gap-4">
-            <div className="relative shrink-0 flex flex-col items-center">
-              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                1
-              </span>
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                <MessageCircle className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+          <Reveal direction="up" distance={18} duration={0.75} delay={0.1}>
+            <div className="flex items-start gap-4">
+              <div className="relative shrink-0 flex flex-col items-center">
+                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
+                  1
+                </span>
+                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                  <MessageCircle className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+                </div>
+              </div>
+              <div className="pt-2">
+                <h3 className="font-bold text-brand-dark text-base">Conte sua ideia</h3>
+                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
+                  Fale pra gente a ocasião e o que você imagina.
+                </p>
               </div>
             </div>
-            <div className="pt-2">
-              <h3 className="font-bold text-brand-dark text-base">Conte sua ideia</h3>
-              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                Fale pra gente a ocasião e o que você imagina.
-              </p>
-            </div>
-          </div>
+          </Reveal>
 
-          <div className="pl-6 text-slate-300">
+          <Reveal direction="fade" duration={0.6} delay={0.18} className="pl-6 text-slate-300">
             <ArrowDown className="w-4 h-4 text-slate-400" />
-          </div>
+          </Reveal>
 
           {/* Passo 2 */}
-          <div className="flex items-start gap-4">
-            <div className="relative shrink-0 flex flex-col items-center">
-              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                2
-              </span>
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                <Gift className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+          <Reveal direction="up" distance={18} duration={0.75} delay={0.24}>
+            <div className="flex items-start gap-4">
+              <div className="relative shrink-0 flex flex-col items-center">
+                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
+                  2
+                </span>
+                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                  <Gift className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+                </div>
+              </div>
+              <div className="pt-2">
+                <h3 className="font-bold text-brand-dark text-base">Criamos com carinho</h3>
+                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
+                  Montamos uma opção especial e personalizada.
+                </p>
               </div>
             </div>
-            <div className="pt-2">
-              <h3 className="font-bold text-brand-dark text-base">Criamos com carinho</h3>
-              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                Montamos uma opção especial e personalizada.
-              </p>
-            </div>
-          </div>
+          </Reveal>
 
-          <div className="pl-6 text-slate-300">
+          <Reveal direction="fade" duration={0.6} delay={0.32} className="pl-6 text-slate-300">
             <ArrowDown className="w-4 h-4 text-slate-400" />
-          </div>
+          </Reveal>
 
           {/* Passo 3 */}
-          <div className="flex items-start gap-4">
-            <div className="relative shrink-0 flex flex-col items-center">
-              <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                3
-              </span>
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                <Heart className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+          <Reveal direction="up" distance={18} duration={0.75} delay={0.38}>
+            <div className="flex items-start gap-4">
+              <div className="relative shrink-0 flex flex-col items-center">
+                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
+                  3
+                </span>
+                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
+                  <Heart className="w-5 h-5 text-brand-pink stroke-[1.8]" />
+                </div>
+              </div>
+              <div className="pt-2">
+                <h3 className="font-bold text-brand-dark text-base">Surpreenda alguém</h3>
+                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
+                  Entregamos um presente que vai emocionar.
+                </p>
               </div>
             </div>
-            <div className="pt-2">
-              <h3 className="font-bold text-brand-dark text-base">Surpreenda alguém</h3>
-              <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                Entregamos um presente que vai emocionar.
-              </p>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

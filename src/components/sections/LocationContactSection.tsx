@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
+import { Reveal } from "@/components/animation";
 
 export function LocationContactSection() {
   const whatsappUrl = createWhatsAppUrl(
@@ -12,12 +15,12 @@ export function LocationContactSection() {
   );
 
   return (
-    <section id="contato" className="py-14 sm:py-20 bg-[#FFF7FA] border-t border-[#F8E2EC]">
+    <section id="contato" className="py-14 sm:py-20 bg-[#FFF7FA] border-t border-[#F8E2EC] overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-end">
           {/* Coluna Esquerda (~42%): Eyebrow, Título e Foto da Fachada */}
           <div className="lg:col-span-5 flex flex-col justify-end">
-            <div className="mb-4 sm:mb-5">
+            <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="mb-4 sm:mb-5">
               <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-pink block mb-1">
                 VISITE NOSSA LOJA
               </span>
@@ -25,24 +28,26 @@ export function LocationContactSection() {
                 Estamos em Valinhos <br className="hidden sm:inline" />
                 e prontos para te atender!
               </h2>
-            </div>
+            </Reveal>
 
             {/* Foto da Fachada da Loja Física */}
-            <div className="relative aspect-[4/3] sm:aspect-[4/3] w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
-              <Image
-                src="/images/fachada-mimos-caprichos.webp"
-                alt="Fachada da loja Mimos e Caprichos em Valinhos"
-                fill
-                quality={95}
-                className="object-cover object-top"
-                sizes="(max-width: 1024px) 100vw, 520px"
-                priority
-              />
-            </div>
+            <Reveal direction="up" distance={25} duration={0.85} delay={0.18}>
+              <div className="relative aspect-[4/3] sm:aspect-[4/3] w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
+                <Image
+                  src="/images/fachada-mimos-caprichos.webp"
+                  alt="Fachada da loja Mimos e Caprichos em Valinhos"
+                  fill
+                  quality={95}
+                  className="object-cover object-top transition-transform duration-700 ease-premium hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 520px"
+                  priority
+                />
+              </div>
+            </Reveal>
           </div>
 
           {/* Coluna Direita (~58%): Bloco Agrupado Branco (Informações + Mapa + Botões) */}
-          <div className="lg:col-span-7">
+          <Reveal direction="up" distance={25} duration={0.85} delay={0.25} className="lg:col-span-7">
             <div className="bg-white rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 xl:p-8 shadow-[0_4px_24px_rgba(244,143,177,0.08)] border border-[#F3DFE9] flex flex-col justify-between">
               {/* Área Superior: Informações de Contato + Mini Mapa */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
@@ -119,7 +124,7 @@ export function LocationContactSection() {
                 </a>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

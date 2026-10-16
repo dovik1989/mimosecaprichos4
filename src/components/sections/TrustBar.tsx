@@ -1,12 +1,16 @@
+"use client";
+
 import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Star, Package, Heart, MapPin } from "lucide-react";
+import { Reveal } from "@/components/animation";
 
 export function TrustBar() {
   return (
-    <div className="bg-white border-y border-[#F5E6EC] py-5 sm:py-6 shadow-xs">
+    <div className="bg-white border-y border-[#F5E6EC] py-5 sm:py-6 shadow-xs overflow-hidden">
       <Container>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#F8E7EE]">
+        <Reveal direction="up" distance={20} duration={0.8}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#F8E7EE]">
           {/* 1. Google 5,0 */}
           <div className="flex items-center gap-3.5 pt-3 sm:pt-0 sm:px-4 first:pt-0 first:px-0">
             <div className="w-10 h-10 rounded-full bg-[#FFF0F5] border border-[#FADCE8] flex items-center justify-center text-brand-pink shrink-0">
@@ -65,7 +69,8 @@ export function TrustBar() {
             </div>
           </div>
         </div>
-      </Container>
+      </Reveal>
+    </Container>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ChevronLeft, ChevronRight, ArrowRight, Star } from "lucide-react";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
 
 /**
  * Ícone estilizado de aspas duplas rosas conforme o mockup aprovado
@@ -78,7 +79,7 @@ export function ReviewsSection() {
         {/* ========================================================= */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 sm:mb-10">
           {/* Esquerda: Título */}
-          <div>
+          <Reveal direction="up" distance={20} duration={0.8} delay={0.05}>
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               AVALIAÇÕES
             </span>
@@ -88,10 +89,10 @@ export function ReviewsSection() {
             <p className="text-xs sm:text-[13px] text-[#554959] mt-1 font-sans">
               Histórias e experiências que fazem a diferença.
             </p>
-          </div>
+          </Reveal>
 
           {/* Direita: Selo Oficial do Google Rating */}
-          <div className="bg-white rounded-[22px] sm:rounded-full px-5 sm:px-6 py-3 shadow-xs border border-[#F4E1EC] flex items-center gap-3.5 sm:gap-4 shrink-0 self-start lg:self-auto">
+          <Reveal direction="up" distance={20} duration={0.8} delay={0.15} className="bg-white rounded-[22px] sm:rounded-full px-5 sm:px-6 py-3 shadow-xs border border-[#F4E1EC] flex items-center gap-3.5 sm:gap-4 shrink-0 self-start lg:self-auto">
             {/* Logo Google oficial colorido */}
             <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0">
               <svg className="w-7 h-7" width="28" height="28" viewBox="0 0 24 24">
@@ -138,7 +139,7 @@ export function ReviewsSection() {
             <p className="hidden sm:block text-[11px] text-[#554959] max-w-[130px] leading-tight font-sans">
               Clientes reais compartilhando momentos especiais
             </p>
-          </div>
+          </Reveal>
         </div>
 
         {/* ========================================================= */}
@@ -149,21 +150,26 @@ export function ReviewsSection() {
           <button
             type="button"
             onClick={() => scroll("left")}
-            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all shadow-2xs shrink-0 active:scale-95"
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95"
             aria-label="Avaliação anterior"
           >
             <ChevronLeft className="w-4 h-4" width="16" height="16" />
           </button>
 
           {/* Container dos 3 cards */}
-          <div
+          <StaggerContainer
             ref={scrollContainerRef}
+            staggerInterval={0.1}
+            baseDelay={0.12}
+            duration={0.8}
+            distance={22}
             className="flex-1 flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth no-scrollbar py-2"
           >
-            {demoReviews.map((rev) => (
-              <div
+            {demoReviews.map((rev, index) => (
+              <StaggerItem
                 key={rev.id}
-                className="flex-none w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(235,75,142,0.06)] border border-[#F6DCE6]/70 flex flex-col justify-between min-h-[170px] sm:min-h-[185px] transition-transform duration-300 hover:-translate-y-1"
+                index={index}
+                className="flex-none w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(235,75,142,0.06)] hover:shadow-[0_8px_30px_rgba(235,75,142,0.12)] border border-[#F6DCE6]/70 flex flex-col justify-between min-h-[170px] sm:min-h-[185px] transition-all duration-400 ease-premium hover:-translate-y-1"
               >
                 {/* Linha superior: Aspas rosas à esquerda + 5 estrelas amarelas */}
                 <div className="flex items-center justify-between mb-2">
@@ -179,15 +185,15 @@ export function ReviewsSection() {
                 <p className="text-xs sm:text-[13px] text-[#2D2630] font-sans leading-[1.65] my-auto">
                   {rev.text}
                 </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
           {/* Seta circular direita */}
           <button
             type="button"
             onClick={() => scroll("right")}
-            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all shadow-2xs shrink-0 active:scale-95"
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95"
             aria-label="Próxima avaliação"
           >
             <ChevronRight className="w-4 h-4" width="16" height="16" />
@@ -197,7 +203,7 @@ export function ReviewsSection() {
         {/* ========================================================= */}
         {/* 3. RODAPÉ: AVISO ILUSTRATIVO + BOTÃO GOOGLE CENTRALIZADO   */}
         {/* ========================================================= */}
-        <div className="mt-6 sm:mt-8 text-center space-y-3.5">
+        <Reveal direction="up" distance={16} duration={0.8} delay={0.2} className="mt-6 sm:mt-8 text-center space-y-3.5">
           <p className="text-[10px] sm:text-[11px] text-[#8C7A86] font-sans">
             Comentários ilustrativos — substituir por avaliações reais do Google na versão final.
           </p>
@@ -207,13 +213,13 @@ export function ReviewsSection() {
               href={siteConfig.googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs sm:text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs sm:text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 ease-premium hover:scale-[1.02]"
             >
               <span>Ver avaliações no Google</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-premium group-hover:translate-x-1" />
             </a>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );
