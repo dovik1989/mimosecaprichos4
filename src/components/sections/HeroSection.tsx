@@ -68,8 +68,8 @@ export function HeroSection() {
             Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
           </p>
 
-          {/* Botões Mobile */}
-          <div className="flex flex-col gap-3 w-full pt-1">
+          {/* Botão Mobile */}
+          <div className="w-full pt-1">
             <a
               href={whatsappUrl}
               target="_blank"
@@ -79,13 +79,6 @@ export function HeroSection() {
               <MessageCircle className="w-4 h-4 fill-white text-transparent" />
               <span>Fale pelo WhatsApp</span>
               <ArrowRight className="w-4 h-4 ml-0.5" />
-            </a>
-
-            <a
-              href="#presentes"
-              className="flex items-center justify-center py-3.5 px-6 rounded-full bg-white border border-[#F3D7E3] hover:border-brand-pink text-brand-dark text-sm font-semibold transition-all"
-            >
-              Conheça nossos presentes
             </a>
           </div>
 
@@ -153,24 +146,17 @@ export function HeroSection() {
               Presentes e personalizados feitos com carinho para tornar cada momento inesquecível.
             </p>
 
-            {/* Botões Desktop: Conheça nossos presentes (rosa) + Fale pelo WhatsApp (branco) */}
-            <div className="flex items-center gap-4 pt-1">
-              <a
-                href="#presentes"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
-              >
-                <span>Conheça nossos presentes</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
+            {/* Botão Desktop: Fale pelo WhatsApp */}
+            <div className="pt-1">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white border border-[#F3D7E3] hover:border-brand-pink text-brand-dark text-sm font-semibold shadow-xs hover:bg-[#FFF8FA] transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 hover:scale-[1.02]"
               >
-                <MessageCircle className="w-4 h-4 fill-emerald-500 text-transparent" />
+                <MessageCircle className="w-4 h-4 fill-white text-transparent" />
                 <span>Fale pelo WhatsApp</span>
+                <ArrowRight className="w-4 h-4 ml-0.5" />
               </a>
             </div>
 
