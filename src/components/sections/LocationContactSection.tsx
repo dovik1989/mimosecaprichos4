@@ -28,12 +28,13 @@ export function LocationContactSection() {
             </div>
 
             {/* Foto da Fachada da Loja Física */}
-            <div className="relative aspect-[16/10] sm:aspect-[16/10.2] w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
+            <div className="relative aspect-[4/3] sm:aspect-[4/3] w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
               <Image
-                src="/images/fachada-loja.png"
+                src="/images/fachada-mimos-caprichos.webp"
                 alt="Fachada da loja Mimos e Caprichos em Valinhos"
                 fill
-                className="object-cover object-center transition-transform duration-700 hover:scale-103"
+                quality={95}
+                className="object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 520px"
                 priority
               />
@@ -77,23 +78,21 @@ export function LocationContactSection() {
                   </div>
                 </div>
 
-                {/* Mini Mapa Estilizado Google Maps */}
+                {/* Mini Mapa Incorporado Google Maps */}
                 <div className="sm:col-span-5">
-                  <a
-                    href={siteConfig.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative w-full aspect-[16/11] rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs hover:shadow-sm transition-all group"
-                    title="Ver Mimos e Caprichos no Google Maps"
-                  >
-                    <Image
-                      src="/images/mapa-card.png"
-                      alt="Localização no Google Maps: Av. Onze de Agosto, 849 - Centro, Valinhos"
-                      fill
-                      className="object-cover object-center group-hover:scale-102 transition-transform duration-300"
-                      sizes="300px"
+                  <div className="relative w-full aspect-[16/11] rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs bg-[#F5F2F4]">
+                    <iframe
+                      src="https://www.google.com/maps?q=Av.+Onze+de+Agosto,+849+-+Centro,+Valinhos+-+SP&hl=pt-BR&z=16&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen={false}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Localização da loja Mimos e Caprichos no Google Maps"
+                      className="w-full h-full block"
                     />
-                  </a>
+                  </div>
                 </div>
               </div>
 
