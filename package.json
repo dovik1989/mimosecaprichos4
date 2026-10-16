@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync": "node scripts/auto-sync.js"
+    "sync": "node scripts/auto-sync.js",
+    "watch": "node scripts/watch-sync.js",
+    "dev:watch": "node scripts/watch-sync.js --with-dev"
   },
   "dependencies": {
     "clsx": "^2.1.1",
