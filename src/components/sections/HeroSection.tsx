@@ -52,11 +52,6 @@ export function HeroSection() {
         {/* COMPOSIÇÃO MOBILE (< lg) (Conforme referência "mobile.png") */}
         {/* ========================================================= */}
         <div className="lg:hidden flex flex-col items-start text-left space-y-4">
-          {/* Eyebrow */}
-          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-brand-dark/70">
-            PRESENTES QUE TRANSFORMAM MOMENTOS
-          </span>
-
           {/* Título Mobile */}
           <h1 className="font-serif text-4xl sm:text-5xl text-brand-dark leading-[1.12] tracking-tight">
             Pequenos gestos. <br />
@@ -133,10 +128,6 @@ export function HeroSection() {
         <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center">
           {/* Coluna Texto (7 colunas no lg, 6 no xl para respiração perfeita) */}
           <div className="col-span-7 xl:col-span-6 flex flex-col items-start text-left space-y-6">
-            <span className="text-xs font-semibold uppercase tracking-wider text-brand-dark/70">
-              PRESENTES QUE TRANSFORMAM MOMENTOS
-            </span>
-
             <h1 className="font-serif text-5xl xl:text-6xl text-brand-dark leading-[1.12] tracking-tight">
               Pequenos gestos. <br />
               <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
