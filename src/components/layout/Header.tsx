@@ -39,14 +39,14 @@ export function Header() {
           href="#inicio"
           className="flex items-center gap-3 shrink-0 focus:outline-none"
         >
-          <div className="relative h-11 sm:h-13 flex items-center">
+          <div className="relative h-11 sm:h-12 flex items-center">
             <Image
               src="/images/logos/logo-oficial-mimos.png"
               alt="Mimos e Caprichos"
               width={707}
               height={364}
               priority
-              className="h-11 sm:h-13 w-auto object-contain object-left"
+              className="h-[56px] sm:h-[68px] w-auto max-w-none object-contain object-left"
             />
           </div>
         </Link>

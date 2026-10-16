@@ -58,14 +58,14 @@ export function Footer() {
       <Container>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8 items-start">
           {/* 1. Logo & Descrição Curta (3 colunas no lg) */}
-          <div className="lg:col-span-3 space-y-4">
-            <div className="relative h-12 sm:h-14 flex items-center">
+          <div className="lg:col-span-3 space-y-3.5">
+            <div className="relative h-14 sm:h-16 flex items-center">
               <Image
                 src="/images/logos/logo-oficial-mimos.png"
                 alt="Mimos e Caprichos"
                 width={707}
                 height={364}
-                className="h-12 sm:h-14 w-auto object-contain object-left"
+                className="h-16 sm:h-[76px] w-auto max-w-none object-contain object-left"
               />
             </div>
 
