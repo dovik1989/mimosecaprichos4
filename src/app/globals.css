@@ -62,3 +62,19 @@ body {
   }
 }
 
+/* Mobile-specific object positioning for category cards */
+@media (max-width: 639px) {
+  .obj-pos-cestas {
+    object-position: center 32% !important;
+  }
+  .obj-pos-baloes {
+    object-position: center 20% !important;
+  }
+  .obj-pos-personalizados {
+    object-position: center 46% !important;
+  }
+  .obj-pos-corporativos {
+    object-position: center 55% !important;
+  }
+}
+

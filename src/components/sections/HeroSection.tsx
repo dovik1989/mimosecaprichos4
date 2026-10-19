@@ -89,17 +89,35 @@ export function HeroSection() {
             </div>
           </Reveal>
 
-          {/* Imagem Mobile (hero-mobile.png adaptada à largura) */}
+          {/* Imagem Mobile integrada com degradê superior suave (sem card, sem borda, sem sombra) */}
           <Reveal direction="up" distance={18} duration={0.75} delay={0.38} className="w-full">
-            <div className="w-full pt-2">
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#F5E2EC] bg-white shadow-2xs">
+            <div className="w-full pt-1">
+              <div
+                className="relative aspect-[4/4] sm:aspect-[4/3.6] w-full rounded-b-[28px] rounded-t-[20px] overflow-hidden"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 6%, rgba(0,0,0,0.8) 18%, black 30%, black 100%)",
+                  maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 6%, rgba(0,0,0,0.8) 18%, black 30%, black 100%)",
+                }}
+              >
                 <Image
                   src="/images/hero-mobile.png"
                   alt="Presentes afetivos Mimos e Caprichos"
                   fill
                   priority
-                  className="object-cover object-center"
+                  className="object-cover object-[center_30%]"
                   sizes="(max-width: 640px) 100vw, 400px"
+                />
+
+                {/* Degradê superior suave fundindo a imagem com o fundo da Hero */}
+                <div
+                  className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#FFF9F6] via-[#FFF9F6]/85 via-25% via-[#FFF9F6]/40 via-65% to-transparent z-10"
+                  aria-hidden="true"
+                />
+
+                {/* Suave fusão na base para transição harmoniosa */}
+                <div
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#FFF9F6]/40 to-transparent z-10"
+                  aria-hidden="true"
                 />
               </div>
             </div>
