@@ -141,6 +141,7 @@ export function CategoriesSection() {
                       alt={category.title}
                       fill
                       priority
+                      unoptimized
                       className={cn(
                         "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03] sm:object-center",
                         category.mobilePosClass

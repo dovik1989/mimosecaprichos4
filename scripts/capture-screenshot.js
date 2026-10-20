@@ -94,11 +94,24 @@ async function main() {
     fs.writeFileSync(outputPathHero, Buffer.from(resultHero.data, "base64"));
     console.log("Hero screenshot saved to:", outputPathHero);
 
-    // Capture Full Page
+    // Capture Full Page Mobile
     const resultFull = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true });
     const outputPathFull = path.join(__dirname, "..", "full_page_mobile.png");
     fs.writeFileSync(outputPathFull, Buffer.from(resultFull.data, "base64"));
     console.log("Full page screenshot saved to:", outputPathFull);
+
+    // Also verify Desktop (1280px)
+    await send("Emulation.setDeviceMetricsOverride", {
+      width: 1280,
+      height: 900,
+      deviceScaleFactor: 1,
+      mobile: false
+    });
+    await new Promise(r => setTimeout(r, 1000));
+    const resultDesktop = await send("Page.captureScreenshot", { format: "png" });
+    const outputPathDesktop = path.join(__dirname, "..", "desktop_verification.png");
+    fs.writeFileSync(outputPathDesktop, Buffer.from(resultDesktop.data, "base64"));
+    console.log("Desktop screenshot saved to:", outputPathDesktop);
 
     ws.close();
   } catch (err) {

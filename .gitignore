@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# temp screenshots
+/*verification*.png
+/*screenshot*.png
+/full_page_mobile.png
+/nossos_presentes_mobile.png
+
