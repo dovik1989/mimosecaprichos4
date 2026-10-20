@@ -2,6 +2,8 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { catalogCategories, canLinkCategory } from "@/data/catalog";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -56,6 +58,7 @@ const categories = [
 
 export function CategoriesSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const cardPointerStart = useRef({ x: 0, y: 0 });
   const { progress, isDesktop, stopWheelAnimation } = useCarouselNavigation(scrollContainerRef);
 
   const handleScroll = (direction: "left" | "right") => {
@@ -144,12 +147,19 @@ export function CategoriesSection() {
           {categories.map((category, index) => {
             const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, category.whatsappMessage);
 
+            const catalog = catalogCategories.find(item => item.homeCardId === category.id);
+            const isCatalogLink = !!catalog && canLinkCategory(catalog);
+            const CardLink = isCatalogLink ? Link : "a";
             return (
               <StaggerItem key={category.id} index={index} className="shrink-0 w-full lg:w-[calc((100%-4.5rem)/4)]">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <CardLink
+                  href={isCatalogLink ? `/presentes/${catalog!.id}` : whatsappUrl}
+                  target={isCatalogLink ? undefined : "_blank"}
+                  rel={isCatalogLink ? undefined : "noopener noreferrer"}
+                  onPointerDown={isCatalogLink ? event => { cardPointerStart.current = { x: event.clientX, y: event.clientY }; } : undefined}
+                  onClick={isCatalogLink ? event => {
+                    if (event.detail > 0 && Math.hypot(event.clientX - cardPointerStart.current.x, event.clientY - cardPointerStart.current.y) > 8) event.preventDefault();
+                  } : undefined}
                   id={category.id === "corporativos" ? "corporativos" : undefined}
                   className="group flex flex-col bg-white rounded-2xl lg:rounded-[22px] p-2.5 lg:p-4 border border-[#F2E5EC] shadow-[0_2px_10px_-2px_rgba(0,0,0,0.04)] lg:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(235,75,142,0.14)] hover:-translate-y-1 transition-all duration-400 ease-premium h-full"
                 >
@@ -201,7 +211,7 @@ export function CategoriesSection() {
                       </div>
                     </div>
                   </div>
-                </a>
+                </CardLink>
               </StaggerItem>
             );
           })}

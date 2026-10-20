@@ -37,7 +37,7 @@ export function Header() {
       <Container className="flex items-center justify-between">
         {/* Logo */}
         <Link
-          href="#inicio"
+          href="/#inicio"
           className="flex items-center gap-3 shrink-0 focus:outline-none"
         >
           <div className="relative h-11 sm:h-12 flex items-center">
@@ -55,7 +55,7 @@ export function Header() {
         {/* Desktop Navigation (Centralizada) */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-brand-dark/85">
           <Link
-            href="#inicio"
+            href="/#inicio"
             onClick={() => setActiveSection("inicio")}
             className={cn(
               "relative py-1 transition-colors hover:text-brand-pink",
@@ -69,7 +69,7 @@ export function Header() {
           </Link>
 
           <Link
-            href="#sobre"
+            href="/#sobre"
             onClick={() => setActiveSection("sobre")}
             className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
           >
@@ -78,7 +78,7 @@ export function Header() {
 
           {/* Dropdown / Presentes com chevron */}
           <Link
-            href="#presentes"
+            href="/#presentes"
             onClick={() => setActiveSection("presentes")}
             className="inline-flex items-center gap-1 py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
           >
@@ -87,7 +87,7 @@ export function Header() {
           </Link>
 
           <Link
-            href="#corporativos"
+            href="/#corporativos"
             onClick={() => setActiveSection("corporativos")}
             className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
           >
@@ -95,7 +95,7 @@ export function Header() {
           </Link>
 
           <Link
-            href="#avaliacoes"
+            href="/#avaliacoes"
             onClick={() => setActiveSection("avaliacoes")}
             className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
           >
@@ -103,7 +103,7 @@ export function Header() {
           </Link>
 
           <Link
-            href="#contato"
+            href="/#contato"
             onClick={() => setActiveSection("contato")}
             className="py-1 text-brand-dark/80 hover:text-brand-pink transition-colors"
           >
@@ -146,42 +146,42 @@ export function Header() {
         <div className="lg:hidden fixed inset-x-0 top-[65px] bottom-0 bg-white z-50 flex flex-col p-6 animate-fadeIn shadow-xl border-t border-[#F5E6EC]">
           <nav className="flex flex-col gap-3 py-4 text-base font-medium">
             <Link
-              href="#inicio"
+              href="/#inicio"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-pink bg-[#FDF0F4]"
             >
               Início
             </Link>
             <Link
-              href="#sobre"
+              href="/#sobre"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
             >
               Nossa história
             </Link>
             <Link
-              href="#presentes"
+              href="/#presentes"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
             >
               Presentes
             </Link>
             <Link
-              href="#corporativos"
+              href="/#corporativos"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
             >
               Empresas
             </Link>
             <Link
-              href="#avaliacoes"
+              href="/#avaliacoes"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
             >
               Avaliações
             </Link>
             <Link
-              href="#contato"
+              href="/#contato"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2.5 px-3 rounded-xl text-brand-dark hover:text-brand-pink"
             >

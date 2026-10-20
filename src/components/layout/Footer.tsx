@@ -101,7 +101,7 @@ export function Footer() {
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    href={item.href.startsWith("#") ? `/${item.href}` : item.href}
                     className="text-brand-muted hover:text-brand-pink transition-colors"
                   >
                     {item.label}
@@ -118,7 +118,7 @@ export function Footer() {
               {categoriesList.map((cat, idx) => (
                 <li key={idx}>
                   <Link
-                    href={cat.href}
+                    href={cat.href.startsWith("#") ? `/${cat.href}` : cat.href}
                     className="text-brand-muted hover:text-brand-pink transition-colors"
                   >
                     {cat.label}
