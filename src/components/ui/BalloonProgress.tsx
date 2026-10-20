@@ -1,14 +1,32 @@
 "use client";
 
+import Image from "next/image";
+
 const wave = "M0 12 Q25 2 50 12 T100 12 T150 12 T200 12 T250 12 T300 12 T350 12 T400 12 T450 12 T500 12 T550 12 T600 12 T650 12 T700 12 T750 12 T800 12 T850 12 T900 12 T950 12 T1000 12";
 
-export function BalloonProgress({ progress }: { progress: number }) {
+interface BalloonProgressProps {
+  progress: number;
+  imageSrc?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  balloonWidth?: number;
+  label?: string;
+}
+
+export function BalloonProgress({
+  progress,
+  imageSrc = "/images/balão_rosa_pastel_brilhante.png",
+  imageWidth = 887,
+  imageHeight = 1774,
+  balloonWidth,
+  label = "Progresso do carrossel de presentes",
+}: BalloonProgressProps) {
   const position = Math.min(1, Math.max(0, Number.isFinite(progress) ? progress : 0));
 
   return (
     <div
       role="progressbar"
-      aria-label="Progresso do carrossel de presentes"
+      aria-label={label}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(position * 100)}
@@ -20,15 +38,15 @@ export function BalloonProgress({ progress }: { progress: number }) {
           <path d={wave} stroke="var(--color-pink-primary)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" style={{ clipPath: `inset(0 ${(1 - position) * 100}% 0 0)` }} />
         </svg>
         <div className="absolute inset-x-0 top-0 will-change-transform" style={{ transform: `translateX(${position * 100}%)` }}>
-          <div className="w-10 -translate-x-1/2 sm:w-12">
-            <svg className="gift-balloon-float h-[72px] w-10 sm:h-20 sm:w-12" viewBox="0 0 48 80" fill="none">
-              <path d="M24 39C21 45 29 47 25 53C20 59 26 62 24 67" stroke="var(--color-blue-accent)" strokeWidth="1.2" strokeLinecap="round" />
-              <path d="M24 38C18 32 5 24 5 14C5 3 18 1 24 10C30 1 43 3 43 14C43 24 30 32 24 38Z" fill="var(--color-pink-primary)" />
-              <path d="M24 38L21 42Q24 40 27 42Z" fill="var(--color-blue-accent)" />
-              <path d="M10 15C9 9 15 6 19 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity=".8" />
-              <path d="M10 20L11 22" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity=".65" />
-              <path d="M38 13C40 21 30 29 27 32" stroke="white" strokeWidth="1" strokeLinecap="round" opacity=".35" />
-            </svg>
+          <div className={balloonWidth ? "-translate-x-1/2" : "w-10 -translate-x-1/2 sm:w-12"} style={balloonWidth ? { width: balloonWidth } : undefined}>
+            <Image
+              src={imageSrc}
+              alt=""
+              width={imageWidth}
+              height={imageHeight}
+              sizes={`${balloonWidth ?? 48}px`}
+              className={balloonWidth ? "gift-balloon-float h-auto w-full object-contain" : "gift-balloon-float h-20 w-10 object-contain sm:h-24 sm:w-12"}
+            />
           </div>
         </div>
       </div>

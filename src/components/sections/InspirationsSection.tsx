@@ -3,6 +3,8 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
+import { BalloonProgress } from "@/components/ui/BalloonProgress";
+import { useCarouselNavigation } from "@/components/ui/useCarouselNavigation";
 import { Container } from "@/components/ui/Container";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/utils";
@@ -69,6 +71,7 @@ const mobileFilterTabs = [
 export function InspirationsSection() {
   const [mobileFilter, setMobileFilter] = useState("all");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { progress, stopWheelAnimation } = useCarouselNavigation(scrollContainerRef);
 
   const whatsappUrl = createWhatsAppUrl(
     siteConfig.phoneRaw,
@@ -76,9 +79,10 @@ export function InspirationsSection() {
   );
 
   const scroll = (direction: "left" | "right") => {
+    stopWheelAnimation.current();
     if (scrollContainerRef.current) {
       const scrollAmount = direction === "left" ? -260 : 260;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
     }
   };
 
@@ -135,11 +139,14 @@ export function InspirationsSection() {
         {/* ========================================================= */}
         <StaggerContainer
           ref={scrollContainerRef}
+          id="inspiration-carousel"
+          tabIndex={0}
+          aria-label="Galeria de inspirações; use as setas ou role para ver mais"
           staggerInterval={0.08}
           baseDelay={0.1}
           duration={0.8}
           distance={22}
-          className="hidden lg:flex gap-3.5 xl:gap-4 overflow-x-auto scroll-smooth no-scrollbar py-1"
+          className="hidden lg:flex gap-3.5 xl:gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink"
         >
           {inspirationPhotos.map((photo, index) => (
             <StaggerItem
@@ -158,6 +165,10 @@ export function InspirationsSection() {
             </StaggerItem>
           ))}
         </StaggerContainer>
+
+        <div className="hidden lg:block">
+          <BalloonProgress progress={progress} imageSrc="/images/balão_azul_pastel_brilhante.png" imageWidth={1024} imageHeight={1536} balloonWidth={44} label="Progresso da galeria de inspirações" />
+        </div>
 
         {/* ========================================================= */}
         {/* LAYOUT MOBILE (Conforme mockup "mobile.png" tela 4)        */}
