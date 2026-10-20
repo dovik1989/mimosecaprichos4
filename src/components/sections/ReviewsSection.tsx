@@ -83,7 +83,7 @@ export function ReviewsSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               AVALIAÇÕES
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-brand-dark tracking-tight mt-1 leading-[1.15]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-[var(--color-heading-primary)] tracking-tight mt-1 leading-[1.15]">
               O carinho de quem já comprou
             </h2>
             <p className="text-xs sm:text-[13px] text-[#554959] mt-1 font-sans">

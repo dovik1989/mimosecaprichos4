@@ -98,7 +98,7 @@ export function InspirationsSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
               GALERIA
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-brand-dark tracking-tight mt-1 leading-[1.2]">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-[var(--color-heading-primary)] tracking-tight mt-1 leading-[1.2]">
               Inspirações que encantam
             </h2>
           </Reveal>

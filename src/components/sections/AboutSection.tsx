@@ -61,7 +61,7 @@ export function AboutSection() {
                   SOBRE NÓS
                 </span>
 
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-brand-dark leading-[1.15] tracking-tight mt-1.5">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-[var(--color-heading-primary)] leading-[1.15] tracking-tight mt-1.5">
                   Uma história feita <br />
                   de carinho e detalhes
                 </h2>

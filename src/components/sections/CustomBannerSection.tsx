@@ -51,7 +51,7 @@ export function CustomBannerSection() {
                   PERSONALIZADOS
                 </span>
 
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[38px] xl:text-[42px] text-brand-dark leading-[1.12] tracking-tight mt-1.5">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[38px] xl:text-[42px] text-[var(--color-heading-primary)] leading-[1.12] tracking-tight mt-1.5">
                   Seu presente, <br />
                   <span className="text-brand-pink font-normal italic">do seu jeito.</span>
                 </h2>

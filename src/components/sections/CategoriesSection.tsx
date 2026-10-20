@@ -68,7 +68,7 @@ export function CategoriesSection() {
             </span>
             <div className="mt-1.5 w-full">
               {/* Título com quebra harmoniosa no mobile e corações na mesma linha */}
-              <h2 className="font-serif text-[28px] sm:text-4xl lg:text-[44px] text-brand-dark tracking-tight leading-[1.18] sm:leading-[1.12]">
+              <h2 className="font-serif text-[28px] sm:text-4xl lg:text-[44px] text-[var(--color-heading-primary)] tracking-tight leading-[1.18] sm:leading-[1.12]">
                 <span className="block sm:inline">Encontre o presente </span>
                 <span className="inline-flex items-center gap-2">
                   perfeito

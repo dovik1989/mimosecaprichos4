@@ -85,7 +85,7 @@ export function HowItWorksSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink mb-1.5">
               COMO FUNCIONA
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-brand-dark leading-[1.18] tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-[var(--color-heading-primary)] leading-[1.18] tracking-tight">
               É simples surpreender <br />
               com a Mimos e Caprichos
             </h2>

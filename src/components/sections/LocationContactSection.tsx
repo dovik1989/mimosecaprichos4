@@ -24,7 +24,7 @@ export function LocationContactSection() {
               <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-pink block mb-1">
                 VISITE NOSSA LOJA
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] leading-[1.15] text-[#2D2630] font-normal tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] leading-[1.15] text-[var(--color-heading-primary)] font-normal tracking-tight">
                 Estamos em Valinhos <br className="hidden sm:inline" />
                 e prontos para te atender!
               </h2>

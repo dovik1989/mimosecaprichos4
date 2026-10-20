@@ -61,7 +61,7 @@ export function HeroSection() {
           {/* Título Mobile */}
           <Reveal direction="up" distance={16} duration={0.7} delay={0.05} className="w-full">
             <h1 className="font-serif text-4xl sm:text-5xl text-brand-dark leading-[1.12] tracking-tight">
-              <span className="text-[#275780]">Pequenos gestos.</span> <br />
+              <span className="text-[var(--color-heading-primary)]">Pequenos gestos.</span> <br />
               <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
             </h1>
           </Reveal>
@@ -164,7 +164,7 @@ export function HeroSection() {
           <div className="col-span-7 xl:col-span-6 flex flex-col items-start text-left space-y-6">
             <Reveal direction="up" distance={20} duration={0.7} delay={0.05} className="w-full">
               <h1 className="font-serif text-5xl xl:text-6xl text-brand-dark leading-[1.12] tracking-tight">
-                <span className="text-[#275780]">Pequenos gestos.</span> <br />
+                <span className="text-[var(--color-heading-primary)]">Pequenos gestos.</span> <br />
                 <span className="text-brand-pink font-normal italic">Grandes emoções.</span>
               </h1>
             </Reveal>
