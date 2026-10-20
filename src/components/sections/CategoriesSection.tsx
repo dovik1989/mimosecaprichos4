@@ -56,6 +56,76 @@ const categories = [
 export function CategoriesSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const stopWheelAnimation = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    const viewport = scrollContainerRef.current;
+    if (!viewport) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    let target = viewport.scrollLeft;
+    let lastTime = 0;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      target = viewport.scrollLeft;
+    };
+    stopWheelAnimation.current = stop;
+    const animate = (time: number) => {
+      const elapsed = Math.min(time - lastTime, 64);
+      lastTime = time;
+      const remaining = target - viewport.scrollLeft;
+      if (Math.abs(remaining) <= 1) {
+        viewport.scrollLeft = target;
+        frame = 0;
+        return;
+      }
+      viewport.scrollLeft += remaining * (1 - Math.exp(-elapsed / 55));
+      frame = requestAnimationFrame(animate);
+    };
+    const onWheel = (event: WheelEvent) => {
+      // Preserve browser zoom and native horizontal touchpad gestures.
+      if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      const range = viewport.scrollWidth - viewport.clientWidth;
+      const delta = event.deltaY;
+      if (!delta || range <= 1 || (delta > 0 ? viewport.scrollLeft >= range - 1 : viewport.scrollLeft <= 1)) return;
+      if (!event.cancelable) return;
+      event.preventDefault();
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewport.clientWidth : 1;
+      // Bound large mouse ticks without amplifying small touchpad deltas.
+      const pixels = Math.sign(delta) * Math.min(Math.abs(delta * unit), 100);
+      if (!frame || Math.sign(target - viewport.scrollLeft) !== Math.sign(delta)) target = viewport.scrollLeft;
+      target = Math.max(0, Math.min(range, target + pixels));
+      if (reducedMotion.matches) {
+        stop();
+        viewport.scrollLeft = Math.max(0, Math.min(range, viewport.scrollLeft + pixels));
+      } else if (!frame) {
+        lastTime = performance.now();
+        frame = requestAnimationFrame(animate);
+      }
+    };
+    const syncDesktop = () => {
+      stop();
+      viewport.removeEventListener("wheel", onWheel);
+      setIsDesktop(desktop.matches);
+      if (desktop.matches) viewport.addEventListener("wheel", onWheel, { passive: false });
+      else viewport.scrollLeft = 0;
+    };
+    syncDesktop();
+    desktop.addEventListener("change", syncDesktop);
+    viewport.addEventListener("pointerdown", stop, { passive: true });
+    viewport.addEventListener("keydown", stop);
+    return () => {
+      stop();
+      desktop.removeEventListener("change", syncDesktop);
+      viewport.removeEventListener("wheel", onWheel);
+      viewport.removeEventListener("pointerdown", stop);
+      viewport.removeEventListener("keydown", stop);
+      stopWheelAnimation.current = () => {};
+    };
+  }, []);
 
   useEffect(() => {
     const viewport = scrollContainerRef.current;
@@ -80,6 +150,7 @@ export function CategoriesSection() {
   }, []);
 
   const handleScroll = (direction: "left" | "right") => {
+    stopWheelAnimation.current();
     const viewport = scrollContainerRef.current;
     const track = viewport?.firstElementChild;
     const card = track?.firstElementChild;
@@ -127,7 +198,7 @@ export function CategoriesSection() {
             </p>
 
             {/* Botões Circulares com Setas de Navegação (Desktop) */}
-            <div className="flex items-center gap-2.5 shrink-0">
+            <div className="hidden lg:flex items-center gap-2.5 shrink-0">
               <button
                 type="button"
                 onClick={() => handleScroll("left")}
@@ -153,28 +224,28 @@ export function CategoriesSection() {
         {/* ========================================================= */}
         {/* CARDS DE CATEGORIAS (Mobile compacto / 4 colunas desktop)  */}
         {/* ========================================================= */}
-        <div ref={scrollContainerRef} id="gift-carousel" tabIndex={0} aria-label="Categorias de presentes; deslize para ver mais" className="overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 -my-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink">
+        <div ref={scrollContainerRef} id="gift-carousel" tabIndex={isDesktop ? 0 : undefined} aria-label={isDesktop ? "Categorias de presentes; use as setas ou role para ver mais" : "Categorias de presentes"} className="lg:overflow-x-auto lg:overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 -my-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink">
         <StaggerContainer
           staggerInterval={0.1}
           baseDelay={0.08}
           duration={0.75}
           distance={24}
-          className="flex flex-nowrap gap-2.5 sm:gap-6"
+          className="flex flex-col lg:flex-row lg:flex-nowrap gap-2.5 lg:gap-6"
         >
           {categories.map((category, index) => {
             const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, category.whatsappMessage);
 
             return (
-              <StaggerItem key={category.id} index={index} className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)]">
+              <StaggerItem key={category.id} index={index} className="shrink-0 w-full lg:w-[calc((100%-4.5rem)/4)]">
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   id={category.id === "corporativos" ? "corporativos" : undefined}
-                  className="group flex flex-col bg-white rounded-2xl sm:rounded-[22px] p-2.5 sm:p-4 border border-[#F2E5EC] shadow-[0_2px_10px_-2px_rgba(0,0,0,0.04)] sm:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(235,75,142,0.14)] hover:-translate-y-1 transition-all duration-400 ease-premium h-full"
+                  className="group flex flex-col bg-white rounded-2xl lg:rounded-[22px] p-2.5 lg:p-4 border border-[#F2E5EC] shadow-[0_2px_10px_-2px_rgba(0,0,0,0.04)] lg:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(235,75,142,0.14)] hover:-translate-y-1 transition-all duration-400 ease-premium h-full"
                 >
                   {/* Imagem em proporção horizontal compacta no mobile (h-[126px]) e aspecto original no desktop */}
-                  <div className="relative w-full h-[126px] sm:h-auto sm:aspect-[4/3.7] rounded-[14px] sm:rounded-[16px] overflow-hidden bg-[#FAF2F5] mb-2.5 sm:mb-3.5 shrink-0">
+                  <div className="relative w-full h-[126px] lg:h-auto lg:aspect-[4/3.7] rounded-[14px] lg:rounded-[16px] overflow-hidden bg-[#FAF2F5] mb-2.5 lg:mb-3.5 shrink-0">
                     <Image
                       src={category.imageSrc}
                       alt={category.title}
@@ -182,15 +253,15 @@ export function CategoriesSection() {
                       priority
                       unoptimized
                       className={cn(
-                        "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03] sm:object-center",
+                        "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03] lg:object-center",
                         category.mobilePosClass
                       )}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 1023px) 100vw, 25vw"
                     />
                   </div>
 
                   {/* Bloco de Informações Mobile (compacto: Título + Descrição à esquerda, Botão à direita) */}
-                  <div className="flex sm:hidden items-center justify-between gap-2.5 px-0.5 pb-0.5">
+                  <div className="flex lg:hidden items-center justify-between gap-2.5 px-0.5 pb-0.5">
                     <div className="min-w-0 flex-1">
                       <h3 className="font-bold text-brand-dark text-[14.5px] leading-tight group-hover:text-brand-pink transition-colors">
                         {category.title}
@@ -206,13 +277,13 @@ export function CategoriesSection() {
                   </div>
 
                   {/* Bloco de Informações Desktop (100% preservado conforme layout original) */}
-                  <div className="hidden sm:flex flex-1 flex-col justify-between px-1">
-                    <h3 className="font-bold text-brand-dark text-[16px] sm:text-[17px] group-hover:text-brand-pink transition-colors duration-300 ease-premium leading-snug">
+                  <div className="hidden lg:flex flex-1 flex-col justify-between px-1">
+                    <h3 className="font-bold text-brand-dark text-[16px] lg:text-[17px] group-hover:text-brand-pink transition-colors duration-300 ease-premium leading-snug">
                       {category.title}
                     </h3>
 
                     <div className="flex items-end justify-between gap-3 pt-2 mt-auto">
-                      <p className={cn("text-[12px] sm:text-[12.5px] text-brand-muted leading-relaxed", category.id !== "datas-comemorativas" && "line-clamp-2")}>
+                      <p className={cn("text-[12px] lg:text-[12.5px] text-brand-muted leading-relaxed", category.id !== "datas-comemorativas" && "line-clamp-2")}>
                         {category.description}
                       </p>
 
@@ -227,7 +298,9 @@ export function CategoriesSection() {
           })}
         </StaggerContainer>
         </div>
-        <BalloonProgress progress={progress} />
+        <div className="hidden lg:block">
+          <BalloonProgress progress={progress} />
+        </div>
       </Container>
     </section>
   );
