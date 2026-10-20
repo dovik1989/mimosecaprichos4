@@ -50,9 +50,9 @@ export function LocationContactSection() {
           <Reveal direction="up" distance={25} duration={0.85} delay={0.25} className="lg:col-span-7">
             <div className="bg-white rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 xl:p-8 shadow-[0_4px_24px_rgba(244,143,177,0.08)] border border-[#F3DFE9] flex flex-col justify-between">
               {/* Área Superior: Informações de Contato + Mini Mapa */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 lg:gap-4 xl:gap-6 items-center">
                 {/* Informações: Endereço, Telefone, Horários (sem caixas ou títulos pesados) */}
-                <div className="sm:col-span-7 space-y-4">
+                <div className="sm:col-span-7 lg:col-span-6 space-y-4">
                   {/* Endereço */}
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-brand-pink shrink-0 mt-0.5 stroke-[1.8]" />
@@ -84,8 +84,8 @@ export function LocationContactSection() {
                 </div>
 
                 {/* Mini Mapa Incorporado Google Maps */}
-                <div className="sm:col-span-5">
-                  <div className="relative w-full aspect-[16/11] rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs bg-[#F5F2F4]">
+                <div className="sm:col-span-5 lg:col-span-6">
+                  <div className="relative w-full aspect-[16/11] lg:aspect-auto lg:h-[220px] xl:h-[240px] rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs bg-[#F5F2F4]">
                     <iframe
                       src="https://www.google.com/maps?q=Av.+Onze+de+Agosto,+849+-+Centro,+Valinhos+-+SP&hl=pt-BR&z=16&output=embed"
                       width="100%"
