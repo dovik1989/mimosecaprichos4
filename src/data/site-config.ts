@@ -23,8 +23,8 @@ export const siteConfig = {
     platform: "Google",
   },
   socials: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
+    instagram: "https://www.instagram.com/mimosecaprichosvalinhos/",
+    facebook: "https://www.facebook.com/mimosecaprichosvalinhos",
   },
 };
 
