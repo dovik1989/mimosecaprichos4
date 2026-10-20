@@ -58,16 +58,6 @@ export function ReviewsSection() {
       {/* ELEMENTOS DECORATIVOS ORGÂNICOS DE FUNDO                   */}
       {/* ========================================================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-0">
-        {/* Onda suave no topo */}
-        <svg
-          className="absolute -top-1 left-0 w-full h-10 opacity-70"
-          viewBox="0 0 1440 40"
-          fill="none"
-          preserveAspectRatio="none"
-        >
-          <path d="M0 0C360 22 720 30 1440 8V0H0Z" fill="#FFFFFF" />
-        </svg>
-
         {/* Formas orgânicas suaves com blur */}
         <div className="absolute -bottom-16 -left-16 w-80 h-80 rounded-full bg-[#FCE6EE] blur-3xl opacity-60" />
         <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-[#FFF0F6] blur-3xl opacity-60" />

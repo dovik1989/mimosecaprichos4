@@ -58,21 +58,6 @@ function DoodleGiftBox({ className = "w-14 h-16" }: { className?: string }) {
 export function HowItWorksSection() {
   return (
     <section className="relative py-10 sm:py-12 lg:py-14 bg-white border-t border-[#F8E7EE] overflow-hidden">
-      {/* ========================================================= */}
-      {/* ELEMENTO DECORATIVO: ONDAS ORGÂNICAS INFERIOR ESQUERDA     */}
-      {/* ========================================================= */}
-      <svg
-        className="absolute bottom-0 left-0 w-72 sm:w-96 h-20 sm:h-24 pointer-events-none opacity-75 -z-0"
-        viewBox="0 0 360 90"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0 90V45C70 25 140 65 210 50C280 35 320 55 360 40V90H0Z"
-          fill="#FDEEF4"
-        />
-      </svg>
-
       <Container className="relative z-10">
         {/* ========================================================= */}
         {/* LAYOUT DESKTOP: UMA ÚNICA FAIXA HORIZONTAL (35% / 65%)    */}
@@ -94,7 +79,7 @@ export function HowItWorksSection() {
           {/* ========================================================= */}
           {/* COLUNA DIREITA (~65%): 3 Passos Horizontais + Doodles      */}
           {/* ========================================================= */}
-          <div className="lg:col-span-8 relative">
+          <div className="hidden lg:block lg:col-span-8 relative">
             <div className="flex items-start justify-between w-full lg:pr-14 xl:pr-16">
               {/* ---------------- PASSO 1 ---------------- */}
               <Reveal direction="up" distance={22} duration={0.8} delay={0.15} className="flex-1 flex flex-col items-center text-center">
