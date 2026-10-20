@@ -37,7 +37,7 @@ const categories = [
   {
     id: "corporativos",
     title: "Presentes corporativos",
-    description: "Soluções criativas para empresas e eventos.",
+    description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.",
     imageSrc: "/images/categoria-corporativos.png",
     whatsappMessage: "Olá! Gostaria de um orçamento para presentes corporativos da minha empresa.",
     mobilePosClass: "obj-pos-corporativos",
