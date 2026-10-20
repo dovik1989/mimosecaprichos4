@@ -17,10 +17,10 @@ export function LocationContactSection() {
   return (
     <section id="contato" className="py-14 sm:py-20 bg-[#FFF7FA] border-t border-[#F8E2EC] overflow-hidden">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-x-10 lg:gap-y-0 xl:gap-x-12 items-end">
           {/* Coluna Esquerda (~42%): Eyebrow, Título e Foto da Fachada */}
-          <div className="lg:col-span-5 flex flex-col justify-end">
-            <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="mb-4 sm:mb-5">
+          <div className="flex flex-col justify-end lg:contents">
+            <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="mb-4 sm:mb-5 lg:col-span-5 lg:row-start-1">
               <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-pink block mb-1">
                 VISITE NOSSA LOJA
               </span>
@@ -31,7 +31,7 @@ export function LocationContactSection() {
             </Reveal>
 
             {/* Foto da Fachada da Loja Física */}
-            <Reveal direction="up" distance={25} duration={0.85} delay={0.18}>
+            <Reveal direction="up" distance={25} duration={0.85} delay={0.18} className="lg:col-span-5 lg:col-start-1 lg:row-start-2">
               <div className="relative aspect-[4/3] sm:aspect-[4/3] w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
                 <Image
                   src="/images/fachada-mimos-caprichos.webp"
@@ -47,10 +47,10 @@ export function LocationContactSection() {
           </div>
 
           {/* Coluna Direita (~58%): Bloco Agrupado Branco (Informações + Mapa + Botões) */}
-          <Reveal direction="up" distance={25} duration={0.85} delay={0.25} className="lg:col-span-7">
-            <div className="bg-white rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 xl:p-8 shadow-[0_4px_24px_rgba(244,143,177,0.08)] border border-[#F3DFE9] flex flex-col justify-between">
+          <Reveal direction="up" distance={25} duration={0.85} delay={0.25} className="lg:col-span-7 lg:col-start-6 lg:row-start-2 lg:h-0 lg:min-h-full">
+            <div className="bg-white rounded-[24px] sm:rounded-[28px] p-6 sm:p-7 xl:p-8 lg:py-5 xl:py-6 lg:h-full shadow-[0_4px_24px_rgba(244,143,177,0.08)] border border-[#F3DFE9] flex flex-col justify-between">
               {/* Área Superior: Informações de Contato + Mini Mapa */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 lg:gap-4 xl:gap-6 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 lg:gap-4 xl:gap-6 items-center lg:flex-1 lg:min-h-0">
                 {/* Informações: Endereço, Telefone, Horários (sem caixas ou títulos pesados) */}
                 <div className="sm:col-span-7 lg:col-span-6 space-y-4">
                   {/* Endereço */}
@@ -84,8 +84,8 @@ export function LocationContactSection() {
                 </div>
 
                 {/* Mini Mapa Incorporado Google Maps */}
-                <div className="sm:col-span-5 lg:col-span-6">
-                  <div className="relative w-full aspect-[16/11] lg:aspect-auto lg:h-[220px] xl:h-[240px] rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs bg-[#F5F2F4]">
+                <div className="sm:col-span-5 lg:col-span-6 lg:self-stretch lg:min-h-0">
+                  <div className="relative w-full aspect-[16/11] lg:aspect-auto lg:h-full rounded-[18px] overflow-hidden border border-[#E9D6E2] shadow-2xs bg-[#F5F2F4]">
                     <iframe
                       src="https://www.google.com/maps?q=Av.+Onze+de+Agosto,+849+-+Centro,+Valinhos+-+SP&hl=pt-BR&z=16&output=embed"
                       width="100%"
@@ -102,7 +102,7 @@ export function LocationContactSection() {
               </div>
 
               {/* Área Inferior: Botões de Ação na mesma linha dentro do card */}
-              <div className="pt-6 sm:pt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <div className="pt-6 sm:pt-7 lg:pt-5 lg:shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                 <a
                   href={whatsappUrl}
                   target="_blank"
