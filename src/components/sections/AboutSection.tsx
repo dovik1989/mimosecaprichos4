@@ -1,19 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight } from "lucide-react";
-import { createWhatsAppUrl } from "@/lib/utils";
+import { OurStoryDialog } from "./OurStoryDialog";
 import { LargeDoodleHeart } from "@/components/ui/Doodles";
 import { Reveal } from "@/components/animation";
 
 export function AboutSection() {
-  const whatsappUrl = createWhatsAppUrl(
-    siteConfig.phoneRaw,
-    "Olá! Conheci a história da Mimos e Caprichos no site e gostaria de saber mais sobre a loja e os presentes."
-  );
+  const [storyOpen, setStoryOpen] = useState(false);
 
   return (
     <section id="sobre" className="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
@@ -75,21 +71,23 @@ export function AboutSection() {
 
               <Reveal direction="up" distance={18} duration={0.8} delay={0.36} className="w-full">
                 <div className="pt-2 w-full sm:w-auto">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => setStoryOpen(true)}
+                    aria-haspopup="dialog"
+                    aria-controls="our-story-dialog"
                     className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 ease-premium hover:scale-[1.02]"
                   >
                     <span>Conheça nossa história</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-premium group-hover:translate-x-1" />
-                  </a>
+                  </button>
                 </div>
               </Reveal>
             </div>
           </div>
         </div>
       </Container>
+      <OurStoryDialog open={storyOpen} onClose={() => setStoryOpen(false)} />
     </section>
   );
 }

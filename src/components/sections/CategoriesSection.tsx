@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
@@ -8,6 +8,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { createWhatsAppUrl, cn } from "@/lib/utils";
 import { DoodleTripleHearts, DoodleDoubleHeart } from "@/components/ui/Doodles";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
+import { BalloonProgress } from "@/components/ui/BalloonProgress";
 
 const categories = [
   {
@@ -54,6 +55,29 @@ const categories = [
 
 export function CategoriesSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const viewport = scrollContainerRef.current;
+    if (!viewport) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const range = viewport.scrollWidth - viewport.clientWidth;
+      setProgress(range > 0 ? Math.min(1, Math.max(0, viewport.scrollLeft / range)) : 0);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    viewport.addEventListener("scroll", schedule, { passive: true });
+    const observer = new ResizeObserver(schedule);
+    observer.observe(viewport);
+    if (viewport.firstElementChild) observer.observe(viewport.firstElementChild);
+    update();
+    return () => {
+      viewport.removeEventListener("scroll", schedule);
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const handleScroll = (direction: "left" | "right") => {
     const viewport = scrollContainerRef.current;
@@ -129,19 +153,19 @@ export function CategoriesSection() {
         {/* ========================================================= */}
         {/* CARDS DE CATEGORIAS (Mobile compacto / 4 colunas desktop)  */}
         {/* ========================================================= */}
-        <div ref={scrollContainerRef} id="gift-carousel" className="sm:overflow-hidden sm:py-4 sm:-my-4">
+        <div ref={scrollContainerRef} id="gift-carousel" tabIndex={0} aria-label="Categorias de presentes; deslize para ver mais" className="overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 -my-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink">
         <StaggerContainer
           staggerInterval={0.1}
           baseDelay={0.08}
           duration={0.75}
           distance={24}
-          className="grid grid-cols-1 sm:flex sm:flex-nowrap gap-2.5 sm:gap-6"
+          className="flex flex-nowrap gap-2.5 sm:gap-6"
         >
           {categories.map((category, index) => {
             const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, category.whatsappMessage);
 
             return (
-              <StaggerItem key={category.id} index={index} className="sm:shrink-0 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)]">
+              <StaggerItem key={category.id} index={index} className="shrink-0 w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)]">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -203,6 +227,7 @@ export function CategoriesSection() {
           })}
         </StaggerContainer>
         </div>
+        <BalloonProgress progress={progress} />
       </Container>
     </section>
   );
