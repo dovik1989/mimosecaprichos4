@@ -4,7 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
-import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { createWhatsAppUrl } from "@/lib/utils";
 import { Reveal } from "@/components/animation";
 
@@ -109,7 +110,7 @@ export function LocationContactSection() {
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs sm:text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-200"
                 >
-                  <MessageCircle className="w-4 h-4 fill-white text-transparent" />
+                  <FaWhatsapp size={19} aria-hidden="true" />
                   <span>Fale pelo WhatsApp</span>
                 </a>
 
