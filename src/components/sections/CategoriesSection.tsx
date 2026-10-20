@@ -20,8 +20,8 @@ const categories = [
   },
   {
     id: "baloes",
-    title: "Balões & surpresas",
-    description: "Balões, kits e combinações que criam momentos únicos.",
+    title: "Presentes e Mimos",
+    description: "O mimo perfeito para encantar e surpreender",
     imageSrc: "/images/categoria-baloes.png",
     whatsappMessage: "Olá! Gostaria de encomendar balões personalizados e kits surpresa.",
     mobilePosClass: "obj-pos-baloes",
