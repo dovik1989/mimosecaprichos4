@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { CategoriesSection } from "@/components/sections/CategoriesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { CustomBannerSection } from "@/components/sections/CustomBannerSection";
 import { InspirationsSection } from "@/components/sections/InspirationsSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
@@ -22,9 +21,6 @@ export default function HomePage() {
 
       {/* 4. Nossa História ("Uma história feita de carinho e detalhes") */}
       <AboutSection />
-
-      {/* 5. Banner de Presentes Personalizados ("Seu presente, do seu jeito.") */}
-      <CustomBannerSection />
 
       {/* 6. Galeria de Inspirações ("Inspirações que encantam") */}
       <InspirationsSection />
