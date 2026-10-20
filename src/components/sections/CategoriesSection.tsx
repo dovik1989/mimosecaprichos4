@@ -56,10 +56,15 @@ export function CategoriesSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -340 : 340;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+    const viewport = scrollContainerRef.current;
+    const track = viewport?.firstElementChild;
+    const card = track?.firstElementChild;
+    if (!viewport || !track || !card) return;
+    const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap);
+    viewport.scrollBy({
+      left: direction === "left" ? -step : step,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
   };
 
   return (
@@ -104,6 +109,7 @@ export function CategoriesSection() {
                 onClick={() => handleScroll("left")}
                 className="w-10 h-10 rounded-full border border-[#E8DCE2] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs hover:scale-105 active:scale-95"
                 aria-label="Anterior"
+                aria-controls="gift-carousel"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -112,6 +118,7 @@ export function CategoriesSection() {
                 onClick={() => handleScroll("right")}
                 className="w-10 h-10 rounded-full border border-[#E8DCE2] hover:border-brand-pink bg-white text-brand-dark hover:text-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs hover:scale-105 active:scale-95"
                 aria-label="Próximo"
+                aria-controls="gift-carousel"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -122,19 +129,19 @@ export function CategoriesSection() {
         {/* ========================================================= */}
         {/* CARDS DE CATEGORIAS (Mobile compacto / 4 colunas desktop)  */}
         {/* ========================================================= */}
+        <div ref={scrollContainerRef} id="gift-carousel" className="sm:overflow-hidden sm:py-4 sm:-my-4">
         <StaggerContainer
-          ref={scrollContainerRef}
           staggerInterval={0.1}
           baseDelay={0.08}
           duration={0.75}
           distance={24}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 no-scrollbar"
+          className="grid grid-cols-1 sm:flex sm:flex-nowrap gap-2.5 sm:gap-6"
         >
           {categories.map((category, index) => {
             const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, category.whatsappMessage);
 
             return (
-              <StaggerItem key={category.id} index={index}>
+              <StaggerItem key={category.id} index={index} className="sm:shrink-0 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)]">
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -195,6 +202,7 @@ export function CategoriesSection() {
             );
           })}
         </StaggerContainer>
+        </div>
       </Container>
     </section>
   );
