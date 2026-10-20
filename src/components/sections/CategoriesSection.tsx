@@ -42,6 +42,14 @@ const categories = [
     whatsappMessage: "Olá! Gostaria de um orçamento para presentes corporativos da minha empresa.",
     mobilePosClass: "obj-pos-corporativos",
   },
+  {
+    id: "datas-comemorativas",
+    title: "Datas comemorativas",
+    description: "Dia da Mulher, Páscoa, Dia das Mães, Namorados, Pais, Professores, Natal, aniversários, casamentos e bodas.",
+    imageSrc: "/images/categoria-datas-comemorativas.jpg",
+    whatsappMessage: "Olá! Gostaria de conhecer as opções de presentes para datas comemorativas.",
+    mobilePosClass: "object-center",
+  },
 ];
 
 export function CategoriesSection() {
@@ -156,7 +164,7 @@ export function CategoriesSection() {
                       <h3 className="font-bold text-brand-dark text-[14.5px] leading-tight group-hover:text-brand-pink transition-colors">
                         {category.title}
                       </h3>
-                      <p className="text-[11.5px] text-brand-muted leading-tight line-clamp-2 mt-1">
+                      <p className={cn("text-[11.5px] text-brand-muted leading-tight mt-1", category.id !== "datas-comemorativas" && "line-clamp-2")}>
                         {category.description}
                       </p>
                     </div>
@@ -173,7 +181,7 @@ export function CategoriesSection() {
                     </h3>
 
                     <div className="flex items-end justify-between gap-3 pt-2 mt-auto">
-                      <p className="text-[12px] sm:text-[12.5px] text-brand-muted leading-relaxed line-clamp-2">
+                      <p className={cn("text-[12px] sm:text-[12.5px] text-brand-muted leading-relaxed", category.id !== "datas-comemorativas" && "line-clamp-2")}>
                         {category.description}
                       </p>
 
