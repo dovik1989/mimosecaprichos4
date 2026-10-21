@@ -6,11 +6,11 @@ O layout de Cestas personalizadas foi aprovado pelo usuário. As outras quatro c
 
 As novas rotas são `/presentes/presentes-e-mimos`, `/presentes/presentes-personalizados`, `/presentes/presentes-corporativos` e `/presentes/datas-comemorativas`. São geradas por uma única página dinâmica com quatro parâmetros estáticos; slugs desconhecidos retornam 404. A rota dedicada de Cestas foi preservada.
 
-## Prévia e segurança de publicação
+## Publicação das cinco categorias
 
 Com `npm run dev`, as quatro páginas mostram oito posições com "Fotografia pendente" e "Produto a cadastrar", sem links de WhatsApp para itens não cadastrados. Os cinco cards da Home abrem suas rotas no mesmo site, mantendo carrossel, setas, rodinha e indicador.
 
-No build de produção padrão, as quatro categorias ainda vazias exibem somente o estado vazio e retorno aos presentes. Não há placeholders, fotos provisórias, CTAs de produtos ou links da Home para essas categorias. Os cards não publicados conservam o contato original no WhatsApp. As quatro páginas ficam com `noindex, nofollow` até terem produtos aprovados e publicação habilitada. Elas continuam acessíveis por URL direta com o estado vazio: `noindex` não é controle de acesso.
+No build de produção padrão, as quatro categorias ainda vazias exibem somente o estado vazio e retorno aos presentes. Não há placeholders, fotos provisórias ou CTAs de produtos inexistentes. As cinco rotas são vinculadas na Home e nos links correspondentes do rodapé. Todos os cinco cards abrem suas próprias páginas, mesmo quando uma categoria ainda não tem produtos. As quatro páginas ficam com `noindex, nofollow` até terem produtos aprovados e publicação habilitada. Elas continuam acessíveis por URL direta com o estado vazio: `noindex` não é controle de acesso.
 
 Para uma prévia hospedada **protegida**, pode-se definir `NEXT_PUBLIC_CATALOG_PREVIEW=true` antes de iniciar/buildar. Não definir essa variável na hospedagem pública. É um sinal de build, não uma preferência do visitante, cookie ou query string. Rebuildar ao alterá-la. `npm run build` sem essa variável valida a versão pública segura.
 
@@ -35,7 +35,7 @@ O padrão é `informationStatus: "pending-approval"` e `availability: "on-reques
 
 `whatsappMessage` permite mensagem específica; quando ausente, é gerada automaticamente com o nome. A referência `id` é anexada em ambos os casos, e o helper existente codifica a mensagem e usa o número oficial. A primeira foto vira capa; as seguintes habilitam botões, teclado e swipe no modal automaticamente.
 
-Para tornar uma categoria pública: cadastrar e aprovar conteúdo oficial, revisar fotos/textos e então definir `published: true` em `catalogCategories`. A Home só divulga uma nova categoria quando ela tiver ao menos um produto aprovado. Apenas cadastrar um item pendente não o publica. Confirmar novamente estado de produção e SEO antes do deploy.
+As cinco categorias já estão públicas (`published: true`). Para publicar um produto, cadastrar conteúdo oficial, revisar fotos/textos e marcar `informationStatus: "approved"`. O link da categoria não depende da existência de produtos. Apenas cadastrar um item pendente não publica esse item. Confirmar novamente estado de produção e SEO antes do deploy.
 
 ## Componentes compartilhados
 
@@ -45,6 +45,11 @@ Para tornar uma categoria pública: cadastrar e aprovar conteúdo oficial, revis
 
 Build de produção aprovado com as quatro rotas estáticas. Em Chromium, cada rota foi aberta diretamente em 1440px e 390px: oito posições, quatro/duas colunas, zero produtos, fotos ou CTAs inventados e ausência de overflow horizontal. Testados os cinco destinos da Home em desenvolvimento, rodinha e progresso do balão, além dos três produtos e fechamento do lightbox de Cestas. Sem exceções de runtime durante o teste.
 
-Na execução de produção padrão, todas as quatro URLs responderam 200 em acesso direto e nova requisição, com estado vazio, `noindex`, sem placeholders ou CTAs de produtos; a Home omite os quatro links vazios. Cestas mantém seus três itens e slugs desconhecidos retornam 404. O helper foi testado com entradas temporárias não persistidas, conferindo IDs, defaults e fotografias adicionais. Não houve teste em aparelho físico.
+Na execução de produção padrão, todas as quatro URLs responderam 200 em acesso direto e nova requisição, com estado vazio, `noindex`, sem placeholders ou CTAs de produtos; naquela etapa a Home omitia os quatro links vazios (comportamento substituído pela correção de publicação abaixo). Cestas mantém seus três itens e slugs desconhecidos retornam 404. O helper foi testado com entradas temporárias não persistidas, conferindo IDs, defaults e fotografias adicionais. Não houve teste em aparelho físico.
 
 Capturas da prévia: `artifacts/catalog-categories/desktop.png` e `mobile.png`. Revisão independente: ship no escopo da replicação do modelo aprovado, sem correções materiais. Conferência documental confirmou identidade visual preservada. As instruções históricas da V1 sobre aguardar aprovação/commit foram superadas pelo pedido atual de replicação e envio ao GitHub; isso não autoriza divulgar categorias vazias no ambiente público.
+
+
+## Correção da navegação em produção
+
+O pedido posterior autorizou explicitamente publicar e vincular as cinco páginas, inclusive as vazias. Removida a condição `canLinkCategory` que desviava os quatro cards ao WhatsApp em produção. Todos os cards usam Next Link com suas rotas em desktop e mobile. Categorias sem dados oficiais continuam com o estado em preparação, sem produtos inventados. Os links correspondentes do rodapé foram atualizados preservando seu visual; o Header não tem dropdown de categorias e não foi redesenhado. O problema observado online não era arquivo ausente: o deployment reportado pelo GitHub já servia o commit `1cb20ab`; a condição de ambiente era a causa. O origin permanece em mimosecaprichos3, e o site público informado usa mimosecaprichos4; a correção deve ser enviada para ambos sem force push nem alteração de origin.

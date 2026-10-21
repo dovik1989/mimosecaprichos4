@@ -91,19 +91,16 @@ export interface CatalogCategory {
 
 export const catalogCategories: CatalogCategory[] = [
   { id: "cestas-personalizadas", homeCardId: "cestas", title: "Cestas personalizadas", description: "Presentes preparados com carinho para surpreender em qualquer ocasião.", capacity: 8, published: true },
-  { id: "presentes-e-mimos", homeCardId: "baloes", title: "Presentes e Mimos", description: "O mimo perfeito para encantar e surpreender.", capacity: 8, published: false },
-  { id: "presentes-personalizados", homeCardId: "personalizados", title: "Presentes personalizados", description: "Canecas, caixinhas, lembranças e muito mais.", capacity: 8, published: false },
-  { id: "presentes-corporativos", homeCardId: "corporativos", title: "Presentes corporativos", description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.", capacity: 8, published: false },
-  { id: "datas-comemorativas", homeCardId: "datas-comemorativas", title: "Datas comemorativas", description: "Presentes especiais para celebrar cada data com carinho e emoção.", capacity: 8, published: false },
+  { id: "presentes-e-mimos", homeCardId: "baloes", title: "Presentes e Mimos", description: "O mimo perfeito para encantar e surpreender.", capacity: 8, published: true },
+  { id: "presentes-personalizados", homeCardId: "personalizados", title: "Presentes personalizados", description: "Canecas, caixinhas, lembranças e muito mais.", capacity: 8, published: true },
+  { id: "presentes-corporativos", homeCardId: "corporativos", title: "Presentes corporativos", description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.", capacity: 8, published: true },
+  { id: "datas-comemorativas", homeCardId: "datas-comemorativas", title: "Datas comemorativas", description: "Presentes especiais para celebrar cada data com carinho e emoção.", capacity: 8, published: true },
 ];
 
 export function getCategoryProducts(category: CatalogCategoryId, preview = isCatalogPreview) {
   return catalogProducts.filter(product => product.category === category && (preview || product.informationStatus === "approved"));
 }
 
-export function canLinkCategory(category: CatalogCategory) {
-  return isCatalogPreview || (category.published && (category.id === "cestas-personalizadas" || getCategoryProducts(category.id, false).length > 0));
-}
 
 export const basketCatalog = {
   title: "Cestas personalizadas",

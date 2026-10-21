@@ -38,12 +38,12 @@ export function Footer() {
   const [modalContent, setModalContent] = useState<"privacy" | "terms" | null>(null);
 
   const categoriesList = [
-    { label: "Cestas personalizadas", href: "#presentes" },
-    { label: "Balões & surpresas", href: "#presentes" },
-    { label: "Presentes personalizados", href: "#presentes" },
-    { label: "Presentes corporativos", href: "#corporativos" },
-    { label: "Lembranças e kits", href: "#presentes" },
-    { label: "Todas as ocasiões", href: "#presentes" },
+    { label: "Cestas personalizadas", href: "/presentes/cestas-personalizadas" },
+    { label: "Balões & surpresas", href: "/presentes/presentes-e-mimos" },
+    { label: "Presentes personalizados", href: "/presentes/presentes-personalizados" },
+    { label: "Presentes corporativos", href: "/presentes/presentes-corporativos" },
+    { label: "Lembranças e kits", href: "/presentes/presentes-personalizados" },
+    { label: "Todas as ocasiões", href: "/presentes/datas-comemorativas" },
   ];
 
   return (
