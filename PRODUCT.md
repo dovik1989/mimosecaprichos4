@@ -14,7 +14,7 @@ Pessoas procurando presentes personalizados, com atendimento e consulta de opç�
 
 ## Capabilities and constraints
 
-O layout de Cestas personalizadas foi aprovado. As quatro outras categorias estão autorizadas a reutilizar o modelo, sem cadastrar produtos fictícios. Posições pendentes aparecem apenas na prévia; as cinco categorias abrem suas páginas pelos cards públicos, mesmo sem produtos, exibindo estado em preparação. Não inventar preços, composição ou nomes comerciais. Fotografias e informações definitivas dependem de envio e aprovação da empresa.
+O layout de Cestas personalizadas foi aprovado. As quatro outras categorias estão autorizadas a reutilizar o modelo, sem cadastrar produtos fictícios. As cinco categorias abrem suas páginas pelos cards públicos. Todas exibem oito posições; posições sem produto são identificadas como pendentes, inclusive em produção, sem CTAs funcionais. Não inventar preços, composição ou nomes comerciais. Fotografias e informações definitivas dependem de envio e aprovação da empresa.
 
 ## Brand commitments
 

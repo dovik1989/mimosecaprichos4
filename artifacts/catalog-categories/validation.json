@@ -1,0 +1,16 @@
+{
+  "preview": true,
+  "routes": [
+    "presentes-e-mimos",
+    "presentes-personalizados",
+    "presentes-corporativos",
+    "datas-comemorativas"
+  ],
+  "viewports": [
+    1440,
+    390
+  ],
+  "products": 0,
+  "slotsPerPage": 8,
+  "errors": []
+}

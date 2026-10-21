@@ -1,0 +1,24 @@
+{
+  "base": "http://localhost:3000",
+  "routes": [
+    "cestas-personalizadas",
+    "presentes-e-mimos",
+    "presentes-personalizados",
+    "presentes-corporativos",
+    "datas-comemorativas"
+  ],
+  "viewports": [
+    1440,
+    390
+  ],
+  "checks": [
+    "home-click",
+    "direct",
+    "reload",
+    "no-wa-card-links",
+    "empty-state",
+    "carousel-wheel-arrows-progress",
+    "mobile-column"
+  ],
+  "errors": []
+}
