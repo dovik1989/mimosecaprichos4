@@ -43,6 +43,27 @@ export const catalogProducts: CatalogProduct[] = [
       whatsappMessage: `Olá! Gostaria de saber mais informações e valores sobre a Cesta Personalizada ${number} que vi no site da Mimos e Caprichos.`,
     });
   }),
+  ...[
+    ["Aniversário", "aniversario"],
+    ["Cesta Junina", "cesta-junina"],
+    ["Dia da Mulher", "dia-da-mulher"],
+    ["Dia da Secretária", "dia-da-secretaria"],
+    ["Dia das Crianças", "dia-das-criancas"],
+    ["Dia das Mães", "dia-das-maes"],
+    ["Dia dos Namorados", "dia-dos-namorados"],
+    ["Dia dos Pais", "dia-dos-pais"],
+    ["Dia dos Professores", "dia-dos-professores"],
+    ["Natal", "natal"],
+    ["Romântica", "romantica"],
+  ].map(([name, slug]) => createCatalogProduct({
+    id: `datas-comemorativas-${slug}`,
+    category: "datas-comemorativas",
+    name,
+    description: "",
+    image: `/images/produtos/datas-comemorativas/${slug}.webp`,
+    informationStatus: "approved",
+    whatsappMessage: `Olá! Vi o presente ${name} na categoria Datas comemorativas do site da Mimos e Caprichos e gostaria de saber mais informações e valores.`,
+  })),
 ];
 
 export const basketProducts = catalogProducts.filter(product => product.category === "cestas-personalizadas");
@@ -88,7 +109,7 @@ export const catalogCategories: CatalogCategory[] = [
   { id: "presentes-e-mimos", homeCardId: "baloes", title: "Presentes e Mimos", description: "O mimo perfeito para encantar e surpreender.", capacity: 8, published: true },
   { id: "presentes-personalizados", homeCardId: "personalizados", title: "Presentes personalizados", description: "Canecas, caixinhas, lembranças e muito mais.", capacity: 8, published: true },
   { id: "presentes-corporativos", homeCardId: "corporativos", title: "Presentes corporativos", description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.", capacity: 8, published: true },
-  { id: "datas-comemorativas", homeCardId: "datas-comemorativas", title: "Datas comemorativas", description: "Presentes especiais para celebrar cada data com carinho e emoção.", capacity: 8, published: true },
+  { id: "datas-comemorativas", homeCardId: "datas-comemorativas", title: "Datas comemorativas", description: "Presentes especiais para celebrar cada data com carinho e emoção.", capacity: 11, published: true },
 ];
 
 export function getCategoryProducts(category: CatalogCategoryId, preview = isCatalogPreview) {

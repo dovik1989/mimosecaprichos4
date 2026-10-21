@@ -6,6 +6,6 @@ export function CategoryPage({ category }: { category: CatalogCategory }) {
   const products = category.published || isCatalogPreview ? getCategoryProducts(category.id) : [];
   return <>
     <CategoryHeader title={category.title} description={category.description} />
-    <ProductGrid products={products} capacity={category.capacity} preview />
+    <ProductGrid products={products} capacity={category.capacity} preview={category.id === "datas-comemorativas" ? products.length < category.capacity : true} />
   </>;
 }

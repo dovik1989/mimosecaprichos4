@@ -3,7 +3,7 @@
 import React from "react";
 import { siteConfig } from "@/data/site-config";
 import { createWhatsAppUrl } from "@/lib/utils";
-import { MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export function WhatsAppFloating() {
   const whatsappUrl = createWhatsAppUrl(siteConfig.phoneRaw, siteConfig.defaultWhatsAppMessage);
@@ -23,7 +23,7 @@ export function WhatsAppFloating() {
         aria-label="Falar no WhatsApp com a Mimos e Caprichos"
         className="relative w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center shadow-floating transition-transform duration-300 hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
       >
-        <MessageCircle className="w-8 h-8 fill-current" />
+        <FaWhatsapp className="w-8 h-8" aria-hidden="true" />
 
         {/* Badge vermelho com número "1" conforme o mockup mobile tela 9 */}
         <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center shadow-xs border-2 border-white">
