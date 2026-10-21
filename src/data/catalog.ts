@@ -22,6 +22,15 @@ export interface CatalogProduct {
 // Descriptive working names, not an official product assortment or composition.
 // Never fill remaining slots with duplicates, invented products or unrelated photos.
 export const catalogProducts: CatalogProduct[] = [
+  createCatalogProduct({
+    id: "presente-empresarial-brindes",
+    category: "presentes-corporativos",
+    name: "Presente Empresarial / Brindes",
+    description: "Presentes e brindes personalizados para empresas e ocasiões especiais.",
+    image: "/images/produtos/presentes-corporativos/presente-empresarial-brindes.webp",
+    informationStatus: "approved",
+    whatsappMessage: "Olá! Vi o Presente Empresarial / Brindes no site da Mimos e Caprichos e gostaria de conhecer as opções, personalizações e valores.",
+  }),
   ...Array.from({ length: 11 }, (_, index) => {
     const number = index + 1;
     return createCatalogProduct({
