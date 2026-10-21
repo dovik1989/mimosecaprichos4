@@ -22,33 +22,18 @@ export interface CatalogProduct {
 // Descriptive working names, not an official product assortment or composition.
 // Never fill remaining slots with duplicates, invented products or unrelated photos.
 export const catalogProducts: CatalogProduct[] = [
-  {
-    id: "cesta-ursinho-referencia",
-    category: "cestas-personalizadas",
-    availability: "on-request",
-    name: "Cesta com ursinho",
-    description: "Referência em cesta de madeira, com ursinho em destaque.",
-    photos: [{ src: "/images/categoria-cestas.png", alt: "Cesta de madeira com ursinho e laço rosa" }],
-    informationStatus: "pending-approval",
-  },
-  {
-    id: "cesta-balao-coracao-referencia",
-    category: "cestas-personalizadas",
-    availability: "on-request",
-    name: "Cesta com balão de coração",
-    description: "Referência em tons de rosa, com balão de coração.",
-    photos: [{ src: "/images/inspiracao-extra.png", alt: "Presente em tons de rosa com ursinho e balão de coração" }],
-    informationStatus: "pending-approval",
-  },
-  {
-    id: "cesta-rosa-personalizada-referencia",
-    category: "cestas-personalizadas",
-    availability: "on-request",
-    name: "Cesta rosa personalizada",
-    description: "Referência em caixa redonda rosa, com nome personalizado.",
-    photos: [{ src: "/images/categoria-datas-comemorativas.jpg", alt: "Caixa redonda rosa personalizada com flores e presentes" }],
-    informationStatus: "pending-approval",
-  },
+  ...Array.from({ length: 11 }, (_, index) => {
+    const number = index + 1;
+    return createCatalogProduct({
+      id: `cesta-personalizada-${String(number).padStart(2, "0")}`,
+      category: "cestas-personalizadas",
+      name: `Cesta Personalizada ${number}`,
+      description: "Cesta personalizada preparada com carinho para surpreender em momentos especiais.",
+      image: `/images/produtos/cestas-personalizadas/cesta-personalizada-${String(number).padStart(2, "0")}.webp`,
+      informationStatus: "approved",
+      whatsappMessage: `Olá! Gostaria de saber mais informações e valores sobre a Cesta Personalizada ${number} que vi no site da Mimos e Caprichos.`,
+    });
+  }),
 ];
 
 export const basketProducts = catalogProducts.filter(product => product.category === "cestas-personalizadas");
@@ -90,7 +75,7 @@ export interface CatalogCategory {
 }
 
 export const catalogCategories: CatalogCategory[] = [
-  { id: "cestas-personalizadas", homeCardId: "cestas", title: "Cestas personalizadas", description: "Presentes preparados com carinho para surpreender em qualquer ocasião.", capacity: 8, published: true },
+  { id: "cestas-personalizadas", homeCardId: "cestas", title: "Cestas personalizadas", description: "Presentes preparados com carinho para surpreender em qualquer ocasião.", capacity: 11, published: true },
   { id: "presentes-e-mimos", homeCardId: "baloes", title: "Presentes e Mimos", description: "O mimo perfeito para encantar e surpreender.", capacity: 8, published: true },
   { id: "presentes-personalizados", homeCardId: "personalizados", title: "Presentes personalizados", description: "Canecas, caixinhas, lembranças e muito mais.", capacity: 8, published: true },
   { id: "presentes-corporativos", homeCardId: "corporativos", title: "Presentes corporativos", description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.", capacity: 8, published: true },
@@ -105,6 +90,6 @@ export function getCategoryProducts(category: CatalogCategoryId, preview = isCat
 export const basketCatalog = {
   title: "Cestas personalizadas",
   description: "Presentes preparados com carinho para surpreender em qualquer ocasião.",
-  capacity: 8,
-  preview: true,
+  capacity: 11,
+  preview: false,
 };
