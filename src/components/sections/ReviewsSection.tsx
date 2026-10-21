@@ -1,10 +1,32 @@
 "use client";
 
-import React, { useRef } from "react";
-import { siteConfig } from "@/data/site-config";
+import React, { useEffect, useRef, useState } from "react";
+import { verifiedReviewCollection } from "./reviews/verifiedReviews";
+import { useReviewWheel } from "./reviews/useReviewWheel";
 import { Container } from "@/components/ui/Container";
 import { ChevronLeft, ChevronRight, ArrowRight, Star } from "lucide-react";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
+
+const isValidDate = (value: string) => Number.isFinite(Date.parse(value));
+
+function ReviewText({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [overflows, setOverflows] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    const element = textRef.current;
+    if (!element || expanded) return;
+    const update = () => setOverflows(element.scrollHeight > element.clientHeight + 1);
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    update();
+    return () => observer.disconnect();
+  }, [text, expanded]);
+  return <div className="my-auto">
+    <p ref={textRef} className={`text-xs sm:text-[13px] text-[#2D2630] font-sans leading-[1.65] whitespace-pre-line break-words ${expanded ? "" : "line-clamp-4"}`}>{text}</p>
+    {overflows && <button type="button" aria-expanded={expanded} onClick={() => setExpanded(!expanded)} className="text-[11px] text-brand-dark underline underline-offset-4 mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink">{expanded ? "Ler menos" : "Ler avaliação completa"}</button>}
+  </div>;
+}
 
 /**
  * Ícone estilizado de aspas duplas rosas conforme o mockup aprovado
@@ -23,32 +45,38 @@ function PinkQuoteIcon({ className = "w-7 h-7 text-brand-pink" }: { className?: 
   );
 }
 
-/**
- * Textos de demonstração claramente identificados como ilustrativos
- * conforme instrução do projeto.
- */
-const demoReviews = [
-  {
-    id: "review-1",
-    text: "Atendimento muito atencioso do início ao fim. Cada detalhe faz a diferença.",
-  },
-  {
-    id: "review-2",
-    text: "O presente ficou lindo e cheio de carinho. Uma surpresa muito especial!",
-  },
-  {
-    id: "review-3",
-    text: "A personalização deixou tudo ainda mais encantador.",
-  },
-];
-
 export function ReviewsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const collection = verifiedReviewCollection;
+  const reviews = collection.reviews.filter(r => r.approvedByBusiness && r.rating === 5 && r.text.trim() && r.author.trim() && r.verifiedAt).slice(0, 15);
+  const googleUrl = collection.allReviewsUrl || "https://www.google.com/maps/search/?api=1&query=Mimos+e+Caprichos+Av.+Onze+de+Agosto+849+Valinhos+SP";
+  const figures = collection.summary;
+  const summary = figures && Number.isFinite(figures.averageRating) && figures.averageRating >= 1 && figures.averageRating <= 5 && Number.isInteger(figures.totalReviews) && figures.totalReviews > 0 && isValidDate(figures.checkedAt) ? figures : null;
+  const dateFormat = new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "short", year: "numeric", timeZone: "America/Sao_Paulo" });
+  const stopWheelAnimation = useReviewWheel(scrollContainerRef);
+  const [canScroll, setCanScroll] = useState({ left: false, right: false });
+  useEffect(() => {
+    const viewport = scrollContainerRef.current;
+    if (!viewport) return;
+    const update = () => setCanScroll({ left: viewport.scrollLeft > 1, right: viewport.scrollLeft < viewport.scrollWidth - viewport.clientWidth - 1 });
+    viewport.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(viewport);
+    for (const card of viewport.children) observer.observe(card);
+    update();
+    return () => { viewport.removeEventListener("scroll", update); observer.disconnect(); };
+  }, [collection]);
+
   const scroll = (direction: "left" | "right") => {
+    stopWheelAnimation.current();
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      const viewport = scrollContainerRef.current;
+      const card = viewport.firstElementChild;
+      if (!card) return;
+      const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(viewport).columnGap);
+      const scrollAmount = direction === "left" ? -step : step;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
     }
   };
 
@@ -77,7 +105,7 @@ export function ReviewsSection() {
               O carinho de quem já comprou
             </h2>
             <p className="text-xs sm:text-[13px] text-[#554959] mt-1 font-sans">
-              Histórias e experiências que fazem a diferença.
+              {reviews.length ? "Avaliações 5 estrelas selecionadas" : "Conheça as experiências dos nossos clientes no Google."}
             </p>
           </Reveal>
 
@@ -105,43 +133,27 @@ export function ReviewsSection() {
               </svg>
             </div>
 
-            {/* Nota e estrelas */}
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-xl sm:text-2xl text-brand-dark leading-none">
-                  5,0
-                </span>
-                <div className="flex text-[#FBBC05] text-xs gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-[#FBBC05] text-[#FBBC05]" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-[11px] text-[#554959] font-medium mt-0.5 leading-none">
-                874 avaliações
-              </p>
+              {summary ? <>
+                <p className="font-bold text-xl text-brand-dark">{summary.averageRating.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} <span className="text-xs font-normal">de 5 no Google</span></p>
+                <p className="text-[11px] text-[#554959]">{summary.totalReviews.toLocaleString("pt-BR")} avaliações</p>
+                <p className="text-[10px] text-[#554959]">Consultado em {dateFormat.format(new Date(summary.checkedAt))}</p>
+              </> : <span className="text-sm font-semibold text-brand-dark">Avaliações no Google</span>}
             </div>
-
-            {/* Divisória vertical rosa-claro */}
-            <div className="hidden sm:block h-7 w-[1.5px] bg-[#F4D3E1] mx-1" />
-
-            {/* Texto de apoio */}
-            <p className="hidden sm:block text-[11px] text-[#554959] max-w-[130px] leading-tight font-sans">
-              Clientes reais compartilhando momentos especiais
-            </p>
           </Reveal>
         </div>
 
         {/* ========================================================= */}
         {/* 2. CARDS DE AVALIAÇÃO + SETAS DE NAVEGAÇÃO LATERAIS       */}
         {/* ========================================================= */}
-        <div className="relative flex items-center gap-2 sm:gap-3 lg:gap-4">
+        {reviews.length === 0 && <div className="rounded-[22px] bg-white border border-[#F6DCE6]/70 p-6 sm:p-7 text-sm text-[#554959]">Confira os comentários e as avaliações dos nossos clientes diretamente no Google.</div>}
+        <div className={reviews.length ? "relative flex items-center gap-2 sm:gap-3 lg:gap-4" : "hidden"}>
           {/* Seta circular esquerda */}
           <button
             type="button"
             onClick={() => scroll("left")}
-            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95"
-            aria-label="Avaliação anterior"
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95 disabled:opacity-40 disabled:cursor-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink"
+            aria-label="Avaliação anterior" aria-controls="reviews-carousel" disabled={!canScroll.left}
           >
             <ChevronLeft className="w-4 h-4" width="16" height="16" />
           </button>
@@ -149,32 +161,38 @@ export function ReviewsSection() {
           {/* Container dos 3 cards */}
           <StaggerContainer
             ref={scrollContainerRef}
+            id="reviews-carousel" role="region" aria-label="Avaliações 5 estrelas selecionadas" tabIndex={reviews.length ? 0 : undefined}
             staggerInterval={0.1}
             baseDelay={0.12}
             duration={0.8}
             distance={22}
-            className="flex-1 flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth no-scrollbar py-2"
+            className="min-w-0 flex-1 flex gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink"
           >
-            {demoReviews.map((rev, index) => (
+            {reviews.map((rev, index) => (
               <StaggerItem
                 key={rev.id}
                 index={index}
-                className="flex-none w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-14px)] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(235,75,142,0.06)] hover:shadow-[0_8px_30px_rgba(235,75,142,0.12)] border border-[#F6DCE6]/70 flex flex-col justify-between min-h-[170px] sm:min-h-[185px] transition-all duration-400 ease-premium hover:-translate-y-1"
+                className="flex-none w-[calc(100%_-_16px)] sm:w-[calc((100%_-_20px)/2)] lg:w-[calc((100%_-_40px)/3)] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(235,75,142,0.06)] hover:shadow-[0_8px_30px_rgba(235,75,142,0.12)] border border-[#F6DCE6]/70 flex flex-col justify-between min-h-[170px] sm:min-h-[185px] transition-all duration-400 ease-premium hover:-translate-y-1"
               >
                 {/* Linha superior: Aspas rosas à esquerda + 5 estrelas amarelas */}
                 <div className="flex items-center justify-between mb-2">
                   <PinkQuoteIcon className="w-7 h-7 text-brand-pink" />
-                  <div className="flex text-[#FBBC05] gap-0.5">
-                    {[...Array(5)].map((_, i) => (
+                  <div className="flex text-[#FBBC05] gap-0.5" role="img" aria-label={`${rev.rating} de 5 estrelas`}>
+                    {[...Array(rev.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-[#FBBC05] text-[#FBBC05]" />
                     ))}
                   </div>
                 </div>
 
                 {/* Texto do depoimento */}
-                <p className="text-xs sm:text-[13px] text-[#2D2630] font-sans leading-[1.65] my-auto">
-                  {rev.text}
-                </p>
+                <ReviewText text={rev.text} />
+                {rev.isExcerpt && <p className="text-[10px] text-[#554959] mt-2">Trecho da avaliação exibido na captura.</p>}
+                <div className="mt-4 pt-3 border-t border-[#F8E7EE] text-[11px] text-[#554959]">
+                  <p className="font-semibold text-brand-dark break-words">{rev.author}</p>
+                  {rev.publishedAt && isValidDate(rev.publishedAt) && <time dateTime={rev.publishedAt} className="block mt-1">{dateFormat.format(new Date(rev.publishedAt))}</time>}
+                  {!rev.publishedAt && rev.publicationLabel && <p className="mt-1">Na captura: {rev.publicationLabel}</p>}
+                  <a href={rev.originalUrl || googleUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 underline underline-offset-4 hover:text-brand-pink focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink">{rev.originalUrl ? "Ver avaliação no Google" : "Ver avaliações no Google"}</a>
+                </div>
               </StaggerItem>
             ))}
           </StaggerContainer>
@@ -183,24 +201,22 @@ export function ReviewsSection() {
           <button
             type="button"
             onClick={() => scroll("right")}
-            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95"
-            aria-label="Próxima avaliação"
+            className="w-9 h-9 rounded-full bg-white border border-[#F2D6E3] text-[#2D2630] hover:text-brand-pink hover:border-brand-pink flex items-center justify-center transition-all duration-300 ease-premium shadow-2xs shrink-0 active:scale-95 disabled:opacity-40 disabled:cursor-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-pink"
+            aria-label="Próxima avaliação" aria-controls="reviews-carousel" disabled={!canScroll.right}
           >
             <ChevronRight className="w-4 h-4" width="16" height="16" />
           </button>
         </div>
 
         {/* ========================================================= */}
-        {/* 3. RODAPÉ: AVISO ILUSTRATIVO + BOTÃO GOOGLE CENTRALIZADO   */}
+        {/* 3. CRITÉRIO DE SELEÇÃO + ACESSO A TODAS AS AVALIAÇÕES     */}
         {/* ========================================================= */}
         <Reveal direction="up" distance={16} duration={0.8} delay={0.2} className="mt-6 sm:mt-8 text-center space-y-3.5">
-          <p className="text-[10px] sm:text-[11px] text-[#8C7A86] font-sans">
-            Comentários ilustrativos — substituir por avaliações reais do Google na versão final.
-          </p>
+          {reviews.length > 0 && <p className="text-[11px] text-[#554959] font-sans">Seleção de avaliações 5 estrelas. Veja todas as notas e opiniões no Google.</p>}
 
           <div>
             <a
-              href={siteConfig.googleReviewsUrl}
+              href={googleUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs sm:text-sm font-semibold shadow-soft hover:shadow-floating transition-all duration-300 ease-premium hover:scale-[1.02]"
