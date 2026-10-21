@@ -43,16 +43,16 @@ export function TrustBar() {
             </div>
           </div>
 
-          {/* 3. Feito com carinho */}
+          {/* 3. Atendimento personalizado */}
           <div className="flex items-center gap-3.5 pt-3 sm:pt-0 sm:px-4">
             <div className="w-10 h-10 rounded-full bg-[#FFF0F5] border border-[#FADCE8] flex items-center justify-center text-brand-pink shrink-0">
               <Heart className="w-5 h-5 text-brand-pink fill-brand-pink" />
             </div>
             <div>
               <p className="text-xs sm:text-sm font-bold text-brand-dark leading-tight">
-                Feito com
+                Atendimento
               </p>
-              <p className="text-xs text-brand-muted font-medium">carinho</p>
+              <p className="text-xs text-brand-muted font-medium">personalizado</p>
             </div>
           </div>
 
