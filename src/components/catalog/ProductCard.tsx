@@ -19,6 +19,7 @@ export function ProductCard({ product, onOpen, priority = false }: { product: Ca
     </button>
     <div className="flex flex-col flex-1 px-0.5 pt-3 pb-0.5">
       <h2 className="text-sm sm:text-base font-bold text-brand-dark leading-snug">{product.name}</h2>
+      {product.price && <p className="mt-1 text-base sm:text-lg font-bold leading-tight text-brand-dark">{product.price}</p>}
       <p className="text-xs sm:text-[13px] text-brand-muted leading-relaxed mt-2 mb-4">{product.description}</p>
       {product.availability === "unavailable" ? <p className="mt-auto pt-4 text-xs font-semibold text-brand-muted">Indisponível no momento</p> : (<a href={productWhatsAppUrl(product)} target="_blank" rel="noopener noreferrer" aria-label={`Quero este presente: ${product.name}, pelo WhatsApp`} className="inline-flex items-center justify-center gap-1.5 min-h-11 px-2 sm:px-3 py-2.5 mt-auto rounded-full bg-brand-pink hover:bg-brand-pink-hover text-white text-xs leading-snug font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-pink">
         <FaWhatsapp size={16} aria-hidden="true" className="shrink-0" /><span>Quero este presente</span>

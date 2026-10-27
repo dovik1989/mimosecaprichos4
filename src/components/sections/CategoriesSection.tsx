@@ -17,17 +17,19 @@ const categories = [
     id: "cestas",
     title: "Cestas personalizadas",
     description: "Combinações especiais para emocionar em qualquer ocasião.",
-    imageSrc: "/images/categoria-cestas.png",
+    imageSrc: "/images/categoria-cestas-personalizadas-capa.webp",
+    imageFitClass: "object-cover object-top",
     whatsappMessage: "Olá! Gostaria de um orçamento para uma Cesta Personalizada da Mimos e Caprichos.",
-    mobilePosClass: "obj-pos-cestas",
+    mobilePosClass: "object-top",
   },
   {
     id: "baloes",
     title: "Presentes e Mimos",
     description: "O mimo perfeito para encantar e surpreender",
-    imageSrc: "/images/categoria-baloes.png",
+    imageSrc: "/images/categoria-presentes-e-mimos-capa.webp",
+    imageFitClass: "object-cover object-top",
     whatsappMessage: "Olá! Gostaria de encomendar balões personalizados e kits surpresa.",
-    mobilePosClass: "obj-pos-baloes",
+    mobilePosClass: "object-top",
   },
   {
     id: "personalizados",
@@ -41,17 +43,20 @@ const categories = [
     id: "corporativos",
     title: "Presentes corporativos",
     description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.",
-    imageSrc: "/images/categoria-corporativos.png",
+    imageSrc: "/images/categoria-presentes-corporativos-capa.webp",
+    imageFitClass: "object-cover object-right",
+    desktopPosClass: "lg:object-right",
     whatsappMessage: "Olá! Gostaria de um orçamento para presentes corporativos da minha empresa.",
-    mobilePosClass: "obj-pos-corporativos",
+    mobilePosClass: "object-right",
   },
   {
     id: "datas-comemorativas",
     title: "Datas comemorativas",
     description: "Dia da Mulher, Páscoa, Dia das Mães, Namorados, Pais, Professores, Natal, aniversários, casamentos e bodas.",
-    imageSrc: "/images/categoria-datas-comemorativas.jpg",
+    imageSrc: "/images/categoria-datas-comemorativas-capa.webp",
+    imageFitClass: "object-cover object-top",
     whatsappMessage: "Olá! Gostaria de conhecer as opções de presentes para datas comemorativas.",
-    mobilePosClass: "object-center",
+    mobilePosClass: "object-top",
   },
 ];
 
@@ -83,7 +88,7 @@ export function CategoriesSection() {
           {/* Lado Esquerdo: Eyebrow + Título + Corações Decorativos */}
           <Reveal direction="up" distance={20} duration={0.75} delay={0.05} className="flex flex-col items-start w-full lg:w-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
-              NOSSOS PRESENTES
+              NOSSAS OPÇÕES
             </span>
             <div className="mt-1.5 w-full">
               {/* Título com quebra harmoniosa no mobile e corações na mesma linha */}
@@ -166,7 +171,9 @@ export function CategoriesSection() {
                       priority
                       unoptimized
                       className={cn(
-                        "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.03] lg:object-center",
+                        "transition-transform duration-700 ease-premium",
+                        category.imageFitClass ?? "object-cover group-hover:scale-[1.03]",
+                        category.desktopPosClass ?? "lg:object-center",
                         category.mobilePosClass
                       )}
                       sizes="(max-width: 1023px) 100vw, 25vw"

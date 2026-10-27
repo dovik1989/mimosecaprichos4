@@ -21,6 +21,7 @@ const config: Config = {
             hover: "#128EA8",
             light: "#E5F7FB",
           },
+          heading: "#275780",
           offwhite: "#FFF9F6",
           dark: "#2D2630",
           muted: "#716675",

@@ -29,7 +29,7 @@ export function HeroSection() {
           <div className="relative w-full h-full">
             {/* Imagem real hero-desktop com enquadramento preservando os presentes */}
             <Image
-              src="/images/hero-desktop.png"
+              src="/images/hero-banner-cestas.webp"
               alt="Presentes e personalizados da Mimos e Caprichos em Valinhos"
               fill
               priority
@@ -100,7 +100,7 @@ export function HeroSection() {
                 }}
               >
                 <Image
-                  src="/images/hero-mobile.png"
+                  src="/images/hero-banner-cestas.webp"
                   alt="Presentes afetivos Mimos e Caprichos"
                   fill
                   priority

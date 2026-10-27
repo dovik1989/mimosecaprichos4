@@ -61,6 +61,7 @@ export function ProductDetailsModal({ product, onClose }: { product: CatalogProd
       </div>
       <div className="flex flex-col justify-center p-6 sm:p-8 sm:pt-16">
         <h2 id="product-dialog-title" className="font-serif text-3xl text-[var(--color-heading-primary)] leading-tight">{product.name}</h2>
+        {product.price && <p className="mt-2 text-xl font-bold text-brand-dark">{product.price}</p>}
         <p id="product-dialog-description" className="text-sm text-brand-muted leading-relaxed mt-4">{product.description}</p>
         {product.informationStatus === "pending-approval" && <p className="text-xs text-brand-muted mt-4">Nome descritivo provisório. Consulte as opções e os valores pelo WhatsApp.</p>}
         {product.availability === "unavailable" ? <p className="mt-auto pt-4 text-xs font-semibold text-brand-muted">Indisponível no momento</p> : (<a href={productWhatsAppUrl(product)} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-brand-pink hover:bg-brand-pink-hover px-4 py-3.5 min-h-11 text-white text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-pink"><FaWhatsapp size={19} aria-hidden="true" />Consultar pelo WhatsApp</a>)}

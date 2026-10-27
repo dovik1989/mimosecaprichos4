@@ -1,250 +1,120 @@
 "use client";
 
 import React from "react";
-import { Container } from "@/components/ui/Container";
-import { MessageCircle, Gift, Heart, ArrowRight, ArrowDown } from "lucide-react";
-import { DoodleHeart } from "@/components/ui/Doodles";
+import { Camera, Heart, Info, Lightbulb, MessageCircle, type LucideIcon } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { Reveal } from "@/components/animation";
+import { Container } from "@/components/ui/Container";
+import { siteConfig } from "@/data/site-config";
+import { createWhatsAppUrl } from "@/lib/utils";
 
-function DoodleGiftBox({ className = "w-14 h-16" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      width="56"
-      height="68"
-      viewBox="0 0 56 68"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      {/* Cyan/Blue box with hand-drawn dash pattern */}
-      <rect
-        x="6"
-        y="24"
-        width="44"
-        height="40"
-        rx="4"
-        stroke="#00AEEF"
-        strokeWidth="2"
-        fill="#FFFFFF"
-      />
-      {/* Decorative hand-drawn doodle text/lines on box */}
-      <path d="M11 34h8M11 42h5M11 50h10M36 36h8M36 46h6" stroke="#00AEEF" strokeWidth="1.5" />
+type Step = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+};
 
-      {/* Vertical pink ribbon */}
-      <rect x="23" y="24" width="10" height="40" fill="#EB4B8E" />
-
-      {/* Pink Bow on top */}
-      <path
-        d="M28 24C21 14 9 12 13 20c3 6 15 4 15 4z"
-        fill="#FFA4C8"
-        stroke="#EB4B8E"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M28 24C35 14 47 12 43 20c-3 6-15 4-15 4z"
-        fill="#FFA4C8"
-        stroke="#EB4B8E"
-        strokeWidth="1.8"
-      />
-      <circle cx="28" cy="24" r="3.5" fill="#EB4B8E" />
-      {/* Hanging ribbon tails */}
-      <path d="M25 26c-3 6-5 12-6 16" stroke="#EB4B8E" strokeWidth="2" />
-      <path d="M31 26c3 6 5 12 6 16" stroke="#EB4B8E" strokeWidth="2" />
-    </svg>
-  );
-}
+const steps: Step[] = [
+  {
+    title: "Chame no WhatsApp",
+    description: `Fale com a gente pelo ${siteConfig.phoneDisplay}.`,
+    icon: MessageCircle,
+  },
+  {
+    title: "Conte sua ideia e o que deseja",
+    description: "Conte qual item procura, a ocasião e para quem será o presente.",
+    icon: Lightbulb,
+  },
+  {
+    title: "Envie as informações necessárias",
+    description: "Informe o endereço de entrega, o nome de quem vai receber e a data desejada.",
+    icon: Info,
+  },
+  {
+    title: "Aguarde seu pedido ficar pronto",
+    description: "Enviaremos uma foto quando tudo estiver pronto e finalizado.",
+    icon: Camera,
+  },
+  {
+    title: "Ajudamos você a surpreender",
+    description: "Enviamos o presente para quem você deseja e, juntos, tornamos esse dia inesquecível.",
+    icon: Heart,
+  },
+];
 
 export function HowItWorksSection() {
+  const whatsappUrl = createWhatsAppUrl(
+    siteConfig.phoneRaw,
+    "Olá! Quero contar minha ideia para montar um presente especial."
+  );
+
   return (
-    <section className="relative py-10 sm:py-12 lg:py-14 bg-white border-t border-[#F8E7EE] overflow-hidden">
-      <Container className="relative z-10">
-        {/* ========================================================= */}
-        {/* LAYOUT DESKTOP: UMA ÚNICA FAIXA HORIZONTAL (35% / 65%)    */}
-        {/* ========================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* ========================================================= */}
-          {/* COLUNA ESQUERDA (~35%): Eyebrow + Título                   */}
-          {/* ========================================================= */}
-          <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="lg:col-span-4 flex flex-col items-start justify-center">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-pink mb-1.5">
-              COMO FUNCIONA
-            </span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] text-[var(--color-heading-primary)] leading-[1.18] tracking-tight">
-              É simples surpreender <br />
-              com a Mimos e Caprichos
-            </h2>
-          </Reveal>
+    <section className="relative overflow-hidden border-t border-[#F8E7EE] bg-white py-12 sm:py-14 lg:py-16">
+      <Container size="wide">
+        <Reveal direction="up" distance={20} duration={0.8} delay={0.05} className="max-w-[780px]">
+          <p className="mb-2 text-xs font-bold uppercase tracking-wider text-brand-pink">
+            Como funciona
+          </p>
+          <h2 className="font-serif text-[30px] leading-[1.08] tracking-[-0.025em] text-[var(--color-heading-primary)] sm:text-[38px] lg:text-[46px]">
+            <span className="lg:block">É simples surpreender</span>{" "}
+            <span className="lg:block lg:whitespace-nowrap">com a Mimos e Caprichos</span>
+          </h2>
+        </Reveal>
 
-          {/* ========================================================= */}
-          {/* COLUNA DIREITA (~65%): 3 Passos Horizontais + Doodles      */}
-          {/* ========================================================= */}
-          <div className="hidden lg:block lg:col-span-8 relative">
-            <div className="flex items-start justify-between w-full lg:pr-14 xl:pr-16">
-              {/* ---------------- PASSO 1 ---------------- */}
-              <Reveal direction="up" distance={22} duration={0.8} delay={0.15} className="flex-1 flex flex-col items-center text-center">
-                {/* Número 1 em pequeno círculo rosa acima do ícone */}
-                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
-                  1
-                </div>
+        <ol className="relative mt-10 grid gap-7 sm:mt-12 lg:grid-cols-5 lg:gap-5 xl:gap-7">
+          <span
+            className="pointer-events-none absolute left-[10%] right-[10%] top-[45px] hidden h-px bg-[#F4CDD9] lg:block"
+            aria-hidden="true"
+          />
 
-                {/* Ícone de conversa em círculo rosa suave */}
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
-                  <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
-                </div>
+          {steps.map((step, index) => {
+            const Icon = step.icon;
 
-                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
-                  Conte sua ideia
-                </h3>
-                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
-                  Fale pra gente a ocasião e o que você imagina.
-                </p>
-              </Reveal>
+            return (
+              <li key={step.title} className="relative">
+                <Reveal
+                  direction="up"
+                  distance={18}
+                  duration={0.72}
+                  delay={0.1 + index * 0.08}
+                  className="flex items-start gap-4 lg:flex-col lg:items-center lg:text-center"
+                >
+                  <div className="relative z-10 flex shrink-0 flex-col items-center bg-white">
+                    <span className="mb-2 flex size-6 items-center justify-center rounded-full border-2 border-brand-pink bg-white text-xs font-bold text-brand-pink">
+                      {index + 1}
+                    </span>
+                    <span className="flex size-14 items-center justify-center rounded-full border border-[#FADDE8] bg-[#FFF0F5] text-brand-pink sm:size-16">
+                      <Icon className="size-6 stroke-[1.8] sm:size-7" aria-hidden="true" />
+                    </span>
+                  </div>
 
-              {/* Seta horizontal 1 (alinhada à altura dos ícones) */}
-              <Reveal direction="fade" duration={0.7} delay={0.25} className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
-              </Reveal>
+                  <div className="min-w-0 pt-1 lg:pt-0">
+                    <h3 className="text-[15px] font-bold leading-snug text-brand-dark sm:text-base">
+                      {step.title}
+                    </h3>
+                    <p className="mx-auto mt-1.5 max-w-[250px] text-xs leading-[1.55] text-[#554959] sm:text-[13px]">
+                      {step.description}
+                    </p>
 
-              {/* ---------------- PASSO 2 ---------------- */}
-              <Reveal direction="up" distance={22} duration={0.8} delay={0.32} className="flex-1 flex flex-col items-center text-center">
-                {/* Número 2 em pequeno círculo rosa */}
-                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
-                  2
-                </div>
-
-                {/* Ícone de presente em círculo rosa suave */}
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
-                  <Gift className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
-                </div>
-
-                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
-                  Criamos com carinho
-                </h3>
-                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
-                  Montamos uma opção especial e personalizada.
-                </p>
-              </Reveal>
-
-              {/* Seta horizontal 2 (alinhada à altura dos ícones) */}
-              <Reveal direction="fade" duration={0.7} delay={0.42} className="pt-9 sm:pt-10 px-1 text-slate-400 shrink-0">
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 stroke-[1.8]" />
-              </Reveal>
-
-              {/* ---------------- PASSO 3 ---------------- */}
-              <Reveal direction="up" distance={22} duration={0.8} delay={0.48} className="flex-1 flex flex-col items-center text-center">
-                {/* Número 3 em pequeno círculo rosa */}
-                <div className="w-6 h-6 rounded-full border-2 border-brand-pink text-brand-pink text-xs font-bold flex items-center justify-center bg-white mb-2 shadow-2xs">
-                  3
-                </div>
-
-                {/* Ícone de coração em círculo rosa suave */}
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FFF0F5] border border-[#FADDE8]/80 flex items-center justify-center text-brand-pink mb-3 shadow-2xs">
-                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-brand-pink stroke-[1.8]" />
-                </div>
-
-                <h3 className="font-bold text-brand-dark text-sm sm:text-[15px] leading-snug">
-                  Surpreenda alguém
-                </h3>
-                <p className="text-xs text-[#554959] mt-1 leading-[1.4] max-w-[170px]">
-                  Entregamos um presente que vai emocionar.
-                </p>
-              </Reveal>
-            </div>
-
-            {/* ========================================================= */}
-            {/* ELEMENTOS DECORATIVOS À DIREITA (Coração e Presente)       */}
-            {/* ========================================================= */}
-            {/* Coração em contorno no canto superior direito */}
-            <div className="hidden lg:block absolute -top-1 right-2 xl:right-4 text-brand-pink">
-              <Reveal direction="fade" duration={0.8} delay={0.5}>
-                <DoodleHeart className="w-6 h-6 text-brand-pink rotate-12" />
-              </Reveal>
-            </div>
-
-            {/* Ilustração decorativa de presente no canto inferior direito */}
-            <div className="hidden lg:block absolute -bottom-3 right-0">
-              <Reveal direction="fade" duration={0.8} delay={0.55}>
-                <DoodleGiftBox className="w-12 h-16 xl:w-14 xl:h-18" />
-              </Reveal>
-            </div>
-          </div>
-        </div>
-
-        {/* ========================================================= */}
-        {/* LAYOUT MOBILE (Organização Vertical Conforme Referência)   */}
-        {/* ========================================================= */}
-        <div className="lg:hidden mt-8 flex flex-col space-y-6">
-          {/* Passo 1 */}
-          <Reveal direction="up" distance={18} duration={0.75} delay={0.1}>
-            <div className="flex items-start gap-4">
-              <div className="relative shrink-0 flex flex-col items-center">
-                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                  1
-                </span>
-                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                  <MessageCircle className="w-5 h-5 text-brand-pink stroke-[1.8]" />
-                </div>
-              </div>
-              <div className="pt-2">
-                <h3 className="font-bold text-brand-dark text-base">Conte sua ideia</h3>
-                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                  Fale pra gente a ocasião e o que você imagina.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal direction="fade" duration={0.6} delay={0.18} className="pl-6 text-slate-300">
-            <ArrowDown className="w-4 h-4 text-slate-400" />
-          </Reveal>
-
-          {/* Passo 2 */}
-          <Reveal direction="up" distance={18} duration={0.75} delay={0.24}>
-            <div className="flex items-start gap-4">
-              <div className="relative shrink-0 flex flex-col items-center">
-                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                  2
-                </span>
-                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                  <Gift className="w-5 h-5 text-brand-pink stroke-[1.8]" />
-                </div>
-              </div>
-              <div className="pt-2">
-                <h3 className="font-bold text-brand-dark text-base">Criamos com carinho</h3>
-                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                  Montamos uma opção especial e personalizada.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal direction="fade" duration={0.6} delay={0.32} className="pl-6 text-slate-300">
-            <ArrowDown className="w-4 h-4 text-slate-400" />
-          </Reveal>
-
-          {/* Passo 3 */}
-          <Reveal direction="up" distance={18} duration={0.75} delay={0.38}>
-            <div className="flex items-start gap-4">
-              <div className="relative shrink-0 flex flex-col items-center">
-                <span className="w-5 h-5 rounded-full border border-brand-pink text-brand-pink text-[10px] font-bold flex items-center justify-center bg-white mb-1">
-                  3
-                </span>
-                <div className="w-12 h-12 rounded-full bg-[#FFF0F5] border border-[#FADDE8] flex items-center justify-center text-brand-pink shadow-xs">
-                  <Heart className="w-5 h-5 text-brand-pink stroke-[1.8]" />
-                </div>
-              </div>
-              <div className="pt-2">
-                <h3 className="font-bold text-brand-dark text-base">Surpreenda alguém</h3>
-                <p className="text-xs text-[#554959] mt-0.5 leading-relaxed">
-                  Entregamos um presente que vai emocionar.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
+                    {index === 0 && (
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-brand-pink px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-brand-pink-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-pink"
+                        aria-label="Chamar a Mimos e Caprichos no WhatsApp"
+                      >
+                        <FaWhatsapp className="size-4" aria-hidden="true" />
+                        Chamar no WhatsApp
+                      </a>
+                    )}
+                  </div>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ol>
       </Container>
     </section>
   );
 }
-
