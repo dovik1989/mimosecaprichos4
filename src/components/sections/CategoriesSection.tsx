@@ -18,46 +18,44 @@ const categories = [
     title: "Cestas personalizadas",
     description: "Combinações especiais para emocionar em qualquer ocasião.",
     imageSrc: "/images/categoria-cestas-personalizadas-capa-v2.webp",
-    imageFitClass: "object-cover object-top",
+    desktopImageSrc: "/images/categoria-cestas-personalizadas-desktop.webp",
     whatsappMessage: "Olá! Gostaria de um orçamento para uma Cesta Personalizada da Mimos e Caprichos.",
-    mobilePosClass: "obj-pos-cestas",
+    imagePositionClass: "object-center",
   },
   {
     id: "baloes",
     title: "Presentes e Mimos",
     description: "O mimo perfeito para encantar e surpreender",
     imageSrc: "/images/categoria-presentes-e-mimos-capa-v2.webp",
-    imageFitClass: "object-cover object-top",
+    desktopImageSrc: "/images/categoria-presentes-e-mimos-desktop.webp",
     whatsappMessage: "Olá! Gostaria de encomendar balões personalizados e kits surpresa.",
-    mobilePosClass: "obj-pos-baloes",
+    imagePositionClass: "object-center",
   },
   {
     id: "personalizados",
     title: "Presentes personalizados",
     description: "Canecas, caixinhas, lembranças e muito mais.",
     imageSrc: "/images/categoria-presentes-personalizados-capa-v2.webp",
-    imageFitClass: "object-cover object-center",
+    desktopImageSrc: "/images/categoria-presentes-personalizados-desktop.webp",
     whatsappMessage: "Olá! Gostaria de saber mais sobre as opções de presentes e lembranças personalizadas.",
-    mobilePosClass: "obj-pos-personalizados",
+    imagePositionClass: "object-center",
   },
   {
     id: "corporativos",
     title: "Presentes corporativos",
     description: "Soluções criativas para empresas, brindes, eventos e momentos importantes.",
     imageSrc: "/images/categoria-presentes-corporativos-capa-v2.webp",
-    imageFitClass: "object-cover object-center",
-    desktopPosClass: "lg:object-center",
+    desktopImageSrc: "/images/categoria-presentes-corporativos-desktop.webp",
     whatsappMessage: "Olá! Gostaria de um orçamento para presentes corporativos da minha empresa.",
-    mobilePosClass: "object-center",
+    imagePositionClass: "object-center",
   },
   {
     id: "datas-comemorativas",
     title: "Datas comemorativas",
     description: "Dia da Mulher, Páscoa, Dia das Mães, Namorados, Pais, Professores, Natal, aniversários, casamentos e bodas.",
     imageSrc: "/images/categoria-datas-comemorativas-capa-v2.webp",
-    imageFitClass: "object-cover object-center",
     whatsappMessage: "Olá! Gostaria de conhecer as opções de presentes para datas comemorativas.",
-    mobilePosClass: "object-center",
+    imagePositionClass: "object-center",
   },
 ];
 
@@ -75,7 +73,7 @@ export function CategoriesSection() {
     const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap);
     viewport.scrollBy({
       left: direction === "left" ? -step : step,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
   };
 
@@ -163,8 +161,22 @@ export function CategoriesSection() {
                   id={category.id === "corporativos" ? "corporativos" : undefined}
                   className="group flex flex-col bg-white rounded-2xl lg:rounded-[22px] p-2.5 lg:p-4 border border-[#F2E5EC] shadow-[0_2px_10px_-2px_rgba(0,0,0,0.04)] lg:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(235,75,142,0.14)] hover:-translate-y-1 transition-all duration-400 ease-premium h-full"
                 >
-                  {/* Imagem em proporção horizontal compacta no mobile (h-[126px]) e aspecto original no desktop */}
-                  <div className="relative w-full h-[126px] lg:h-auto lg:aspect-[4/3.7] rounded-[14px] lg:rounded-[16px] overflow-hidden bg-[#FAF2F5] mb-2.5 lg:mb-3.5 shrink-0">
+                  {/* A capa preserva o 16:9 no mobile; no desktop, a foto completa fica sobre um fundo suave da própria imagem. */}
+                  <div className="relative w-full h-[clamp(180px,calc((100vw-2.75rem)*0.5625),210px)] sm:h-[250px] md:h-[300px] lg:h-[270px] rounded-[14px] lg:rounded-[16px] overflow-hidden bg-[#FAF2F5] mb-2.5 lg:mb-3.5 shrink-0">
+                    {!category.desktopImageSrc && (
+                      <Image
+                        src={category.imageSrc}
+                        alt=""
+                        fill
+                        aria-hidden="true"
+                        unoptimized
+                        className={cn(
+                          "hidden lg:block object-cover scale-110 opacity-25 blur-md",
+                          category.imagePositionClass
+                        )}
+                        sizes="25vw"
+                      />
+                    )}
                     <Image
                       src={category.imageSrc}
                       alt={category.title}
@@ -172,12 +184,23 @@ export function CategoriesSection() {
                       priority
                       unoptimized
                       className={cn(
-                        "transition-transform duration-700 ease-premium",
-                        category.imageFitClass ?? "object-cover group-hover:scale-[1.03]",
-                        category.desktopPosClass ?? "lg:object-center",
-                        category.mobilePosClass
+                        "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.015] lg:hidden",
+                        category.imagePositionClass
                       )}
-                      sizes="(max-width: 1023px) 100vw, 25vw"
+                      sizes="(max-width: 1023px) 100vw, 0px"
+                    />
+                    <Image
+                      src={category.desktopImageSrc ?? category.imageSrc}
+                      alt={category.title}
+                      fill
+                      priority
+                      unoptimized
+                      className={cn(
+                        "hidden lg:block transition-transform duration-700 ease-premium lg:group-hover:scale-[1.02]",
+                        category.desktopImageSrc ? "object-cover object-center" : "object-contain",
+                        category.imagePositionClass
+                      )}
+                      sizes="25vw"
                     />
                   </div>
 
