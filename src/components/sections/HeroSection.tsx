@@ -24,16 +24,16 @@ export function HeroSection() {
       {/* IMAGEM DESKTOP INTEGRADA COM FADE SUAVE NO LADO ESQUERDO (>= lg)          */}
       {/* Sem container de card, sem borda dura, sem sombra: fusão com o fundo      */}
       {/* ========================================================================= */}
-      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[52%] xl:w-[56%] 2xl:w-[53%] z-0 pointer-events-none select-none">
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[50%] xl:w-[54%] 2xl:w-[51%] z-0 pointer-events-none select-none">
         <Reveal direction="fade" duration={0.9} delay={0.1} className="w-full h-full">
           <div className="relative w-full h-full">
             {/* Imagem real hero-desktop com enquadramento preservando os presentes */}
             <Image
-              src="/images/hero-banner-cestas.webp"
-              alt="Presentes e personalizados da Mimos e Caprichos em Valinhos"
+              src="/images/banner-mimos-e-caprichos.webp"
+              alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
               fill
               priority
-              className="object-cover object-right"
+              className="object-cover object-[center_35%]"
               sizes="(min-width: 1024px) 56vw, 800px"
             />
 
@@ -42,7 +42,7 @@ export function HeroSection() {
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to left, transparent 0%, rgba(255,249,246,0.15) 20%, rgba(255,249,246,0.55) 40%, rgba(255,249,246,0.9) 70%, #FFF9F6 100%)",
+                  "linear-gradient(to left, transparent 0%, rgba(255,249,246,0.1) 24%, rgba(255,249,246,0.42) 46%, rgba(255,249,246,0.78) 74%, #FFF9F6 100%)",
               }}
             />
 
@@ -100,11 +100,11 @@ export function HeroSection() {
                 }}
               >
                 <Image
-                  src="/images/hero-banner-cestas.webp"
-                  alt="Presentes afetivos Mimos e Caprichos"
+                  src="/images/banner-mimos-e-caprichos.webp"
+                  alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
                   fill
                   priority
-                  className="object-cover object-[center_30%]"
+                  className="object-cover object-[center_35%]"
                   sizes="(max-width: 640px) 100vw, 400px"
                 />
 

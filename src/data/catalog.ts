@@ -20,9 +20,22 @@ export interface CatalogProduct {
   whatsappMessage?: string;
 }
 
-// Descriptive working names, not an official product assortment or composition.
-// Never fill remaining slots with duplicates, invented products or unrelated photos.
+// Product order follows the client-approved sequence used by the catalog cards.
 const basketProductOrder = [12, 1, 11, 9, 3, 5, 10, 8, 6, 2, 7, 4];
+const basketProductNames = [
+  "Cesta Cerveja",
+  "Cesta Mista",
+  "Cesta Orquídea",
+  "Cesta Vinho",
+  "Cesta Aniversário",
+  "Cesta Kalanchoe",
+  "Cesta Café da Manhã",
+  "Cesta Petiscos",
+  "Cesta Chocolate",
+  "Cesta Romântica",
+  "Cesta Palha",
+  "Cesta Mini",
+];
 const basketPricesByPhoto: Record<number, string> = {
   1: "R$ 179,90",
   2: "R$ 175,90",
@@ -40,13 +53,14 @@ const basketPricesByPhoto: Record<number, string> = {
 
 export const catalogProducts: CatalogProduct[] = [
   ...[
-    { id: "caneca", name: "Caneca", price: "R$ 49,90", image: "caneca.webp" },
-    { id: "caixa", name: "Caixa", price: "R$ 65,90", image: "caixa.webp" },
-    { id: "caderno", name: "Caderno", price: "R$ 39,90", image: "caderno.webp" },
-    { id: "garrafa-squeeze", name: "Garrafa Squeeze", price: "R$ 59,90", image: "garrafas.webp" },
-    { id: "garrafa-termica", name: "Garrafa Térmica", price: "R$ 129,90", image: "garrafas.webp" },
-    { id: "bloco-de-anotacoes", name: "Bloco de Anotações", price: "R$ 24,90", image: "bloco-de-anotacoes.webp" },
-    { id: "toalha", name: "Toalha", price: "R$ 24,90", image: "toalha.webp" },
+    { id: "caneca", name: "Caneca", price: "R$ 49,90", image: "caneca-v2.webp", additionalImages: [] },
+    { id: "caixa", name: "Caixa", price: "R$ 65,90", image: "caixa-v2.webp", additionalImages: ["caixa-aberta-v2.webp"] },
+    { id: "bloco-de-anotacoes", name: "Bloco de Anotações", price: "R$ 24,90", image: "bloco-de-anotacoes-detalhe-v2.webp", additionalImages: [] },
+    { id: "garrafa-squeeze", name: "Garrafa Squeeze", price: "R$ 59,90", image: "garrafas-v2.webp", additionalImages: [] },
+    { id: "garrafa-termica", name: "Garrafa Térmica", price: "R$ 129,90", image: "garrafas-v2.webp", additionalImages: [] },
+    { id: "agenda", name: "Agenda", price: "R$ 59,90", image: "bloco-de-anotacoes-v2.webp", additionalImages: [] },
+    { id: "toalha", name: "Toalha", price: "R$ 24,90", image: "toalha-v2.webp", additionalImages: [] },
+    { id: "caderno", name: "Caderno", price: "R$ 39,90", image: "caderno-destaque-v2.webp", additionalImages: [] },
   ].map(product => createCatalogProduct({
     id: `corporativo-${product.id}`,
     category: "presentes-corporativos",
@@ -54,6 +68,7 @@ export const catalogProducts: CatalogProduct[] = [
     price: product.price,
     description: "Produto personalizado para empresas, eventos e ocasiões especiais.",
     image: `/images/produtos/presentes-corporativos/${product.image}`,
+    additionalImages: product.additionalImages.map(image => `/images/produtos/presentes-corporativos/${image}`),
     informationStatus: "approved",
     whatsappMessage: `Olá! Gostaria de saber mais informações e valores sobre ${product.name} personalizado que vi no site da Mimos e Caprichos.`,
   })),
@@ -83,15 +98,18 @@ export const catalogProducts: CatalogProduct[] = [
   ...Array.from({ length: 12 }, (_, index) => {
     const number = index + 1;
     const photoNumber = basketProductOrder[index];
+    const productName = basketProductNames[index];
     return createCatalogProduct({
       id: `cesta-personalizada-${String(number).padStart(2, "0")}`,
       category: "cestas-personalizadas",
-      name: `Cesta Personalizada ${number}`,
+      name: productName,
       price: basketPricesByPhoto[photoNumber],
       description: "Cesta personalizada preparada com carinho para surpreender em momentos especiais.",
-      image: `/images/produtos/cestas-personalizadas/cesta-personalizada-${String(photoNumber).padStart(2, "0")}${photoNumber === 8 || photoNumber === 12 ? "-v2" : ""}.webp`,
+      image: number === 9
+        ? "/images/produtos/cestas-personalizadas/cesta-personalizada-09-nova.webp"
+        : `/images/produtos/cestas-personalizadas/cesta-personalizada-${String(photoNumber).padStart(2, "0")}${photoNumber === 8 || photoNumber === 12 ? "-v2" : ""}.webp`,
       informationStatus: "approved",
-      whatsappMessage: `Olá! Gostaria de saber mais informações e valores sobre a Cesta Personalizada ${number} que vi no site da Mimos e Caprichos.`,
+      whatsappMessage: `Olá! Gostaria de saber mais informações e valores sobre a ${productName} que vi no site da Mimos e Caprichos.`,
     });
   }),
   ...[

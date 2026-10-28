@@ -24,16 +24,15 @@ export function AboutSection() {
           <div className="lg:col-span-6 w-full">
             <Reveal direction="up" distance={25} duration={0.8} delay={0.05}>
               <div
-                className="relative w-full rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-sm border border-[#F2E5EC]/60 bg-[#FAF2F5]"
+                className="relative w-full aspect-[1367/1150] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-sm border border-[#F2E5EC]/60 bg-[#FAF2F5]"
                 style={{ position: "relative" }}
               >
                 <Image
-                  src="/images/sobre-nos-fachada.webp"
+                  src="/images/fachada-loja-v2.webp"
                   alt="Interior e fachada da loja Mimos e Caprichos em Valinhos"
-                  width={1367}
-                  height={1150}
+                  fill
                   priority={false}
-                  className="block h-auto w-full"
+                  className="object-cover object-[center_45%]"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>

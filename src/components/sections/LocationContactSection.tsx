@@ -33,14 +33,13 @@ export function LocationContactSection() {
 
             {/* Foto da Fachada da Loja Física */}
             <Reveal direction="up" distance={25} duration={0.85} delay={0.18} className="lg:col-span-5 lg:col-start-1 lg:row-start-2">
-              <div className="relative w-full rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
+              <div className="relative w-full aspect-[1367/1150] rounded-[22px] sm:rounded-[26px] overflow-hidden shadow-sm border border-[#F2D7E4] bg-white">
                 <Image
-                  src="/images/fachada-atualizada.png"
+                  src="/images/fachada-loja-v2.webp"
                   alt="Fachada da loja Mimos e Caprichos em Valinhos"
-                  width={1367}
-                  height={1150}
+                  fill
                   quality={95}
-                  className="block h-auto w-full"
+                  className="object-cover object-[center_45%]"
                   sizes="(max-width: 1024px) 100vw, 520px"
                   priority
                 />
