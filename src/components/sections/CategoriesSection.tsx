@@ -54,6 +54,7 @@ const categories = [
     title: "Datas comemorativas",
     description: "Dia da Mulher, Páscoa, Dia das Mães, Namorados, Pais, Professores, Natal, aniversários, casamentos e bodas.",
     imageSrc: "/images/categoria-datas-comemorativas-capa-v2.webp",
+    desktopImageSrc: "/images/categoria-datas-comemorativas-desktop.webp",
     whatsappMessage: "Olá! Gostaria de conhecer as opções de presentes para datas comemorativas.",
     imagePositionClass: "object-center",
   },
@@ -196,7 +197,7 @@ export function CategoriesSection() {
                       priority
                       unoptimized
                       className={cn(
-                        "hidden lg:block transition-transform duration-700 ease-premium lg:group-hover:scale-[1.02]",
+                        "hidden lg:block transition-transform duration-700 ease-premium lg:scale-[1.035] lg:group-hover:scale-[1.055]",
                         category.desktopImageSrc ? "object-cover object-center" : "object-contain",
                         category.imagePositionClass
                       )}
