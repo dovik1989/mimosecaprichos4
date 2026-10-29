@@ -13,6 +13,7 @@ import {
   X,
   ShieldCheck,
   FileText,
+  ChevronDown,
 } from "lucide-react";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
 
@@ -30,7 +31,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-14 sm:pt-16 pb-10 sm:pb-12 border-t border-[#F8E2EC] relative">
+    <footer className="bg-[#FFF5F8] text-brand-dark/80 pt-14 sm:pt-16 pb-28 lg:pb-12 border-t border-[#F8E2EC] relative">
       <Container>
         <StaggerContainer
           staggerInterval={0.08}
@@ -78,7 +79,7 @@ export function Footer() {
           </StaggerItem>
 
           {/* 2. Menu Institucional (2 colunas) */}
-          <StaggerItem index={1} className="lg:col-span-2">
+          <StaggerItem index={1} className="hidden lg:block lg:col-span-2">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Menu</h4>
             <ul className="space-y-2 text-xs">
               {navItems.map((item) => (
@@ -95,7 +96,7 @@ export function Footer() {
           </StaggerItem>
 
           {/* 3. Nossos Presentes (2 colunas) */}
-          <StaggerItem index={2} className="lg:col-span-2">
+          <StaggerItem index={2} className="hidden lg:block lg:col-span-2">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Nossos Presentes</h4>
             <ul className="space-y-2 text-xs">
               {categoriesList.map((cat, idx) => (
@@ -112,7 +113,7 @@ export function Footer() {
           </StaggerItem>
 
           {/* 4. Contato (3 colunas) */}
-          <StaggerItem index={3} className="lg:col-span-3 space-y-3">
+          <StaggerItem index={3} className="hidden lg:block lg:col-span-3 space-y-3">
             <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Contato</h4>
 
             <div className="space-y-2.5 text-xs text-brand-muted">
@@ -143,6 +144,28 @@ export function Footer() {
               </div>
             </div>
           </StaggerItem>
+
+          <div className="lg:hidden sm:col-span-2 space-y-3">
+            {[{ title: "Menu", links: navItems }, { title: "Nossos Presentes", links: categoriesList }].map(group => (
+              <details key={group.title} className="group rounded-2xl border border-[#FADCE8] bg-white">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-bold text-brand-dark [&::-webkit-details-marker]:hidden">
+                  {group.title}
+                  <ChevronDown aria-hidden="true" className="size-4 text-brand-pink transition-transform group-open:rotate-180" />
+                </summary>
+                <ul className="space-y-1 px-4 pb-3 text-xs">
+                  {group.links.map(item => <li key={item.href + item.label}><Link href={item.href.startsWith("#") ? `/${item.href}` : item.href} className="inline-flex min-h-9 items-center text-brand-muted hover:text-brand-pink">{item.label}</Link></li>)}
+                </ul>
+              </details>
+            ))}
+            <section aria-labelledby="footer-mobile-contact" className="rounded-2xl border border-[#FADCE8] bg-white p-4">
+              <h4 id="footer-mobile-contact" className="mb-3 text-sm font-bold text-brand-dark">Contato</h4>
+              <div className="space-y-3 pr-14 text-xs text-brand-muted">
+                <div className="flex items-center gap-2.5"><Phone aria-hidden="true" className="size-4 shrink-0 text-brand-pink" /><a href={`tel:${siteConfig.phoneRaw}`} className="font-medium hover:text-brand-pink">(19) 99200-5279</a></div>
+                <div className="flex items-start gap-2.5"><MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-pink" /><a href={siteConfig.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="leading-snug hover:text-brand-pink">Av. Onze de Agosto, 849<br />Centro, Valinhos - SP</a></div>
+                <div className="flex items-start gap-2.5"><Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-pink" /><span className="leading-snug">Seg. a Sex: 09h às 18h<br />Sábado: 09h às 13h</span></div>
+              </div>
+            </section>
+          </div>
 
           {/* 5. Frase Script / Lettering Decorativo (2 colunas) */}
           <StaggerItem index={4} className="lg:col-span-2 hidden lg:flex items-center justify-center border-l border-[#F0D5E2] pl-6 xl:pl-8">
