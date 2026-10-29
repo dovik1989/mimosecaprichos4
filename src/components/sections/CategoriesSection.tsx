@@ -88,14 +88,14 @@ export function CategoriesSection() {
           {/* Lado Esquerdo: Eyebrow + Título + Corações Decorativos */}
           <Reveal direction="up" distance={20} duration={0.75} delay={0.05} className="flex flex-col items-start w-full lg:w-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-pink">
-              NOSSOS PRESENTES
+              NOSSAS OPÇÕES
             </span>
             <div className="mt-1.5 w-full">
               {/* Título com quebra harmoniosa no mobile e corações na mesma linha */}
               <h2 className="font-serif text-[28px] sm:text-4xl lg:text-[44px] text-[var(--color-heading-primary)] tracking-tight leading-[1.18] sm:leading-[1.12]">
-                <span className="block sm:inline">Encontre o presente </span>
+                <span className="block sm:inline">Nossas cestas e </span>
                 <span className="inline-flex items-center gap-2">
-                  perfeito
+                  presentes
                   <DoodleDoubleHeart className="w-8 h-6 sm:hidden text-brand-pink shrink-0 -translate-y-0.5" />
                 </span>
                 <DoodleTripleHearts className="hidden sm:inline-block w-11 h-8 text-brand-pink shrink-0 -translate-y-1 ml-3 align-middle" />

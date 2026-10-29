@@ -24,7 +24,7 @@ export function HeroSection() {
       {/* IMAGEM DESKTOP INTEGRADA COM FADE SUAVE NO LADO ESQUERDO (>= lg)          */}
       {/* Sem container de card, sem borda dura, sem sombra: fusão com o fundo      */}
       {/* ========================================================================= */}
-      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[50%] xl:w-[54%] 2xl:w-[51%] z-0 pointer-events-none select-none">
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[62vw] z-0 pointer-events-none select-none">
         <Reveal direction="fade" duration={0.9} delay={0.1} className="w-full h-full">
           <div className="relative w-full h-full">
             {/* Imagem real hero-desktop com enquadramento preservando os presentes */}
@@ -33,8 +33,8 @@ export function HeroSection() {
               alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
               fill
               priority
-              className="object-cover object-[center_35%]"
-              sizes="(min-width: 1024px) 56vw, 800px"
+              className="object-cover object-[center_28%]"
+              sizes="62vw"
             />
 
             {/* Overlay de Fade no lado esquerdo conforme especificação do mockup */}
@@ -42,13 +42,13 @@ export function HeroSection() {
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to left, transparent 0%, rgba(255,249,246,0.1) 24%, rgba(255,249,246,0.42) 46%, rgba(255,249,246,0.78) 74%, #FFF9F6 100%)",
+                  "linear-gradient(to right, #FFF9F6 0%, rgba(255,249,246,0.98) 10%, rgba(255,249,246,0.8) 22%, rgba(255,249,246,0.38) 38%, rgba(255,249,246,0.08) 56%, transparent 72%)",
               }}
             />
 
             {/* Suaves fusões de transição no topo e na base para total integração */}
-            <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#FFF9F6] to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#FFF9F6] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-5 bg-gradient-to-b from-[#FFF9F6] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-7 bg-gradient-to-t from-[#FFF9F6] to-transparent pointer-events-none" />
           </div>
         </Reveal>
       </div>
@@ -93,10 +93,10 @@ export function HeroSection() {
           <Reveal direction="up" distance={18} duration={0.75} delay={0.38} className="w-full">
             <div className="w-full pt-1">
               <div
-                className="relative aspect-[4/4] sm:aspect-[4/3.6] w-full rounded-b-[28px] rounded-t-[20px] overflow-hidden"
+                className="relative aspect-[5/6] w-full max-w-[460px] mx-auto rounded-b-[28px] rounded-t-[20px] overflow-hidden"
                 style={{
-                  WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 6%, rgba(0,0,0,0.8) 18%, black 30%, black 100%)",
-                  maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 6%, rgba(0,0,0,0.8) 18%, black 30%, black 100%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 100%)",
+                  maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 100%)",
                 }}
               >
                 <Image
@@ -104,13 +104,13 @@ export function HeroSection() {
                   alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
                   fill
                   priority
-                  className="object-cover object-[center_35%]"
+                  className="object-contain object-center"
                   sizes="(max-width: 640px) 100vw, 400px"
                 />
 
                 {/* Degradê superior suave fundindo a imagem com o fundo da Hero */}
                 <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#FFF9F6] via-[#FFF9F6]/85 via-25% via-[#FFF9F6]/40 via-65% to-transparent z-10"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-[#FFF9F6] to-transparent z-10"
                   aria-hidden="true"
                 />
 
