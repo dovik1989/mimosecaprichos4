@@ -19,7 +19,7 @@ export function AboutSection() {
         {/* ========================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-center">
           {/* ========================================================= */}
-          {/* COLUNA ESQUERDA: Fotografia Grande do Interior da Loja     */}
+          {/* COLUNA ESQUERDA: Fotografia completa da fachada da loja    */}
           {/* ========================================================= */}
           <div className="lg:col-span-6 w-full">
             <Reveal direction="up" distance={25} duration={0.8} delay={0.05}>
@@ -28,11 +28,11 @@ export function AboutSection() {
                 style={{ position: "relative" }}
               >
                 <Image
-                  src="/images/fachada-loja-v2.webp"
-                  alt="Interior e fachada da loja Mimos e Caprichos em Valinhos"
+                  src="/images/sobre-nos-fachada.webp"
+                  alt="Fachada da loja Mimos e Caprichos em Valinhos, com mensagem sobre sua história"
                   fill
                   priority={false}
-                  className="object-cover object-[center_45%]"
+                  className="object-contain"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
