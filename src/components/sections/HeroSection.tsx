@@ -12,7 +12,7 @@ import { Reveal } from "@/components/animation";
 export function HeroSection() {
   const whatsappUrl = createWhatsAppUrl(
     siteConfig.phoneRaw,
-    "Olá! Gostaria de encomendar um presente especial na Mimos e Caprichos."
+    "Olá, vim pelo site e gostaria de fazer um pedido com vocês.\nPodemos seguir por aqui? ☺️"
   );
 
   return (

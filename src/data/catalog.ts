@@ -60,7 +60,7 @@ export const catalogProducts: CatalogProduct[] = [
     { id: "garrafa-termica", name: "Garrafa Térmica", price: "R$ 129,90", image: "garrafas-v2.webp", additionalImages: [] },
     { id: "agenda", name: "Agenda", price: "R$ 59,90", image: "bloco-de-anotacoes-v2.webp", additionalImages: [] },
     { id: "toalha", name: "Toalha", price: "R$ 24,90", image: "toalha-v2.webp", additionalImages: [] },
-    { id: "caderno", name: "Caderno", price: "R$ 39,90", image: "caderno-destaque-v2.webp", additionalImages: [] },
+    { id: "caderno", name: "Caderno", price: "R$ 39,90", image: "caderno-v3.webp", additionalImages: [] },
   ].map(product => createCatalogProduct({
     id: `corporativo-${product.id}`,
     category: "presentes-corporativos",

@@ -45,7 +45,7 @@ const steps: Step[] = [
 export function HowItWorksSection() {
   const whatsappUrl = createWhatsAppUrl(
     siteConfig.phoneRaw,
-    "Olá! Quero contar minha ideia para montar um presente especial."
+    "Olá, vim pelo site e gostaria de fazer um pedido com vocês.\nPodemos seguir por aqui? ☺️"
   );
 
   return (

@@ -9,7 +9,7 @@ export const siteConfig = {
   addressShort: "Av. Onze de Agosto, 849, Centro, Valinhos-SP",
   phoneDisplay: "(19) 99200-5279",
   phoneRaw: "5519992005279",
-  defaultWhatsAppMessage: "Olá! Gostaria de saber mais sobre os presentes personalizados da Mimos e Caprichos.",
+  defaultWhatsAppMessage: "Olá, vim pelo site e gostaria de fazer um pedido com vocês.\nPodemos seguir por aqui? ☺️",
   googleMapsUrl: "https://maps.google.com/?q=Av.+Onze+de+Agosto,+849+-+Centro,+Valinhos+-+SP,+13276-130",
   googleReviewsUrl: "https://maps.google.com/?q=Av.+Onze+de+Agosto,+849+-+Centro,+Valinhos+-+SP,+13276-130",
   hours: {
