@@ -9,10 +9,11 @@ export interface VerifiedReview {
   originalUrl?: string;
   source: "Google";
   verifiedAt: string;
-  approvedByBusiness: true;
+  approvedByBusiness: boolean;
 }
 
 export interface VerifiedReviewCollection {
+  synchronized?: boolean;
   reviews: VerifiedReview[];
   // Overall Google figures, never computed from the selected five-star subset.
   summary: { averageRating: number; totalReviews: number; checkedAt: string } | null;

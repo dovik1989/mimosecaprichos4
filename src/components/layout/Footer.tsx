@@ -80,7 +80,7 @@ export function Footer() {
 
           {/* 2. Menu Institucional (2 colunas) */}
           <StaggerItem index={1} className="hidden lg:block lg:col-span-2">
-            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Menu</h4>
+            <h2 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Menu</h2>
             <ul className="space-y-2 text-xs">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -97,7 +97,7 @@ export function Footer() {
 
           {/* 3. Nossos Presentes (2 colunas) */}
           <StaggerItem index={2} className="hidden lg:block lg:col-span-2">
-            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Nossos Presentes</h4>
+            <h2 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Nossos Presentes</h2>
             <ul className="space-y-2 text-xs">
               {categoriesList.map((cat, idx) => (
                 <li key={idx}>
@@ -114,7 +114,7 @@ export function Footer() {
 
           {/* 4. Contato (3 colunas) */}
           <StaggerItem index={3} className="hidden lg:block lg:col-span-3 space-y-3">
-            <h4 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Contato</h4>
+            <h2 className="font-bold text-xs sm:text-sm text-brand-dark mb-3">Contato</h2>
 
             <div className="space-y-2.5 text-xs text-brand-muted">
               <div className="flex items-center gap-2.5">
@@ -158,7 +158,7 @@ export function Footer() {
               </details>
             ))}
             <section aria-labelledby="footer-mobile-contact" className="rounded-2xl border border-[#FADCE8] bg-white p-4">
-              <h4 id="footer-mobile-contact" className="mb-3 text-sm font-bold text-brand-dark">Contato</h4>
+              <h2 id="footer-mobile-contact" className="mb-3 text-sm font-bold text-brand-dark">Contato</h2>
               <div className="space-y-3 pr-14 text-xs text-brand-muted">
                 <div className="flex items-center gap-2.5"><Phone aria-hidden="true" className="size-4 shrink-0 text-brand-pink" /><a href={`tel:${siteConfig.phoneRaw}`} className="font-medium hover:text-brand-pink">(19) 99200-5279</a></div>
                 <div className="flex items-start gap-2.5"><MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-pink" /><a href={siteConfig.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="leading-snug hover:text-brand-pink">Av. Onze de Agosto, 849<br />Centro, Valinhos - SP</a></div>
@@ -176,7 +176,7 @@ export function Footer() {
                 width={100}
                 height={140}
                 className="h-full w-auto object-contain"
-                priority
+
               />
             </div>
           </StaggerItem>

@@ -36,7 +36,7 @@ export const Reveal = React.forwardRef<HTMLElement, RevealProps>(function Reveal
   forwardedRef
 ) {
   const internalRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     // Respeitar preferência do usuário por movimento reduzido (acessibilidade)
@@ -48,6 +48,12 @@ export const Reveal = React.forwardRef<HTMLElement, RevealProps>(function Reveal
 
     const element = internalRef.current;
     if (!element) return;
+
+    // Keep server-rendered content visible immediately, including without JavaScript.
+    // Only animate sections that start outside the initial viewport.
+    const bounds = element.getBoundingClientRect();
+    if (bounds.top < window.innerHeight && bounds.bottom > 0 && triggerOnce) return;
+    setIsVisible(false);
 
     if (typeof IntersectionObserver === "undefined") {
       setIsVisible(true);
@@ -104,7 +110,7 @@ export const Reveal = React.forwardRef<HTMLElement, RevealProps>(function Reveal
   return (
     <Component
       ref={setRefs}
-      className={cn("will-change-[transform,opacity]", className)}
+      className={cn(className)}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),

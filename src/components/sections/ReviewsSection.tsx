@@ -48,8 +48,23 @@ function PinkQuoteIcon({ className = "w-7 h-7 text-brand-pink" }: { className?: 
 export function ReviewsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const collection = verifiedReviewCollection;
-  const reviews = collection.reviews.filter(r => r.approvedByBusiness && r.rating === 5 && r.text.trim() && r.author.trim() && r.verifiedAt).slice(0, 15);
+  const [collection, setCollection] = useState(verifiedReviewCollection);
+  useEffect(() => {
+    const element = scrollContainerRef.current;
+    if (!element) return;
+    const controller = new AbortController();
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      fetch("/api/google-reviews", { signal: controller.signal, cache: "no-store" })
+        .then(response => response.ok ? response.json() : null)
+        .then(data => { if (data?.synchronized && Array.isArray(data.reviews)) setCollection(data); })
+        .catch(() => { /* Keep the business-approved reviews when Google is unavailable. */ });
+    }, { rootMargin: "400px" });
+    observer.observe(element);
+    return () => { observer.disconnect(); controller.abort(); };
+  }, []);
+  const reviews = collection.reviews.filter(r => (collection.synchronized || (r.approvedByBusiness && r.rating === 5)) && r.text.trim() && r.author.trim() && r.verifiedAt).slice(0, 15);
   const googleUrl = collection.allReviewsUrl || "https://www.google.com/maps/search/?api=1&query=Mimos+e+Caprichos+Av.+Onze+de+Agosto+849+Valinhos+SP";
   const figures = collection.summary;
   const summary = figures && Number.isFinite(figures.averageRating) && figures.averageRating >= 1 && figures.averageRating <= 5 && Number.isInteger(figures.totalReviews) && figures.totalReviews > 0 && isValidDate(figures.checkedAt) ? figures : null;
@@ -105,7 +120,7 @@ export function ReviewsSection() {
               O carinho de quem já comprou
             </h2>
             <p className="text-xs sm:text-[13px] text-[#554959] mt-1 font-sans">
-              {reviews.length ? "Avaliações 5 estrelas selecionadas" : "Conheça as experiências dos nossos clientes no Google."}
+              {reviews.length ? (collection.synchronized ? "Avaliações recentes do Google" : "Avaliações 5 estrelas selecionadas") : "Conheça as experiências dos nossos clientes no Google."}
             </p>
           </Reveal>
 
@@ -161,7 +176,7 @@ export function ReviewsSection() {
           {/* Container dos 3 cards */}
           <StaggerContainer
             ref={scrollContainerRef}
-            id="reviews-carousel" role="region" aria-label="Avaliações 5 estrelas selecionadas" tabIndex={reviews.length ? 0 : undefined}
+            id="reviews-carousel" role="region" aria-label={collection.synchronized ? "Avaliações recentes do Google" : "Avaliações 5 estrelas selecionadas"} tabIndex={reviews.length ? 0 : undefined}
             staggerInterval={0.1}
             baseDelay={0.12}
             duration={0.8}
@@ -212,7 +227,7 @@ export function ReviewsSection() {
         {/* 3. CRITÉRIO DE SELEÇÃO + ACESSO A TODAS AS AVALIAÇÕES     */}
         {/* ========================================================= */}
         <Reveal direction="up" distance={16} duration={0.8} delay={0.2} className="mt-6 sm:mt-8 text-center space-y-3.5">
-          {reviews.length > 0 && <p className="text-[11px] text-[#554959] font-sans">Seleção de avaliações 5 estrelas. Veja todas as notas e opiniões no Google.</p>}
+          {reviews.length > 0 && <p className="text-[11px] text-[#554959] font-sans">{collection.synchronized ? "Avaliações recentes com comentários, sincronizadas com o Google. Veja todas as notas e opiniões no Google." : "Seleção de avaliações 5 estrelas. Veja todas as notas e opiniões no Google."}</p>}
 
           <div>
             <a

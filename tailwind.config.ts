@@ -11,8 +11,8 @@ const config: Config = {
       colors: {
         brand: {
           pink: {
-            DEFAULT: "#EB4B8E",
-            hover: "#D6387B",
+            DEFAULT: "#C52B70",
+            hover: "#AD205F",
             light: "#FBE8EE",
             subtle: "#FDF2F5",
           },

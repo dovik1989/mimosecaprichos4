@@ -38,10 +38,10 @@ export function LocationContactSection() {
                   src="/images/fachada-loja-v2.webp"
                   alt="Fachada da loja Mimos e Caprichos em Valinhos"
                   fill
-                  quality={95}
+                  quality={75}
                   className="object-cover object-[center_45%]"
                   sizes="(max-width: 1024px) 100vw, 520px"
-                  priority
+
                 />
               </div>
             </Reveal>

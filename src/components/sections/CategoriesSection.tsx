@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { catalogCategories } from "@/data/catalog";
 import { Container } from "@/components/ui/Container";
@@ -151,6 +151,8 @@ export function CategoriesSection() {
           {categories.map((category, index) => {
             const catalog = catalogCategories.find(item => item.homeCardId === category.id);
             if (!catalog) throw new Error(`Missing catalog category: ${category.id}`);
+            const mobileImage = getImageProps({ src: category.imageSrc, alt: category.title, fill: true, sizes: "(max-width: 639px) calc(100vw - 44px), calc(100vw - 68px)" }).props;
+            const desktopImage = getImageProps({ src: category.desktopImageSrc ?? category.imageSrc, alt: category.title, fill: true, sizes: "(min-width: 1280px) 280px, 25vw" }).props;
             return (
               <StaggerItem key={category.id} index={index} className="shrink-0 w-full lg:w-[calc((100%-4.5rem)/4)]">
                 <Link
@@ -170,7 +172,6 @@ export function CategoriesSection() {
                         alt=""
                         fill
                         aria-hidden="true"
-                        unoptimized
                         className={cn(
                           "hidden lg:block object-cover scale-110 opacity-25 blur-md",
                           category.imagePositionClass
@@ -178,31 +179,16 @@ export function CategoriesSection() {
                         sizes="25vw"
                       />
                     )}
-                    <Image
-                      src={category.imageSrc}
-                      alt={category.title}
-                      fill
-                      priority
-                      unoptimized
-                      className={cn(
-                        "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.015] lg:hidden",
-                        category.imagePositionClass
-                      )}
-                      sizes="(max-width: 1023px) 100vw, 0px"
-                    />
-                    <Image
-                      src={category.desktopImageSrc ?? category.imageSrc}
-                      alt={category.title}
-                      fill
-                      priority
-                      unoptimized
-                      className={cn(
-                        "hidden lg:block transition-transform duration-700 ease-premium lg:scale-[1.035] lg:group-hover:scale-[1.055]",
-                        category.desktopImageSrc ? "object-cover object-center" : "object-contain",
-                        category.imagePositionClass
-                      )}
-                      sizes="25vw"
-                    />
+                    <picture>
+                      <source media="(min-width: 1024px)" srcSet={desktopImage.srcSet} sizes={desktopImage.sizes} />
+                      <img
+                        {...mobileImage}
+                        className={cn(
+                          "object-cover transition-transform duration-700 ease-premium group-hover:scale-[1.015] lg:scale-[1.035] lg:group-hover:scale-[1.055]",
+                          category.imagePositionClass
+                        )}
+                      />
+                    </picture>
                   </div>
 
                   {/* Bloco de Informações Mobile (compacto: Título + Descrição à esquerda, Botão à direita) */}

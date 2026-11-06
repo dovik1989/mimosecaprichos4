@@ -38,7 +38,7 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/#inicio"
-          className="flex items-center gap-3 shrink-0 focus:outline-none"
+          className="flex items-center gap-3 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-pink"
         >
           <div className="relative h-11 sm:h-12 flex items-center">
             <Image
@@ -46,6 +46,7 @@ export function Header() {
               alt="Mimos e Caprichos"
               width={707}
               height={364}
+              sizes="(max-width: 639px) 109px, 133px"
               priority
               className="h-[56px] sm:h-[68px] w-auto max-w-none object-contain object-left"
             />

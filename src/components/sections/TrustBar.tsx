@@ -38,7 +38,7 @@ export function TrustBar() {
               </p>
               <p className="text-[11px] sm:text-xs text-brand-muted leading-tight">
                 entregas realizadas <br className="hidden sm:inline" />
-                <span className="text-[10px] text-brand-muted/70">(desde do instagram)</span>
+                <span className="text-[10px] text-brand-muted">(desde do instagram)</span>
               </p>
             </div>
           </div>

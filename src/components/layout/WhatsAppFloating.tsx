@@ -26,10 +26,11 @@ export function WhatsAppFloating() {
         <FaWhatsapp className="w-8 h-8" aria-hidden="true" />
 
         {/* Badge vermelho com número "1" conforme o mockup mobile tela 9 */}
-        <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center shadow-xs border-2 border-white">
+
+      </a>
+        <span aria-hidden="true" className="pointer-events-none absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center shadow-xs border-2 border-white">
           1
         </span>
-      </a>
     </div>
   );
 }

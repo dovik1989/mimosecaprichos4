@@ -33,8 +33,9 @@ export function HeroSection() {
               alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
               fill
               priority
+              fetchPriority="high"
               className="object-cover object-[center_28%]"
-              sizes="62vw"
+              sizes="(min-width: 1024px) 62vw, (min-width: 640px) 460px, calc(100vw - 32px)"
             />
 
             {/* Overlay de Fade no lado esquerdo conforme especificação do mockup */}
@@ -104,8 +105,9 @@ export function HeroSection() {
                   alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
                   fill
                   priority
+              fetchPriority="high"
                   className="object-contain object-center"
-                  sizes="(max-width: 640px) 100vw, 400px"
+                  sizes="(min-width: 1024px) 62vw, (min-width: 640px) 460px, calc(100vw - 32px)"
                 />
 
                 {/* Degradê superior suave fundindo a imagem com o fundo da Hero */}
