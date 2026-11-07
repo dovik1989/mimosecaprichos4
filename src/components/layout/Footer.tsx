@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   FileText,
   ChevronDown,
+  ArrowUpRight,
 } from "lucide-react";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/animation";
 
@@ -185,7 +186,20 @@ export function Footer() {
         {/* Barra Inferior com Copyright e Links Legais (sem linha divisória pesada) */}
         <Reveal direction="fade" delay={0.15} distance={12}>
           <div className="pt-10 sm:pt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-muted">
-            <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
+            <div className="text-center sm:text-left">
+              <p>© {currentYear} Mimos e Caprichos. Todos os direitos reservados.</p>
+              <p className="mt-2 flex items-center justify-center gap-1 sm:justify-start">
+                Desenvolvido por{" "}
+                <a
+                  href="https://designer-ortiz.vercel.app/#manifesto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold text-brand-dark hover:text-brand-pink transition-colors"
+                >
+                  LUDOVIK <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                </a>
+              </p>
+            </div>
 
             <div className="flex items-center gap-4">
               <button
