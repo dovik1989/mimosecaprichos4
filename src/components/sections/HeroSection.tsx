@@ -32,6 +32,7 @@ export function HeroSection() {
               src="/images/banner-mimos-e-caprichos.webp"
               alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
               fill
+              quality={60}
               priority
               fetchPriority="high"
               className="object-cover object-[center_28%]"
@@ -104,8 +105,9 @@ export function HeroSection() {
                   src="/images/banner-mimos-e-caprichos.webp"
                   alt="Cestas, presentes e balões personalizados da Mimos e Caprichos"
                   fill
+                  quality={60}
                   priority
-              fetchPriority="high"
+                  fetchPriority="high"
                   className="object-contain object-center"
                   sizes="(min-width: 1024px) 62vw, (min-width: 640px) 460px, calc(100vw - 32px)"
                 />
